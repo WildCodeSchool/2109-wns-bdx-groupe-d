@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.4.0",
+    "class-validator": "^0.13.1",
+    "dotenv": "^10.0.0",
+    "graphql": "^15.7.2",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.38"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
