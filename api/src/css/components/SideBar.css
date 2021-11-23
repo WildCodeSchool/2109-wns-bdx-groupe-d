@@ -1,0 +1,9 @@
+.side-bar-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.side-bar-menu-title {
+  cursor: pointer;
+}
