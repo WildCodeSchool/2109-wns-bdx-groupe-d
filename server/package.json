@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "start": "node build/.",
+    "start:watch": "npm run build && (npm run build:watch & nodemon --inspect build/.)"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +18,7 @@
     "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.7.2",
+    "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.38"
