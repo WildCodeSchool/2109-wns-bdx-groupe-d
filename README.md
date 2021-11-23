@@ -2,9 +2,8 @@
 
 ## Projet Fil Rouge : Outil de Gestion de Projet
 
-Blablabla Lorem Ipsum
-
 ----------------------------
+
 # Mise en place de Docker & MySQL
 
 ## Se rendre sur la documentation de Docker et chercher l'image de MySQL (si besoin)
