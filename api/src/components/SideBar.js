@@ -1,76 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import '../css/components/SideBar.css';
+import issues from '../images/library.svg';
+import settings from '../images/settings.svg';
+import project from '../images/projects.svg';
+import dashboard from '../images/dashboard.svg';
+import group from '../images/group.svg'
 
-const SideBar = () => {
-  const [displayMenu1, setDisplayMenu1] = useState(false);
-  const [displayMenu2, setDisplayMenu2] = useState(false);
+const SideBar = () => (
+  <div className="sidebar-container">
 
-  return (
-    <div className="side-bar-container">
+    <div className="sidebar-menu-container">
 
       <div className="logo-container">
         LOGO
       </div>
 
-      <form>
-        <input placeholder="Search a project, issue or user"/>
-      </form>
-
-      <div className="side-bar-menu-container">
-        <div
-          className="side-bar-menu-title"
-          onClick={() => setDisplayMenu1(!displayMenu1)}
-        >
-          Menu 1
-        </div>
-
-        {displayMenu1 &&
-
-          <div className="side-bar-menu-subtitle-container">
-
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 1
-            </div>
-
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 2
-            </div>
-
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 3
-            </div>
-            
-          </div>
-        }
-        <div
-          className="side-bar-menu-title"
-          onClick={() => setDisplayMenu2(!displayMenu2)}
-        >
-          Menu 2
-        </div>
-
-        {displayMenu2 &&
-
-          <div className="side-bar-menu-subtitle-container">
-
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 1
-            </div>
-
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 2
-            </div>
-            
-            <div className="side-bar-menu-subtitle">
-              Sous-menu 3
-            </div>
-            
-          </div>
-        }
+      <div
+        className="sidebar-menu-icon"
+      >
+        <NavLink to="/">
+          <img src={dashboard} alt="logo en attendant" title="Accéder à l'accueil" />
+        </NavLink>
       </div>
+
+      <div
+        className="sidebar-menu-icon"
+      >
+        <NavLink to="/organisation">
+          <img src={group} alt="logo en attendant" title="Accéder aux projets" />
+        </NavLink>
+      </div>
+
+      <div
+        className="sidebar-menu-icon"
+      >
+        <NavLink to="/projects">
+          <img src={project} alt="logo en attendant" title="Accéder à vos projets" />
+        </NavLink>
+      </div>
+
+      <div
+        className="sidebar-menu-icon"
+      >
+        <NavLink to="/issues">
+          <img src={issues} alt="logo en attendant" title="Accéder à vos tickets" />
+        </NavLink>
+      </div>
+
     </div>
-  );
-};
+
+    <div
+        className="sidebar-menu-settings"
+      >
+        <NavLink to="/settings">
+          <img src={settings} alt="logo en attendant" title="Accéder aux paramètres utilisateurs" />
+        </NavLink>
+      </div>
+  </div>
+);
 
 export default SideBar;
