@@ -1,18 +1,19 @@
 .organisation-container {
-  display: grid;
-  grid-template-rows:    repeat(3, 16rem);
-  grid-template-columns: repeat(4, 20rem);
-  overflow-y: scroll;
-
-  @apply px-4;
-  @apply py-4;
+  @apply px-8;
+  @apply pt-20;
   @apply w-full;
   @apply h-screen;
+  @apply overflow-y-scroll;
+  @apply flex;
+  @apply flex-wrap;
+  @apply justify-evenly;
 }
 
 .organisation-project-container {
+  width: 20%;
+  
   @apply mr-4;
-  @apply mb-4;
+  @apply mb-8;
 }
 
 .organisation-project-container img {
