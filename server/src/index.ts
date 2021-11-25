@@ -6,6 +6,8 @@ import { buildSchema } from 'type-graphql';
 
 import User from './models/User';
 import UserResolver from './resolvers/UserResolver';
+import Organization from './models/Organization';
+import Project from './models/Project';
 
 dotenv.config();
 
@@ -14,8 +16,8 @@ const runServer = async () => {
     type: "mysql",
     host: "localhost",
     port: 3306,
-    entities: [User],
-    username: process.env.USERNAME,
+    entities: [User, Organization, Project],
+    username: process.env.ROOTERNAME,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
     synchronize: true,

@@ -1,18 +1,27 @@
+import { IsFirebasePushId, IsSurrogatePair } from 'class-validator';
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
-
+import Organization from './Organization'
+import Project from './Project';
 @Entity()
 @ObjectType()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id!: number;
+  
+  @Column()
+  @Field()
+  roles!: number;
 
   @Column()
   @Field()
@@ -21,7 +30,7 @@ class User extends BaseEntity {
   @Column()
   @Field()
   last_name!: string;
-
+  
   @Column()
   @Field()
   email!: string;
@@ -29,26 +38,15 @@ class User extends BaseEntity {
   @Column()
   @Field()
   password!: string;
-  
-  @Column()
-  @Field()
-  roles!: number;
-
-  @Column()
-  @Field()
-  issue_id!: string;
-
-  @Column()
-  @Field()
-  project_id!: string;
-
-  @Column()
-  @Field()
-  organization_id!: string;
 
   @Column()
   @Field()
   created_at!: string;
+
+  @ManyToOne(() => Organization, organization => organization.id )
+  @JoinColumn({name: 'organization_id'})
+  organization_id!: string;
+
 }
 
 export default User;
