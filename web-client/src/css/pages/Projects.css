@@ -1,0 +1,21 @@
+.organisation-container {
+  display: grid;
+  grid-template-rows:    repeat(3, 16rem);
+  grid-template-columns: repeat(4, 20rem);
+  overflow-y: scroll;
+
+  @apply px-4;
+  @apply py-4;
+  @apply w-full;
+  @apply h-screen;
+}
+
+.organisation-project-container {
+  @apply mr-4;
+  @apply mb-4;
+}
+
+.organisation-project-container img {
+  @apply w-full;
+  @apply h-full;
+}
