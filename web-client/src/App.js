@@ -8,6 +8,8 @@ import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
 import SideBar from './components/SideBar.js';
 
+import './css/tailwind.css';
+
 const App = () => (
   <div className="app-container">
     <SideBar/>
