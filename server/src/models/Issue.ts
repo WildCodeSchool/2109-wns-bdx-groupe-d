@@ -12,11 +12,11 @@ import {
 } from 'typeorm';
 
 import User from './User';
-import Organization from './Organization';
+import Project from './Project';
 
 @Entity()
 @ObjectType()
-class Project extends BaseEntity {
+class Issue extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	@Field(() => ID)
 	id!: number;
@@ -37,15 +37,19 @@ class Project extends BaseEntity {
 	@Field()
 	updated_at!: Date;
 
-	@ManyToOne(() => Organization, (organization) => organization.id)
-	@JoinColumn({ name: 'organization_id' })
-	organization_id!: number;
+	@Column()
+	@Field()
+	status!: string;
+
+	@ManyToOne(() => Project, (project) => project.id)
+	@JoinColumn({ name: 'project_id' })
+	project_id!: number;
 
 	@ManyToMany(() => User)
 	@JoinTable({
-		name: 'project_user',
+		name: 'issue_user',
 		joinColumn: {
-			name: 'project_id',
+			name: 'issue_id',
 			referencedColumnName: 'id',
 		},
 		inverseJoinColumn: {
@@ -54,20 +58,6 @@ class Project extends BaseEntity {
 		},
 	})
 	user_id!: User;
-
-	// @ManyToMany(() => Issue)
-	// @JoinTable({
-	//     name: "project_issues",
-	//     joinColumn: {
-	//         name: "project_id",
-	//         referencedColumnName: "id"
-	//     },
-	//     inverseJoinColumn: {
-	//         name: "issue_id",
-	//         referencedColumnName: "id"
-	//     }
-	// })
-	// project_id!: Issue;
 }
 
-export default Project;
+export default Issue;
