@@ -11,11 +11,17 @@
 
 .logo-container {
   @apply mt-4;
+  @apply self-center;
 }
 
 .sidebar-menu-icon {
   @apply cursor-pointer;
   @apply mt-8;
+}
+
+.sidebar-menu-icon a img,
+.sidebar-menu-settings a img {
+  @apply mx-auto;
 }
 
 .sidebar-menu-settings {

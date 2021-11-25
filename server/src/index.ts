@@ -10,6 +10,8 @@ import UserResolver from './resolvers/UserResolver';
 import Organization from './models/Organization';
 import Project from './models/Project';
 import Color from './models/Color';
+import Comment from './models/Comment';
+import File from './models/File';
 
 dotenv.config();
 
@@ -18,7 +20,7 @@ const runServer = async () => {
 		type: 'mysql',
 		host: 'localhost',
 		port: 3306,
-		entities: [User, Organization, Project, Issue, Color],
+		entities: [User, Organization, Project, Issue, Color, Comment, File],
 		username: process.env.ROOTERNAME,
 		password: process.env.PASSWORD,
 		database: process.env.DATABASE,

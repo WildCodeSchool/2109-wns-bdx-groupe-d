@@ -7,12 +7,12 @@ import {
 	JoinTable,
 	ManyToMany,
 	ManyToOne,
-	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import User from './User';
 import Organization from './Organization';
+import Issue from './Issue';
 
 @Entity()
 @ObjectType()
@@ -55,19 +55,19 @@ class Project extends BaseEntity {
 	})
 	user_id!: User;
 
-	// @ManyToMany(() => Issue)
-	// @JoinTable({
-	//     name: "project_issues",
-	//     joinColumn: {
-	//         name: "project_id",
-	//         referencedColumnName: "id"
-	//     },
-	//     inverseJoinColumn: {
-	//         name: "issue_id",
-	//         referencedColumnName: "id"
-	//     }
-	// })
-	// project_id!: Issue;
+	@ManyToMany(() => Issue)
+	@JoinTable({
+	    name: "project_issues",
+	    joinColumn: {
+	        name: "project_id",
+	        referencedColumnName: "id"
+	    },
+	    inverseJoinColumn: {
+	        name: "issue_id",
+	        referencedColumnName: "id"
+	    }
+	})
+	project_id!: Issue;
 }
 
 export default Project;

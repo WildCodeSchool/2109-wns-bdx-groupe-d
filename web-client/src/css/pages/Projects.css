@@ -1,5 +1,5 @@
 .organisation-container {
-  @apply px-8;
+  @apply px-4;
   @apply pt-20;
   @apply w-full;
   @apply h-screen;
@@ -13,7 +13,7 @@
   width: 20%;
   
   @apply mr-4;
-  @apply mb-8;
+  @apply mb-16;
 }
 
 .organisation-project-container img {
