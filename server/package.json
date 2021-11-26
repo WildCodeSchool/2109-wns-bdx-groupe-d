@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "build:watch": "tsc -w",
     "start": "node build/.",
@@ -24,6 +25,14 @@
     "typeorm": "^0.2.38"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-decorators": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/jest": "^27.0.3",
+    "babel-jest": "^27.3.1",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "jest": "^27.3.1",
     "typescript": "^4.4.4"
   }
 }

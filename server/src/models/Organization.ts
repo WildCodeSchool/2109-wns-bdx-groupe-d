@@ -6,9 +6,6 @@ import {
     OneToMany,
     PrimaryGeneratedColumn,
   } from 'typeorm';
-import User from './User';
-import Project from './Project';
-
 @Entity()
 @ObjectType()
 class Organization extends BaseEntity {
