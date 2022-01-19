@@ -12,15 +12,15 @@ import File from './models/File';
 dotenv.config();
 
 export default async function getDatabaseConnection() {
-  await createConnection({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    entities: [User, Organization, Project, Issue, Color, Comment, File],
-    username: process.env.ROOTERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-    synchronize: true,
-    logging: true,
-  });
+	await createConnection({
+		type: 'mysql',
+		host: 'mysql',
+		port: 3306,
+		entities: [User, Organization, Project, Issue, Color, Comment, File],
+		username: process.env.ROOTERNAME,
+		password: process.env.PASSWORD,
+		database: process.env.DATABASE,
+		synchronize: true,
+		logging: true,
+	});
 }

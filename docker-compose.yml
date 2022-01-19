@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  web-client:
+    build: ./web-client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web-client:/app
+      - /app/node_modules
+
+  api:
+    build: ./server
+    ports:
+      - 3001:3001
+    depends_on:
+      - database
+    volumes:
+      - ./server:/app
+
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1995Posse
+      MYSQL_DATABASE: wildmine
+    # volumes:
+    #   - $HOME/Desktop/MySQL-Snippets/school.sql:/school.sql
