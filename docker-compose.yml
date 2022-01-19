@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 services:
   web-client:
     build: ./web-client
@@ -6,7 +6,7 @@ services:
       - 3000:3000
     volumes:
       - ./web-client:/app
-      - /app/node_modules
+      # - /app/node_modules
 
   api:
     build: ./server
@@ -20,7 +20,7 @@ services:
   database:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 1995Posse
+      MYSQL_ROOT_PASSWORD: ready16160
       MYSQL_DATABASE: wildmine
     # volumes:
     #   - $HOME/Desktop/MySQL-Snippets/school.sql:/school.sql
