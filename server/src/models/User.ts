@@ -20,7 +20,7 @@ class User extends BaseEntity {
 
 	@Column()
 	@Field()
-	roles!: number;
+	roles!: string;
 
 	@Column()
 	@Field()
@@ -44,10 +44,12 @@ class User extends BaseEntity {
 
 	@ManyToOne(() => Organization, (organization) => organization.id)
 	@JoinColumn({ name: 'organization_id' })
+	@Field()
 	organization_id!: number;
 
 	@ManyToOne(() => Color, (color) => color.id)
 	@JoinColumn({ name: 'color_id' })
+	@Field()
 	color_id!: number;
 }
 

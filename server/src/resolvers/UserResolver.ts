@@ -12,13 +12,29 @@ class UserResolver {
   }
 
    @Mutation(() => User)
-  async createWilder(@Args() { first_name, last_name, email, password }: CreateUserInput) {
+  async createUser(@Args() {
+    first_name,
+    last_name,
+    email,
+    password,
+    roles,
+    color_id,
+    organization_id,
+    created_at
+  }: CreateUserInput) {
     const user = new User();
+
     user.first_name = first_name;
     user.last_name = last_name;
     user.email = email;
     user.password = password;
+    user.roles = roles;
+    user.color_id = color_id;
+    user.organization_id = organization_id;
+    user.created_at = created_at;
+
     await user.save();
+
     return user;
   }
 }
