@@ -20,8 +20,7 @@
 		"start": "craco start",
 		"build": "craco build",
 		"test": "craco test",
-		"eject": "react-scripts eject",
-		"generate-gql-types": "apollo client:codegen --watch --includes='src/**/*.js' --endpoint=http://localhost:3001/graphql --target javascript --outputFlat src/schemaTypes.js"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
