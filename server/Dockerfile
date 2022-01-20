@@ -7,5 +7,5 @@ RUN npm install
 
 COPY . ./
 
-CMD npm run build && npm start
-# CMD npm run start:watch & npx nodemon -w package.json --exec 'npm install'
+# CMD npm run build && npm start
+CMD npm run start:watch & npx nodemon -w package.json --exec 'npm install'
