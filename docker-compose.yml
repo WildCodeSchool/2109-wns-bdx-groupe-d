@@ -6,21 +6,27 @@ services:
       - 3000:3000
     volumes:
       - ./web-client:/app
-      # - /app/node_modules
+      - /app/node_modules
 
   api:
     build: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
     ports:
       - 3001:3001
     depends_on:
       - database
-    volumes:
-      - ./server:/app
+    environment:
+      - DATABASE_URL=postgres://postgres:database_password@database:5432/postgres
 
   database:
-    image: mysql
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: ready16160
-      MYSQL_DATABASE: wildmine
-    # volumes:
-    #   - $HOME/Desktop/MySQL-Snippets/school.sql:/school.sql
+      POSTGRES_PASSWORD: database_password
+    volumes:
+      - database-volume:/var/lib/postgresql/data
+
+volumes:
+  database-volume:
+
