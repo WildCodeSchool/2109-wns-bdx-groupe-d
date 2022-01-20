@@ -18,8 +18,8 @@ class UserResolver {
     email,
     password,
     roles,
-    color_id,
-    organization_id,
+    // color_id,
+    // organization_id,
     created_at
   }: CreateUserInput) {
     const user = new User();
@@ -29,8 +29,8 @@ class UserResolver {
     user.email = email;
     user.password = password;
     user.roles = roles;
-    user.color_id = color_id;
-    user.organization_id = organization_id;
+    // user.color_id = color_id;
+    // user.organization_id = organization_id;
     user.created_at = created_at;
 
     await user.save();

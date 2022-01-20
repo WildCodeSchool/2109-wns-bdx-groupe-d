@@ -12,7 +12,13 @@ describe('UserResolver', () => {
         server = await getApolloServer();
     });
 
-    beforeEach(() => getDatabaseConnection());
+    beforeEach(() => {
+        if (!process.env.DATABASE_URL) {
+            throw Error("DATABASE_URL must be set in environment.");
+        }
+
+        getDatabaseConnection(process.env.DATABASE_URL);
+    });
 
     afterEach(() => getConnection().close());
 
