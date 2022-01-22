@@ -1,4 +1,4 @@
-.organisation-container {
+.organization-container {
   @apply px-4;
   @apply pt-20;
   @apply w-full;
@@ -9,14 +9,14 @@
   @apply justify-evenly;
 }
 
-.organisation-project-container {
+.organization-project-container {
   width: 20%;
   
   @apply mr-4;
   @apply mb-16;
 }
 
-.organisation-project-container img {
+.organization-project-container img {
   @apply w-full;
   @apply h-full;
 }

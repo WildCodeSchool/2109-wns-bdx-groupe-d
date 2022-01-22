@@ -1,20 +1,6 @@
 import { useQuery } from "@apollo/client";
-import gql from 'graphql-tag';
 import React from 'react';
-
-const getUser = gql`
-	query getUsers {
-		Users {
-			id
-			first_name
-			last_name
-			roles
-			email
-			password
-			created_at
-		}
-	}
-`;
+import { getUser } from "../components/api/User.js";
 
 const onClickSubmit = (data) => {
 	console.log(data);
