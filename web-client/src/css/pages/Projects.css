@@ -1,19 +1,11 @@
 .organization-container {
-  @apply px-4;
-  @apply pt-20;
-  @apply w-full;
-  @apply h-screen;
-  @apply overflow-y-scroll;
-  @apply flex;
-  @apply flex-wrap;
-  @apply justify-evenly;
+  @apply px-4 mt-24 flex flex-wrap justify-evenly;
 }
 
 .organization-project-container {
-  width: 20%;
+  /* width: 20%; */
   
-  @apply mr-4;
-  @apply mb-16;
+  @apply w-1/4 mr-4 mb-16;
 }
 
 .organization-project-container img {

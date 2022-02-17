@@ -1,0 +1,19 @@
+.topbar-container {
+  @apply flex justify-between fixed w-full bg-wildmine_black top-0 px-4 h-20 pb-4;
+}
+
+.logo-container {
+  @apply self-center;
+}
+
+.topbar-menu-links-container {
+ @apply w-2/3 flex justify-around bg-blue_green_flash rounded-b-lg px-12;
+}
+
+.topbar-menu-link {
+  @apply cursor-pointer px-8 py-1 bg-blue_green_flash focus:bg-wildmine_black text-black border focus:text-blue_green_flash border-black rounded-full my-auto;
+}
+
+.topbar-menu-settings {
+  @apply cursor-pointer ml-8 my-auto mr-8;
+}
