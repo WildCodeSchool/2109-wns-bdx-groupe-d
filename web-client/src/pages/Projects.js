@@ -4,7 +4,7 @@ import projectImage from '../images/dev.jpeg';
 
 
 const Projects = () => {
-  const organisationProjects = [
+  const organizationProjects = [
     "1",
     "2",
     "3",
@@ -27,10 +27,10 @@ const Projects = () => {
     "20",
   ]
   return (
-    <div className="organisation-container">
-      {organisationProjects.map((projectObject) => {
+    <div className="organization-container">
+      {organizationProjects.map((projectObject) => {
         return (
-          <div className="organisation-project-container" key={projectObject}>
+          <div className="organization-project-container" key={projectObject}>
             <img src={projectImage} alt="Sélection du projet" />
           </div>
         );

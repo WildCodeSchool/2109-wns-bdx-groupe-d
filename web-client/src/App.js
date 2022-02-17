@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
-import Organisation from './pages/Organisation.js';
+import Organization from './pages/Organization.js';
 import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
 import SideBar from './components/SideBar.js';
@@ -19,8 +19,8 @@ const App = () => (
         <Dashboard/>
       </Route>
 
-      <Route path="/organisation" >
-        <Organisation/>
+      <Route path="/organization" >
+        <Organization/>
       </Route>
 
       <Route path="/projects" >
