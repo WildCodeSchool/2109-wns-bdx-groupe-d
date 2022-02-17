@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import '../css/components/TopBar.css';
 
 const TopBar = () => (
-  <div className="topbar-container">
+  <nav className="topbar-container">
 
     <div className="logo-container">
       LOGO
@@ -34,7 +34,7 @@ const TopBar = () => (
         Profil
       </NavLink>
     </div>
-  </div>
+  </nav>
 );
 
 export default TopBar;
