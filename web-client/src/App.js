@@ -6,13 +6,13 @@ import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
 import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
-import SideBar from './components/SideBar.js';
+import TopBar from './components/TopBar.js';
 
 import './css/tailwind.css';
 
 const App = () => (
   <div className="app-container">
-    <SideBar/>
+    <TopBar/>
     <Switch>
 
       <Route exact path="/" >
