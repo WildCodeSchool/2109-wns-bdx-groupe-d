@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from 'react';
-import { getUser } from "../components/api/User.js";
+import { getUser } from "../graphql/User.js";
 
 const onClickSubmit = (data) => {
 	console.log(data);
