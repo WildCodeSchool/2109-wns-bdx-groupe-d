@@ -5,17 +5,14 @@ import LoginInput from './LoginInput';
 
 @Resolver(User)
 class LoginResolver {
-  @Query(() => User)
-  async signIn(@Args() {
-    email,
-    password
-  }: LoginInput) {
-    const user = await User.findOne({ email });
+	@Query(() => User)
+	async signIn(@Args() { email, password }: LoginInput) {
+		const user = await User.findOne({ email });
 
-    console.log(password);
+		console.log(password);
 
-    return user;
-  }
+		return user;
+	}
 }
 
 export default LoginResolver;
