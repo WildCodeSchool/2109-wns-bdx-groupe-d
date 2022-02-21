@@ -17,7 +17,7 @@ const App = () => (
         <Route exact path="/subscription">
             <Subsription />
         </Route>
-        {/* <TopBar /> */}
+        <TopBar /> 
         {/* hasToken ? :  */}
         <Switch>
             <Route exact path="/">
