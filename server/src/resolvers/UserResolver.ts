@@ -6,7 +6,7 @@ import CreateUserInput from './CreateUserInput';
 @Resolver(User)
 class UserResolver {
   @Query(() => [User])
-  async Users() {
+  async users() {
     const users = await User.find();
     return users;
   }
