@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
+import { useMutation } from "@apollo/client";
 
 import LoginInput from '../components/LoginInput';
+import { signIn } from '../graphql/UserSession';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [sendLoginInformations] = useMutation(
+        signIn,
+        {
+          onCompleted: () => console.log('coucou'),
+          onError: (error) => {
+            console.log(error.message);
+          },
+          refetchQueries: ["signIn"],
+        }
+    );
+    
     const onSubmit = (event) => {
       event.preventDefault();
-      console.log(password, email)
+      sendLoginInformations({ variables: { email, password }});
     };
     return (
         <>
