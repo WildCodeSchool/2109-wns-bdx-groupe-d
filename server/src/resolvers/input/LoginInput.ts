@@ -7,6 +7,9 @@ class LoginInput {
 
   @Field()
   password!: string;
+
+  // @Field()
+  // sessionId!: string;
 }
 
 export default LoginInput;

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 import LoginInput from '../components/LoginInput';
 import { signIn } from '../graphql/UserSession';
 
-const Login = () => {
+const Login = ({ setActualUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const [rememberMe, setRememberMe] = useState(false);
+    const [error, setError] = useState();
+
+    const history = useHistory();
 
     const [sendLoginInformations] = useMutation(
         signIn,
@@ -19,10 +24,20 @@ const Login = () => {
         }
     );
     
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
       event.preventDefault();
-      sendLoginInformations({ variables: { email, password }});
+      const login = await sendLoginInformations({ variables: { email, password }});
+
+        if (login.data) {
+            setActualUser(login.data.signIn)
+            history.push("/");
+        } else {
+            setError(login.errors.message);
+        }
+
     };
+
+	console.log(document.cookie)
     return (
         <>
             <div className="flex justify-center ">
@@ -45,6 +60,7 @@ const Login = () => {
                     <div className="md:flex md:items-center mb-6">
                         <label className="md:w-3/3 text-gray-100 font-bold">
                             <input
+                                label="checkbox"
                                 className="mr-2 leading-tight"
                                 type="checkbox"
                             />
@@ -54,6 +70,10 @@ const Login = () => {
                             </span>
                         </label>
                     </div>
+
+                    {error &&
+                        <div className="text-center text-red-700 mb-4">{error}</div>
+                    }
                     <div className="flex justify-center">
                         <button className="login-button">
                             Me connecter
