@@ -36,6 +36,8 @@ const Login = ({ setActualUser }) => {
         }
 
     };
+
+	console.log(document.cookie)
     return (
         <>
             <div className="flex justify-center ">

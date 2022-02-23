@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 
 import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';
+import UID from 'uid-safe';
 
 dotenv.config();
 
@@ -22,16 +23,16 @@ const runServer = async () => {
 
 	app.use(function (req, res, next) {
 		// check if client sent cookie
-		const cookie = req.cookies.cookieName;
-		if (cookie === undefined) {
+		const { sessionId } = req.cookies;
+		if (sessionId === undefined) {
 			// no: set a new cookie
-			let randomNumber=Math.random().toString();
-			randomNumber=randomNumber.substring(2,randomNumber.length);
-			res.cookie('sessionId',randomNumber, { maxAge: 900000, httpOnly: true });
+			const uid = UID.sync(18);
+			
+			res.cookie('sessionId',uid, { maxAge: 900000, httpOnly: false });
 			console.log('cookie created successfully');
 		} else {
 			// yes, cookie was already present 
-			console.log('cookie exists', cookie);
+			console.log('cookie exists', sessionId);
 		}
 		next(); // <-- important!
 	});
