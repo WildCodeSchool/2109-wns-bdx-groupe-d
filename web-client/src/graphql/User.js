@@ -8,7 +8,6 @@ export const getUser = gql`
 			last_name
 			roles
 			email
-			password
 			created_at
 		}
 	}
@@ -22,7 +21,6 @@ export const setUser = gql`
 			last_name
 			roles
 			email
-			password
 			created_at
 		}
 	}

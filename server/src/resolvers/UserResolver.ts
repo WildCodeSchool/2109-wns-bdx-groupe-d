@@ -1,15 +1,15 @@
 import { Args, Mutation, Query, Resolver } from 'type-graphql';
-import md5 from 'md5';
 
 import User from '../models/User';
-import CreateUserInput from './CreateUserInput';
+import CreateUserInput from './input/CreateUserInput';
+import UserUtils from '../models/utils/UserUtils';
+import DeleteWilderInput from './input/DeleteWilderInput';
 
 @Resolver(User)
 class UserResolver {
 	@Query(() => [User])
 	async users() {
-		const users = await User.find();
-		return users;
+		return await User.find();
 	}
 
 	@Mutation(() => User)
@@ -21,25 +21,22 @@ class UserResolver {
 			email,
 			password,
 			roles,
-			// color_id,
-			// organization_id,
 			created_at,
 		}: CreateUserInput
 	) {
-		const user = new User();
+		return UserUtils.createUser({
+			first_name,
+			last_name,
+			email,
+			password,
+			roles,
+			created_at
+		})
+	}
 
-		user.first_name = first_name;
-		user.last_name = last_name;
-		user.email = email;
-		user.password = md5(password);
-		user.roles = roles;
-		// user.color_id = color_id;
-		// user.organization_id = organization_id;
-		user.created_at = created_at;
-
-		await user.save();
-
-		return user;
+	@Mutation(() => User)
+	async deleteUser(@Args() { id }: DeleteWilderInput) {
+		return UserUtils.deleteUser({ id });
 	}
 }
 
