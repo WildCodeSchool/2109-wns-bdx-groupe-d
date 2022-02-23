@@ -1,34 +1,30 @@
 import md5 from 'md5';
 import { Args, Query, Resolver, Mutation } from 'type-graphql';
 import Session from '../models/Session';
+import uid from 'uid-safe';
 
 import User from '../models/User';
 import LoginInput from './LoginInput';
 
-@Resolver(User)
+@Resolver(Session)
 class LoginResolver {
-	@Mutation(() => Session)
+	@Mutation(() => User)
 	async signIn(@Args() { email, password }: LoginInput) {
-		try {
-			const user = await User.findOne({ email });
-			const hash = md5(password);
+		const user = await User.findOne({ email });
+		const hash = md5(password);
 
-			if (hash !== user?.password) throw new Error('Invalid email or password');
+		if (hash !== user?.password) throw new Error('Invalid email or password');
 
-			const uid = md5(email);
-			
-			const session = new Session();
-
-			session.uid = uid;
-			session.user_id = user.id;
+		const uuid = uid.sync(18);
 		
-			await session.save();
+		const session = new Session();
 
-			return session;
-		} catch (error: any) {
-			error.statusCode = 401;
-  		throw error
-		}
+		session.uid = uuid;
+		session.user_id = user.id;
+	
+		await session.save();
+
+		return user;
 	}
 }
 

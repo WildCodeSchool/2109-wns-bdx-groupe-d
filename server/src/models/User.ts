@@ -35,7 +35,6 @@ class User extends BaseEntity {
 	email!: string;
 
 	@Column()
-	@Field()
 	password!: string;
 
 	@Column()
