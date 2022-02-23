@@ -1,5 +1,4 @@
 import { Args, Mutation, Query, Resolver } from 'type-graphql';
-// import bcrypt from 'bcrypt';
 import md5 from 'md5';
 
 import User from '../models/User';
@@ -33,9 +32,6 @@ class UserResolver {
 		user.last_name = last_name;
 		user.email = email;
 		user.password = md5(password);
-		// bcrypt.hash(password, 8, function (err: any, hash: string) {
-		// 	hash ? (user.password = hash) : console.log(err);
-		// });
 		user.roles = roles;
 		// user.color_id = color_id;
 		// user.organization_id = organization_id;
