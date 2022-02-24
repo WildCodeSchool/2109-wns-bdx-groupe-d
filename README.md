@@ -4,7 +4,7 @@
 
 ----------------------------
 
-# Prerequis :
+### Prerequis :
  *Node >= 16.x.x*
  
  *NPM >= 7.x.x*
