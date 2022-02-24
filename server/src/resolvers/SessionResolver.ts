@@ -1,21 +1,23 @@
-import md5 from 'md5';
-import { Args, Query, Resolver, Mutation, Ctx } from 'type-graphql';
+import { Args, Resolver, Mutation, Ctx } from 'type-graphql';
 import Session from '../models/Session';
-import uid from 'uid-safe';
 
 import User from '../models/User';
 import LoginInput from './input/LoginInput';
 import SessionUtils from '../models/utils/SessionUtils';
-import { Context } from 'apollo-server-core';
+
+interface Context {
+  sessionId: string
+}
 
 @Resolver(Session)
 class SessionResolver {
 	@Mutation(() => User)
 	async signIn(
-		@Ctx() context: string,
+		@Ctx() context: Context,
 		@Args() { email, password }: LoginInput
 		) {
-		//console.log(context.sessionId, 'CONTEXT')
+		console.log(context.sessionId, 'CONTEXT')
+		const { sessionId } = context;
 		return SessionUtils.signIn({ email, password });
 	}
 }

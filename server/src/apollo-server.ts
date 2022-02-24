@@ -17,7 +17,6 @@ export default async function getServer() {
 
 			const session = await Session.findOne({ uid: sessionId});
 
-			console.log(session)
 			// const user = await User.find(session.user_id)
 
 			return { sessionId };
