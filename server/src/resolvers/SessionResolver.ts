@@ -15,7 +15,7 @@ class SessionResolver {
 		@Ctx() context: string,
 		@Args() { email, password }: LoginInput
 		) {
-		console.log(context.sessionId, 'CONTEXT')
+		//console.log(context.sessionId, 'CONTEXT')
 		return SessionUtils.signIn({ email, password });
 	}
 }
