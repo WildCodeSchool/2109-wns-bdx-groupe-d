@@ -11,15 +11,15 @@ interface Context {
 
 @Resolver(Session)
 class SessionResolver {
-	@Mutation(() => User)
-	async signIn(
-		@Ctx() context: Context,
-		@Args() { email, password }: LoginInput
-		) {
-		console.log(context.sessionId, 'CONTEXT')
-		const { sessionId } = context;
-		return SessionUtils.signIn({ email, password });
-	}
+    @Mutation(() => User)
+    async signIn(
+        @Ctx() context: Context,
+        @Args() { email, password }: LoginInput
+        ) {
+        console.log(context.sessionId, 'CONTEXT')
+        const { sessionId } = context;
+        return SessionUtils.signIn({ email, password, sessionId });
+    }
 }
 
 export default SessionResolver;
