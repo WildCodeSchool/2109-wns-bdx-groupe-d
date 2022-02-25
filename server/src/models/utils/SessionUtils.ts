@@ -17,7 +17,7 @@ class SessionUtils extends Session {
       const session = new Session();
 
       session.uid = sessionId;
-      session.user_id = user.id;
+      session.user = user;
     
       await session.save();
 
@@ -26,9 +26,9 @@ class SessionUtils extends Session {
 	}
 
   static async islogged({ sessionId }: IsLoggedInput) {
-    const userSession: any = await Session.findOne({ uid: sessionId }, { relations: ["user_id"] });
-    console.log(userSession)
-    return userSession.user_id;
+    const userSession: any = await Session.findOne({ uid: sessionId }, { relations: ["user"] });
+ 
+    return userSession.user;
   }
 };
 

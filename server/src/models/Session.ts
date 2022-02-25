@@ -17,9 +17,9 @@ class Session extends BaseEntity {
     uid!: string;
 
     @ManyToOne(() => User, (user) => user.id)
-    @JoinColumn({ name: 'user_id' })
+    @JoinColumn({ name: 'user' })
     @Field()
-    user_id!: number;
+    user!: User;
     
 }
 
