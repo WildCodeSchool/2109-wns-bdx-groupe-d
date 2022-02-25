@@ -4,7 +4,7 @@ import Session from '../models/Session';
 import User from '../models/User';
 import LoginInput from './input/LoginInput';
 import SessionUtils from '../models/utils/SessionUtils';
-import IsLoggedInput from './input/IsLoggedInput';
+import UserInfoInput from './input/UserInfoInput';
 
 interface Context {
   sessionId: string
@@ -23,9 +23,9 @@ class SessionResolver {
 	}
 
 	@Query(() => User)
-	async isLogged(@Ctx() context: Context,) {
+	async userInfo(@Ctx() context: Context,) {
 		const { sessionId } = context;
-		return SessionUtils.islogged({ sessionId });
+		return SessionUtils.userInfo({ sessionId });
 	}
 }
 

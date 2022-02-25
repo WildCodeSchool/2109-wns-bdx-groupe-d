@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
-import { isLogged } from "./graphql/UserSession.js";
+import { userInfo } from "./graphql/UserSession.js";
 
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
@@ -13,7 +13,7 @@ import Login from './pages/Login.js';
 import './css/tailwind.css';
 import Subsription from './pages/Subscription.js';
 const App = () => {
-	const { data, refetch } = useQuery(isLogged);
+	const { data, refetch } = useQuery(userInfo);
 
 	return (
 		<div className="w-full">
@@ -29,7 +29,7 @@ const App = () => {
 			 	<TopBar />
 				<Switch>
 					<Route exact path="/">
-						<Dashboard actualUser={data.isLogged} />
+						<Dashboard actualUser={data.userInfo} />
 					</Route>
 					<Route path="/organization">
 						<Organization />

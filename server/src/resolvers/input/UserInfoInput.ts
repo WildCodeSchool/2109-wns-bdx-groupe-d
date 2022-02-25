@@ -1,10 +1,10 @@
 import { ArgsType, Field } from 'type-graphql';
 
 @ArgsType()
-class IsLoggedInput {
+class UserInfoInput {
   @Field()
   sessionId!: string;
 
 }
 
-export default IsLoggedInput;
+export default UserInfoInput;

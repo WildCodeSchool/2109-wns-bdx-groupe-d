@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { isLogged } from '../graphql/UserSession';
+import { userInfo } from '../graphql/UserSession';
 
 import '../css/components/TopBar.css';
 
 const TopBar = () => {
-  const { data } = useQuery(isLogged);
+  const { data } = useQuery(userInfo);
 
-  const currentUser = data.isLogged;
+  const currentUser = data.userInfo;
   return (
     <nav className="topbar-container">
 

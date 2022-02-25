@@ -13,9 +13,9 @@ export const signIn = gql`
 	}
 `;
 
-export const isLogged = gql`
-	query isLogged {
-		isLogged {
+export const userInfo = gql`
+	query userInfo {
+		userInfo {
 			id
 			first_name
 			last_name

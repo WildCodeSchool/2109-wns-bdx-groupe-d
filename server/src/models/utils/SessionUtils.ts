@@ -2,7 +2,7 @@ import md5 from "md5";
 import SignInInput from "../../resolvers/input/SignInInput";
 import User from "../User";
 import Session from "../Session";
-import IsLoggedInput from "../../resolvers/input/IsLoggedInput";
+import UserInfoInput from "../../resolvers/input/UserInfoInput";
 
 class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {
@@ -25,7 +25,7 @@ class SessionUtils extends Session {
     }
 	}
 
-  static async islogged({ sessionId }: IsLoggedInput) {
+  static async userInfo({ sessionId }: UserInfoInput) {
     const userSession: any = await Session.findOne({ uid: sessionId }, { relations: ["user"] });
  
     return userSession.user;
