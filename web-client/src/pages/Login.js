@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 
 import LoginInput from '../components/LoginInput';
 import { signIn } from '../graphql/UserSession';
 
-const Login = ({ setActualUser }) => {
+const Login = ({ onLoginSuccess }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState();
 
-    const history = useHistory();
-
     const [sendLoginInformations] = useMutation(
         signIn,
         {
-          onCompleted: () => console.log('coucou'),
+          onCompleted: onLoginSuccess,
           onError: (error) => {
             console.log(error.message);
           },
@@ -29,12 +26,7 @@ const Login = ({ setActualUser }) => {
       event.preventDefault();
       const login = await sendLoginInformations({ variables: { email, password }});
 
-        if (login.data) {
-            setActualUser(login.data.signIn)
-            history.push("/");
-        } else {
-            setError(login.errors.message);
-        }
+        if (!login.data) setError(login.errors.message);
 
     };
 

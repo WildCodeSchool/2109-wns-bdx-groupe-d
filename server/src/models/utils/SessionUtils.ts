@@ -2,8 +2,9 @@ import md5 from "md5";
 import SignInInput from "../../resolvers/input/SignInInput";
 import User from "../User";
 import Session from "../Session";
+import IsLoggedInput from "../../resolvers/input/IsLoggedInput";
 
-class SessionUtils extends User {
+class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {
 		const user = await User.findOne({ email });
 		const hash = md5(password);
@@ -23,6 +24,12 @@ class SessionUtils extends User {
       return user;
     }
 	}
+
+  static async islogged({ sessionId }: IsLoggedInput) {
+    const userSession: any = await Session.findOne({ uid: sessionId }, { relations: ["user_id"] });
+    console.log(userSession)
+    return userSession.user_id;
+  }
 };
 
 export default SessionUtils;

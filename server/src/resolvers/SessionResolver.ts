@@ -1,9 +1,10 @@
-import { Args, Resolver, Mutation, Ctx } from 'type-graphql';
+import { Args, Resolver, Mutation, Ctx, Query } from 'type-graphql';
 import Session from '../models/Session';
 
 import User from '../models/User';
 import LoginInput from './input/LoginInput';
 import SessionUtils from '../models/utils/SessionUtils';
+import IsLoggedInput from './input/IsLoggedInput';
 
 interface Context {
   sessionId: string
@@ -19,6 +20,12 @@ class SessionResolver {
 		const { sessionId } = context;
 		
 		return SessionUtils.signIn({ email, password, sessionId });
+	}
+
+	@Query(() => User)
+	async isLogged(@Ctx() context: Context,) {
+		const { sessionId } = context;
+		return SessionUtils.islogged({ sessionId });
 	}
 }
 

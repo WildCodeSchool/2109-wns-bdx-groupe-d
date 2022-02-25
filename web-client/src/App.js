@@ -1,47 +1,51 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { useQuery } from "@apollo/client";
+import { isLogged } from "./graphql/UserSession.js";
 
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
 import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
-// import TopBar from './components/TopBar.js';
+import TopBar from './components/TopBar.js';
 import Login from './pages/Login.js';
 import './css/tailwind.css';
 import Subsription from './pages/Subscription.js';
 const App = () => {
-	const [actualUser, setActualUser] = useState();
+	const { data, refetch } = useQuery(isLogged);
 
-	console.log(Cookies.get('sessionId'))
 	return (
 		<div className="w-full">
-			<Route path="/login">
-				<Login setActualUser={setActualUser}/>
-			</Route>
-			<Route exact path="/subscription">
-				<Subsription />
-			</Route>
-			{/* <TopBar /> */}
-			{/* hasToken ? :  */}
-			<Switch>
+			{!data ? <>
 				<Route exact path="/">
-					<Dashboard actualUser={actualUser} />
+					<Login onLoginSuccess={refetch}/>
 				</Route>
-				<Route path="/organization">
-					<Organization />
+				<Route exact path="/subscription">
+					<Subsription />
 				</Route>
-				<Route path="/projects">
-					<Projects />
-				</Route>
-				<Route path="/issues">
-					<Issues />
-				</Route>
-				<Route path="/settings">
-					<Settings />
-				</Route>
-			</Switch>
+			</>
+			: <>
+			 	<TopBar />
+				<Switch>
+					<Route exact path="/">
+						<Dashboard actualUser={data.isLogged} />
+					</Route>
+					<Route path="/organization">
+						<Organization />
+					</Route>
+					<Route path="/projects">
+						<Projects />
+					</Route>
+					<Route path="/issues">
+						<Issues />
+					</Route>
+					<Route path="/settings">
+						<Settings />
+					</Route>
+				</Switch>
+			</>
+			}
 		</div>
 	);
 };

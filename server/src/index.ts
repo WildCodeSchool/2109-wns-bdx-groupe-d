@@ -30,20 +30,12 @@ const runServer = async () => {
 			// no: set a new cookie
 			const uid = UID.sync(18);
 			
-			res.cookie('sessionId',uid, { maxAge: 900000, httpOnly: false });
+			res.cookie('sessionId',uid, { maxAge: 900000, httpOnly: true });
 			
 			console.log('cookie created successfully');
 		} else {
 			// yes, cookie was already present
 			console.log('cookie exists', sessionId);
-			const session = await Session.findOne({ uid: sessionId});
-
-			if (session) {
-				const { user_id }: any = session;
-				
-				const user = await User.findOne(user_id);
-				res.cookie('userInfo', user, { maxAge: 900000, httpOnly: true });
-			}
 		}
 		next(); // <-- important!
 	});
@@ -53,7 +45,7 @@ const runServer = async () => {
 	await server.start();
 
 	server.applyMiddleware({ app });
-	// The `listen` method launches a web server. AIDEZ-VOUS VOUS MÊME
+	// The `listen` method launches a web server.
 	const port = 3001;
 
 	app.listen(port, () => {

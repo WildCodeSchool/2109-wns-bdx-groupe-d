@@ -12,3 +12,16 @@ export const signIn = gql`
 		}
 	}
 `;
+
+export const isLogged = gql`
+	query isLogged {
+		isLogged {
+			id
+			first_name
+			last_name
+			roles
+			email
+			created_at
+		}
+	}
+`;
