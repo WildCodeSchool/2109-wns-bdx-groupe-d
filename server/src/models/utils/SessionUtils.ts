@@ -1,19 +1,21 @@
 import md5 from "md5";
-import LoginInput from "../../resolvers/input/LoginInput";
+import SignInInput from "../../resolvers/input/SignInInput";
 import User from "../User";
 import Session from "../Session";
 
 class SessionUtils extends User {
-  static async signIn({ email, password }: LoginInput) {
+  static async signIn({ email, password, sessionId }: SignInInput) {
 		const user = await User.findOne({ email });
 		const hash = md5(password);
 
 		if (hash !== user?.password) {
       throw new Error('Invalid email or password');
-    } else {		
+    } else if (!sessionId) {
+      throw new Error('A problem occured');
+    } else {
       const session = new Session();
 
-      session.uid = 'bla';
+      session.uid = sessionId;
       session.user_id = user.id;
     
       await session.save();
