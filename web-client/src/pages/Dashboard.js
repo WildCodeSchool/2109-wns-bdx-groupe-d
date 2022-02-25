@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client";
 import React from 'react';
-import { getUser } from "../graphql/User.js";
+// import { useQuery } from "@apollo/client";
+// import { getUser } from "../graphql/User.js";
 
 const Dashboard = ({ actualUser }) => {
 	// const { loading, error, data } = useQuery(getUser);

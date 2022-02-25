@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 import LoginInput from '../components/LoginInput';
 import { signIn } from '../graphql/UserSession';
@@ -78,6 +79,12 @@ const Login = ({ setActualUser }) => {
                         <button className="login-button">
                             Me connecter
                         </button>
+                    </div>
+
+                    <div className="w-full text-center text-teal_btn mt-4 underline">
+                        <NavLink to="/subscription">
+                            Pas encore inscrit?
+                        </NavLink>
                     </div>
                 </form>
             </div>
