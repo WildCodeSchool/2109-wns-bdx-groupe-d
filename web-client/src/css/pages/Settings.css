@@ -1,0 +1,157 @@
+.settings-container {
+    @apply mt-20;
+}
+
+.user-container {
+    @apply flex;
+    @apply justify-around;
+    @apply items-center;
+    height: 75vh;
+}
+
+.user {
+    @apply flex;
+}
+
+.avatar-pic {
+    @apply m-2;
+    @apply w-40;
+    @apply h-40;
+    @apply relative;
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply rounded-full;
+    @apply bg-blue-500;
+    @apply text-xl;
+    @apply text-white;
+    @apply uppercase;
+}
+
+.avatar-initial {
+    @apply m-2;
+    @apply w-40;
+    @apply h-40;
+    @apply relative;
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply rounded-full;
+    @apply bg-red-500;
+    @apply text-4xl;
+    @apply text-white;
+    @apply uppercase;
+}
+
+.avatar-btn {
+    @apply flex;
+    @apply justify-around;
+}
+
+.user-info {
+    @apply flex;
+    @apply flex-col;
+    @apply self-center;
+    @apply ml-4;
+    
+}
+
+.user-info .perso {
+    @apply mb-2;
+}
+
+.user-info .work {
+    @apply mt-2;
+}
+
+.user-settings {
+    @apply border-2; 
+    @apply border-solid;
+    @apply border-blue_green_flash;
+    @apply p-5;
+    border-radius: 10px;
+}
+
+.user-settings-btn {
+    @apply flex;
+    @apply flex-col;
+}
+
+.info-btn {
+    border: 1px solid #A1FFF4;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 16px;
+    margin: 5px 0;
+    transition: 0.5s;
+}
+
+.info-btn:hover {
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    background-color:#408c99;
+    border: 1px solid transparent;
+}
+
+.info-btn:active {
+    position:relative;
+    top: 2px;
+}
+
+.delete-acc-btn {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    transition: 0.5s;
+}
+
+.delete-acc-btn:hover,
+.delete-acc-btn:active {
+    background-color: initial;
+    color: #FF4742;
+}
+
+.delete-acc-btn:active {
+    position:relative;
+	top: 2px;
+}
+
+.user-organization {
+    width: 95%;
+    @apply m-auto;
+}
+
+table {
+    width: 100%;
+    @apply mt-2;
+    @apply mb-4;
+}
+
+tr, td, th {
+    @apply border-2; 
+    @apply border-solid;
+    @apply border-blue_green_flash;
+    @apply p-2;
+}
+
+.worker-action {
+    width: 10%;
+}
+
+td.worker-action {
+    width: 100%;
+    @apply border-0;
+    @apply flex;
+    @apply justify-around
+}
