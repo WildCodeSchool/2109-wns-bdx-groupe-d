@@ -54,10 +54,19 @@ const Projects = () => {
         else image = projectImage;
 
         return (
-          <div onMouseOver={() => setDisplayHover(index)} className="organization-project-container" key={projectObject}>
-            {displayHover === index &&
-              <div className='w-full h-full bg-black absolute z-10'>
-                hello le hover
+          <div
+            onMouseEnter={() => setDisplayHover(index + 1)}
+            onMouseLeave={() => setDisplayHover(0)}
+            className="organization-project-container"
+            key={projectObject}  
+            style={{ height: '30rem'}}
+          >
+            {displayHover === index + 1 &&
+              <div className='w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4'>
+                <p className='font-bold mb-8'>Un joli hoover</p>
+                <p>C'est l'histoire d'un joli hoover, il était petit et donc pas très grand. Mais un jour il décida de se relevé et devenir un grand hoover!
+                  C'est pour cela qu'il décida de grandir et donc d'être grand. Merci d'avoir perdu du temps à lire ce hoover, bisous!
+                </p>
               </div>
             }
             <img src={image} alt="Sélection du projet" />

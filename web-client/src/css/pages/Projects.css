@@ -3,7 +3,7 @@
 }
 
 .organization-project-container {
-  @apply w-1/4 mr-4 mb-16 h-96 relative;
+  @apply w-1/4 mr-4 mb-16 relative cursor-pointer;
 }
 
 .organization-project-container img {

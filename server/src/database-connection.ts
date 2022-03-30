@@ -7,12 +7,13 @@ import Project from './models/Project';
 import Color from './models/Color';
 import Comment from './models/Comment';
 import File from './models/File';
+import Session from './models/Session';
 
 export default async (url: string, logging = false) => {
 	await createConnection({
 		type: "postgres",
     	url,
-		entities: [User, Organization, Project, Issue, Color, Comment, File],
+		entities: [User, Organization, Project, Issue, Color, Comment, File, Session],
 		synchronize: true,
     logging,
 	});
