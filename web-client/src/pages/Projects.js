@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import projectImage from '../images/dev.jpeg';
+import smiley from '../images/smiley.png';
+import coffee from '../images/coffee.png';
+import donut from '../images/donut.png';
+import psyche from '../images/psyche.png';
+import water from '../images/water.png';
+import blackNWhite from '../images/blackNWhite.png';
 
 
 const Projects = () => {
+	const [displayHover, setDisplayHover] = useState(false);
+
   const organizationProjects = [
     "1",
     "2",
@@ -28,10 +36,31 @@ const Projects = () => {
   ]
   return (
     <div className="organization-container">
-      {organizationProjects.map((projectObject) => {
+      {organizationProjects.map((projectObject, index) => {
+        let image;
+
+        if (index === 0) image = smiley;
+
+        else if (index === 1) image = coffee;
+
+        else if (index === 2) image = donut;
+
+        else if (index === 3) image = psyche;
+
+        else if (index === 4) image = water;
+
+        else if (index === 5) image = blackNWhite;
+
+        else image = projectImage;
+
         return (
-          <div className="organization-project-container" key={projectObject}>
-            <img src={projectImage} alt="Sélection du projet" />
+          <div onMouseOver={() => setDisplayHover(index)} className="organization-project-container" key={projectObject}>
+            {displayHover === index &&
+              <div className='w-full h-full bg-black absolute z-10'>
+                hello le hover
+              </div>
+            }
+            <img src={image} alt="Sélection du projet" />
           </div>
         );
       })}
