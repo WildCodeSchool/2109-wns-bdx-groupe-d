@@ -1,22 +1,17 @@
-import { useQuery } from "@apollo/client";
 import React from 'react';
-import { getUser } from "../components/api/User.js";
+// import { useQuery } from "@apollo/client";
+// import { getUser } from "../graphql/User.js";
 
-const onClickSubmit = (data) => {
-	console.log(data);
-};
+const Dashboard = ({ actualUser }) => {
+	// const { loading, error, data } = useQuery(getUser);
 
-const Dashboard = () => {
-	const { loading, error, data } = useQuery(getUser);
+  // if (loading) return 'Loading...';
 
-  if (loading) return 'Loading...';
-
-  if (error) return `Error! ${error.message}`;
-	console.log(data)
+  // if (error) return `Error! ${error.message}`;
 	return (
 		<div className="dashboard-container">
-			{data.Users ?
-				<>Hello {data.Users[0].first_name} {data.Users[0].last_name}!!! <button onClick={() => onClickSubmit(data)}>Test</button></>
+			{actualUser ?
+				<>Hello {actualUser.first_name} {actualUser.last_name}!!! <button>Test</button></>
 				: <>Pas de données :'(</>
 			}
 		</div>

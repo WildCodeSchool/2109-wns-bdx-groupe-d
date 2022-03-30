@@ -1,3 +1,4 @@
+import { isEmail } from 'class-validator';
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
 	BaseEntity,
@@ -32,10 +33,10 @@ class User extends BaseEntity {
 
 	@Column()
 	@Field()
+	// @isEmail()
 	email!: string;
 
 	@Column()
-	@Field()
 	password!: string;
 
 	@Column()
