@@ -2,9 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import './style.css';
+@import "./style.css";
 
-@import './components/TopBar.css';
+@import "./components/TopBar.css";
 
-@import './pages/Projects.css';
-@import './pages/Login.css';
+@import "./pages/Projects.css";
+@import "./pages/Login.css";
+@import "./pages/DetailsProject.css";

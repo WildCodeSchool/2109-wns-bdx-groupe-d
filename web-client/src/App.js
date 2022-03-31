@@ -7,7 +7,8 @@ import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
 import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
-// import TopBar from './components/TopBar.js';
+import DetailsProject from './pages/DetailsProject.js';
+import TopBar from './components/TopBar.js';
 import Login from './pages/Login.js';
 import './css/tailwind.css';
 import Subsription from './pages/Subscription.js';
@@ -23,7 +24,7 @@ const App = () => {
 			<Route exact path="/subscription">
 				<Subsription />
 			</Route>
-			{/* <TopBar /> */}
+			<TopBar /> 
 			{/* hasToken ? :  */}
 			<Switch>
 				<Route exact path="/">
@@ -34,6 +35,9 @@ const App = () => {
 				</Route>
 				<Route path="/projects">
 					<Projects />
+				</Route>
+				<Route path="/detailsProject">
+					<DetailsProject />
 				</Route>
 				<Route path="/issues">
 					<Issues />

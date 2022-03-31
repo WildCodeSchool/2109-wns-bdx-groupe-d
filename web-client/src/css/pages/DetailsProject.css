@@ -1,0 +1,47 @@
+.detail-project-container {
+  @apply px-48 mt-32 flex flex-col;
+}
+
+.detail-project-rollback {
+  @apply py-4  text-blue_green_flash italic text-base;
+}
+
+.project-name {
+  @apply py-4 font-black text-4xl;
+}
+
+.project-description {
+  @apply py-4 font-medium text-lg;
+}
+
+.project-collaborators {
+  @apply py-4 font-light text-base italic;
+}
+
+.project-img {
+  @apply py-4 flex justify-between;
+}
+
+.first-project-img {
+  @apply w-3/5 h-full;
+}
+
+.rest-project-img {
+  @apply w-1/3 flex flex-wrap content-between;
+}
+
+.rest-project-img img {
+  @apply w-full h-80;
+}
+
+.project-tickets {
+  @apply py-4 table-auto;
+}
+
+.tableau-tickets {
+  @apply py-4 table-auto;
+}
+
+.project-liste-issues {
+  @apply py-4 table-auto;
+}
