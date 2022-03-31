@@ -5,9 +5,10 @@ module.exports = {
     extend: {
       colors: {
         grey: '#343434',
-        wildmine_black: '#171A21',
-        blue_green_flash: '#A1FFF4',
-        teal_btn: '#5EEAD4',
+        wildmine_black: '#1D262C',
+        wildmine_middle: '#465E6F',
+        blue_green_flash: '#80B5D9',
+        teal_btn: '#A5E3DC',
         teal_btn_hover: '#0F766E',
       }
     },

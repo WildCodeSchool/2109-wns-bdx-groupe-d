@@ -7,10 +7,12 @@ import donut from '../images/donut.png';
 import psyche from '../images/psyche.png';
 import water from '../images/water.png';
 import blackNWhite from '../images/blackNWhite.png';
+import loupe from '../images/loupe.svg';
 
 
 const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);
+  const [displayCreation, setDisplayCreation] = useState(false);
 
   const organizationProjects = [
     "1",
@@ -33,46 +35,70 @@ const Projects = () => {
     "18",
     "19",
     "20",
-  ]
+  ];
+
   return (
     <div className="organization-container">
-      {organizationProjects.map((projectObject, index) => {
-        let image;
+      <div className='flex justify-around mb-8'>
 
-        if (index === 0) image = smiley;
+        <div className='flex border border-teal_btn rounded-xl tex--+99-*-
+        t-teal_btn'>
+          <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none' placeholder='Rechercher ...'/>
 
-        else if (index === 1) image = coffee;
+          <img className='cursor-pointer mr-4' src={loupe} alt='Rechercher'/>
+        </div>
 
-        else if (index === 2) image = donut;
+        <div
+          onClick={() => setDisplayCreation(!displayCreation)}
+          className='topbar-menu-link mx-8'
+          style={{ width: '12rem' }}
+        >
+          Créer un projet
+        </div>
 
-        else if (index === 3) image = psyche;
+      </div>
 
-        else if (index === 4) image = water;
+      <div className="projects-container">
 
-        else if (index === 5) image = blackNWhite;
+        {organizationProjects.map((projectObject, index) => {
+          let image;
 
-        else image = projectImage;
+          if (index === 0) image = smiley;
 
-        return (
-          <div
-            onMouseEnter={() => setDisplayHover(index + 1)}
-            onMouseLeave={() => setDisplayHover(0)}
-            className="organization-project-container"
-            key={projectObject}  
-            style={{ height: '30rem'}}
-          >
-            {displayHover === index + 1 &&
-              <div className='w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4'>
-                <p className='font-bold mb-8'>Un joli hoover</p>
-                <p>C'est l'histoire d'un joli hoover, il était petit et donc pas très grand. Mais un jour il décida de se relevé et devenir un grand hoover!
-                  C'est pour cela qu'il décida de grandir et donc d'être grand. Merci d'avoir perdu du temps à lire ce hoover, bisous!
-                </p>
-              </div>
-            }
-            <img src={image} alt="Sélection du projet" />
-          </div>
-        );
-      })}
+          else if (index === 1) image = coffee;
+
+          else if (index === 2) image = donut;
+
+          else if (index === 3) image = psyche;
+
+          else if (index === 4) image = water;
+
+          else if (index === 5) image = blackNWhite;
+
+          else image = projectImage;
+
+          return (
+            <div
+              onMouseEnter={() => setDisplayHover(index + 1)}
+              onMouseLeave={() => setDisplayHover(0)}
+              className="organization-project-container"
+              key={projectObject} 
+              style={{ height: '30rem'}}
+            >
+              {displayHover === index + 1 &&
+                <div className='w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4'>
+                  <p className='font-bold mb-8'>Un joli hoover</p>
+                  <p>C'est l'histoire d'un joli hoover, il était petit et donc pas très grand. Mais un jour il décida de se relevé et devenir un grand hoover!
+                    C'est pour cela qu'il décida de grandir et donc d'être grand. Merci d'avoir perdu du temps à lire ce hoover, bisous!
+        -+-          </p>
+                </div>
+              }
+              <img src={image} alt="Sélection du projet" />
+            </div>
+          );
+        })}
+
+      </div>
     </div>
   );
 }

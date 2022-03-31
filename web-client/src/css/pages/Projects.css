@@ -1,5 +1,9 @@
 .organization-container {
-  @apply px-4 mt-24 flex flex-wrap justify-evenly;
+  @apply px-4 mt-24;
+}
+
+.projects-container {
+  @apply flex flex-wrap justify-evenly;
 }
 
 .organization-project-container {

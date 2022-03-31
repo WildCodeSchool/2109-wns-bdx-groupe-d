@@ -58,12 +58,6 @@ const TopBar = () => {
           {currentUser.first_name} {currentUser.last_name}
         </NavLink>
       </div>
-
-    <div className="topbar-menu-settings">
-      <NavLink to="/settings">
-        Profil
-      </NavLink>
-    </div>
   </nav>
   );
 };
