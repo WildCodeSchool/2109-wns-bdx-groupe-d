@@ -82,7 +82,7 @@ const Subsription = () => {
                     </div>
 
                     <div className="w-full text-center text-teal_btn mt-4 underline">
-                        <NavLink to="/login">
+                        <NavLink to="/">
                             Déjà inscrit?
                         </NavLink>
                     </div>

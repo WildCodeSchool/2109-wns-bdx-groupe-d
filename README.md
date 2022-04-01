@@ -4,6 +4,11 @@
 
 ----------------------------
 
+### Prerequis :
+ *Node >= 16.x.x*
+ 
+ *NPM >= 7.x.x*
+ 
 # Pour lancer l'app
 
 ### Lancer la commande pour la lancer

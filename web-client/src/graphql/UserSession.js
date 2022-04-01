@@ -12,3 +12,16 @@ export const signIn = gql`
 		}
 	}
 `;
+
+export const userInfo = gql`
+	query userInfo {
+		userInfo {
+			id
+			first_name
+			last_name
+			roles
+			email
+			created_at
+		}
+	}
+`;
