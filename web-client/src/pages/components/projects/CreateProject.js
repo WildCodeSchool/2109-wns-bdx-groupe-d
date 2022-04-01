@@ -14,9 +14,9 @@ const CreateProject = ({ setDisplayCreation }) => {
   const [sendProjectInformations] = useMutation(
     setProject,
     {
-      onCompleted: (value) => console.log(value),
+      onCompleted: () => setDisplayCreation(false),
       onError: (error) => console.log(error.message),
-      refetchQueries: ["getProject"],
+      refetchQueries: ["getProjects"],
     }
   );
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useQuery } from "@apollo/client";
+import { getProjects } from "../graphql/Project.js";
 
 import projectImage from '../images/dev.jpeg';
 import smiley from '../images/smiley.png';
@@ -17,28 +19,11 @@ const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
 
-  const organizationProjects = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-  ];
+  const { loading, error, data } = useQuery(getProjects);
+
+  if (loading) return 'Loading...';
+
+  if (error) return `Error! ${error.message}`;
 
   return (
     <div className="organization-container">
@@ -65,7 +50,7 @@ const Projects = () => {
 
       <div className="projects-container">
 
-        {organizationProjects.map((projectObject, index) => {
+        {data.projects.map((projectObject, index) => {
           let image;
 
           if (index === 0) image = smiley;
@@ -89,6 +74,7 @@ const Projects = () => {
               projectObject={projectObject}
               displayHover={displayHover}
               image={image}
+              project={data.projects[index]}
             />
           );
         })}

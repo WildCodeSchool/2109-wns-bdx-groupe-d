@@ -30,7 +30,7 @@ const runServer = async () => {
 			// no: set a new cookie
 			const uid = UID.sync(18);
 			
-			res.cookie('sessionId',uid, { maxAge: 900000, httpOnly: true });
+			res.cookie('sessionId',uid, { maxAge: 900000000, httpOnly: true });
 			
 			console.log('cookie created successfully');
 		} else {

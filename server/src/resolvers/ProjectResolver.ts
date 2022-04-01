@@ -6,6 +6,11 @@ import ProjectUtils from '../models/utils/ProjectUtils';
 
 @Resolver(Project)
 class ProjectResolver {
+  @Query(() => [Project])
+	async projects() {
+		return await Project.find();
+	}
+
 	@Mutation(() => Project)
 	async createProject(
 		@Args()
