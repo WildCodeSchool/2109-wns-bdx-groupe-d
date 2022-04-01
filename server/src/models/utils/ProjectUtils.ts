@@ -1,5 +1,6 @@
 
 import CreateProjectInput from "../../resolvers/input/CreateProjectInput";
+import DeleteProjectInput from "../../resolvers/input/DeleteProjectInput";
 import Project from "../Project";
 
 class ProjectUtils extends Project {
@@ -13,6 +14,12 @@ class ProjectUtils extends Project {
       await project.save();
   
       return project;
+  }
+
+  static async deleteProject({ id }: DeleteProjectInput) {
+    const project = await Project.findOneOrFail({ id });
+
+    return await Project.remove(project);
   }
 };
 

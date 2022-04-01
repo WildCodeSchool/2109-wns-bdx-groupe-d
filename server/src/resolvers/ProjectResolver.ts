@@ -2,6 +2,7 @@ import { Args, Mutation, Query, Resolver } from 'type-graphql';
 
 import Project from '../models/Project';
 import CreateProjectInput from './input/CreateProjectInput';
+import DeleteProjectInput from './input/DeleteProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
 
 @Resolver(Project)
@@ -25,6 +26,11 @@ class ProjectResolver {
 			description,
 			created_at
 		})
+	}
+
+	@Mutation(() => Project)
+	async deleteProject(@Args() { id }: DeleteProjectInput) {
+		return ProjectUtils.deleteProject({ id });
 	}
 }
 

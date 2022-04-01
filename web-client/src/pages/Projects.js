@@ -25,6 +25,8 @@ const Projects = () => {
 
   if (error) return `Error! ${error.message}`;
 
+  console.log(data.projects)
+
   return (
     <div className="organization-container">
       <div className='flex justify-around mb-8'>
@@ -50,7 +52,7 @@ const Projects = () => {
 
       <div className="projects-container">
 
-        {data.projects.map((projectObject, index) => {
+        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
           let image;
 
           if (index === 0) image = smiley;
@@ -77,7 +79,8 @@ const Projects = () => {
               project={data.projects[index]}
             />
           );
-        })}
+        })
+      :<p>Aucun projet pour le moment</p>}
 
       </div>
     </div>
