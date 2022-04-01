@@ -14,7 +14,7 @@ const Subsription = () => {
     const [sendUserInformations] = useMutation(
         setUser,
         {
-          onCompleted: () => console.log('coucou'),
+          onCompleted: () => window.location.replace('/'),
           onError: (error) => {
             console.log(error.message);
           },

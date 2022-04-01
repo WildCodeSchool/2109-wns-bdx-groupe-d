@@ -1,0 +1,28 @@
+.login-input-container {
+  @apply w-full mb-6;
+}
+
+.login-input {
+  @apply w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 focus:outline-none focus:bg-white;
+}
+
+.login-label {
+  @apply uppercase tracking-wide text-gray-100 text-xs font-bold mb-2;
+}
+
+.input-container {
+  @apply w-full mb-6;
+}
+
+.label {
+  @apply tracking-wide text-gray-100 font-bold;
+}
+
+.input,
+.input-area {
+  @apply w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 focus:outline-none focus:bg-white;
+}
+
+.input-area {
+  @apply h-40;
+}

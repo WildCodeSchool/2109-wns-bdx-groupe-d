@@ -1,6 +1,6 @@
 import md5 from "md5";
 import CreateUserInput from "../../resolvers/input/CreateUserInput";
-import DeleteWilderInput from "../../resolvers/input/DeleteWilderInput";
+import DeleteWilderInput from "../../resolvers/input/DeleteUserInput";
 import User from "../User";
 
 class UserUtils extends User {
@@ -24,9 +24,7 @@ class UserUtils extends User {
     
     const email = user.email;
 
-    await User.remove(user);
-
-    return email;
+    return await User.remove(user);
   }
 };
 

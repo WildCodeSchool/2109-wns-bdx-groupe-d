@@ -8,6 +8,9 @@ import psyche from '../images/psyche.png';
 import water from '../images/water.png';
 import blackNWhite from '../images/blackNWhite.png';
 import loupe from '../images/loupe.svg';
+import DisplayProject from './components/projects/DisplayProject';
+import CreateProject from './components/projects/CreateProject';
+import Button from '../components/Button';
 
 
 const Projects = () => {
@@ -41,22 +44,24 @@ const Projects = () => {
     <div className="organization-container">
       <div className='flex justify-around mb-8'>
 
-        <div className='flex border border-teal_btn rounded-xl tex--+99-*-
-        t-teal_btn'>
+        <div className='flex border border-blue_green_flash rounded-xl text-blue_green_flash'>
           <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none' placeholder='Rechercher ...'/>
 
           <img className='cursor-pointer mr-4' src={loupe} alt='Rechercher'/>
         </div>
 
-        <div
-          onClick={() => setDisplayCreation(!displayCreation)}
-          className='topbar-menu-link mx-8'
-          style={{ width: '12rem' }}
-        >
-          Créer un projet
-        </div>
+        <Button
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
+          buttonLabel='Créer un projet'
+          buttonType='button'
+        />
 
       </div>
+
+      {displayCreation &&
+        <CreateProject setDisplayCreation={setDisplayCreation}/>
+      }
 
       <div className="projects-container">
 
@@ -78,23 +83,13 @@ const Projects = () => {
           else image = projectImage;
 
           return (
-            <div
-              onMouseEnter={() => setDisplayHover(index + 1)}
-              onMouseLeave={() => setDisplayHover(0)}
-              className="organization-project-container"
-              key={projectObject} 
-              style={{ height: '30rem'}}
-            >
-              {displayHover === index + 1 &&
-                <div className='w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4'>
-                  <p className='font-bold mb-8'>Un joli hoover</p>
-                  <p>C'est l'histoire d'un joli hoover, il était petit et donc pas très grand. Mais un jour il décida de se relevé et devenir un grand hoover!
-                    C'est pour cela qu'il décida de grandir et donc d'être grand. Merci d'avoir perdu du temps à lire ce hoover, bisous!
-        -+-          </p>
-                </div>
-              }
-              <img src={image} alt="Sélection du projet" />
-            </div>
+            <DisplayProject
+              setDisplayHover={setDisplayHover}
+              index={index}
+              projectObject={projectObject}
+              displayHover={displayHover}
+              image={image}
+            />
           );
         })}
 
