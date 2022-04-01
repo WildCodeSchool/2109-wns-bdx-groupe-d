@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const getUser = gql`
 	query getUsers {
-		users {
+		getUsers {
 			id
 			first_name
 			last_name
@@ -22,6 +22,14 @@ export const setUser = gql`
 			roles
 			email
 			created_at
+		}
+	}
+`;
+
+export const deleteUser = gql`
+	mutation deleteUser($id: String!) {
+		deleteUser(id: $id) {
+			id
 		}
 	}
 `;

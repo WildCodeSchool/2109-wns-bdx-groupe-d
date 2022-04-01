@@ -1,6 +1,6 @@
 import md5 from "md5";
 import CreateUserInput from "../../resolvers/input/CreateUserInput";
-import DeleteWilderInput from "../../resolvers/input/DeleteWilderInput";
+import DeleteUserInput from "../../resolvers/input/DeleteUserInput";
 import User from "../User";
 
 class UserUtils extends User {
@@ -19,14 +19,10 @@ class UserUtils extends User {
       return user;
   }
 
-  static async deleteUser({ id }: DeleteWilderInput) {
+  static async deleteUser({ id }: DeleteUserInput) {
     const user = await User.findOneOrFail({ id });
-    
-    const email = user.email;
 
-    await User.remove(user);
-
-    return email;
+    return await User.remove(user);
   }
 };
 

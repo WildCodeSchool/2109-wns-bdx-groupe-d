@@ -16,7 +16,7 @@ class Session extends BaseEntity {
     @Field()
     uid!: string;
 
-    @ManyToOne(() => User, (user) => user.id)
+    @ManyToOne(() => User, (user) => user.id, {onDelete: 'CASCADE'})
     @JoinColumn({ name: 'user' })
     @Field()
     user!: User;

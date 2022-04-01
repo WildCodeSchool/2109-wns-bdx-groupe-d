@@ -1,12 +1,12 @@
 .settings-container {
-    @apply mt-20;
+    /* @apply mt-20; */
 }
 
 .user-container {
     @apply flex;
     @apply justify-around;
     @apply items-center;
-    height: 75vh;
+    height: 100vh;
 }
 
 .user {
@@ -15,14 +15,12 @@
 
 .avatar-pic {
     @apply m-2;
-    @apply w-40;
-    @apply h-40;
+    width: 15rem;
     @apply relative;
     @apply flex;
     @apply justify-center;
     @apply items-center;
     @apply rounded-full;
-    @apply bg-blue-500;
     @apply text-xl;
     @apply text-white;
     @apply uppercase;
@@ -30,8 +28,8 @@
 
 .avatar-initial {
     @apply m-2;
-    @apply w-40;
-    @apply h-40;
+    width: 15rem;
+    height: 15rem;
     @apply relative;
     @apply flex;
     @apply justify-center;
@@ -46,6 +44,11 @@
 .avatar-btn {
     @apply flex;
     @apply justify-around;
+}
+
+.white-icon {
+    @apply w-5;
+    filter: invert(100%);
 }
 
 .user-info {
@@ -75,6 +78,12 @@
 .user-settings-btn {
     @apply flex;
     @apply flex-col;
+}
+
+.user-settings-btn hr {
+    @apply m-4;
+    border: 1px solid #A1FFF4;
+    border-radius: 1px;
 }
 
 .info-btn {
@@ -136,6 +145,7 @@ table {
     width: 100%;
     @apply mt-2;
     @apply mb-4;
+    @apply rounded-lg;
 }
 
 tr, td, th {
@@ -153,5 +163,5 @@ td.worker-action {
     width: 100%;
     @apply border-0;
     @apply flex;
-    @apply justify-around
+    @apply justify-around;
 }

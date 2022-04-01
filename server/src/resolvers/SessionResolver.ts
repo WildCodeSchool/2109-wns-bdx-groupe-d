@@ -5,6 +5,7 @@ import User from '../models/User';
 import LoginInput from './input/LoginInput';
 import SessionUtils from '../models/utils/SessionUtils';
 import UserInfoInput from './input/UserInfoInput';
+import DeleteSessionsInput from './input/DeleteSessionsInput';
 
 interface Context {
   sessionId: string
@@ -27,6 +28,19 @@ class SessionResolver {
 		const { sessionId } = context;
 		return SessionUtils.userInfo({ sessionId });
 	}
+
+	@Mutation(() => User)
+	async deleteAllUserSessions(
+		@Args() {id} :DeleteSessionsInput
+	) {
+		return SessionUtils.deleteAllUserSessions({id});
+	}
+
+	// @Mutation(() => Session)
+	// async logout(@Ctx() context: Context) {
+	// 	const {sessionId} = context;
+	// 	return SessionUtils.logout({sessionId});
+	// }
 }
 
 export default SessionResolver;

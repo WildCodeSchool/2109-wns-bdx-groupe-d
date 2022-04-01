@@ -25,3 +25,20 @@ export const userInfo = gql`
 		}
 	}
 `;
+
+export const deleteAllUserSessions = gql`
+	mutation deleteAllUserSessions($user: User) {
+		deleteAllUserSessions(user: $user) {
+			User
+		}
+	}
+`;
+
+export const deleteActualSession = gql`
+	mutation deleteActualSession($uid: String) {
+		deleteActualSession(uid: $uid) {
+			uid
+		}
+	}
+`
+
