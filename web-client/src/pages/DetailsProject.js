@@ -1,18 +1,11 @@
 import React from 'react';
-
-//import projectImage from '../images/dev.jpeg';
-
-
+import Carousel, { CarouselItem } from '../components/Carousel';
 
 const DetailsProject = () => {
-    const projectImages = [
-      "1",
-      "2",
-    ]
   return (
     <div className="detail-project-container">
       <div className='detail-project-rollback'>
-        <a to="/projects">Projects {' > '} The Smiling Green Bean</a>
+        <a href='http://localhost:3000/projects'>Projects {' > '} The Smiling Green Bean</a>
       </div>
       <div className='project-name'>
         <h1>SURF COFFEE SHOP</h1>
@@ -28,55 +21,14 @@ const DetailsProject = () => {
         <img class="rounded-full h-8 w-8 mx-2" src="https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg" alt="collabo 1"/>
         <img class="rounded-full h-8 w-8 mx-2" src="https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg" alt="collabo 1"/>
       </div>
-        <div id="carouselDarkVariant" class="carousel slide carousel-fade carousel-dark relative" data-bs-ride="carousel">
-          <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-            <button data-bs-target="#carouselDarkVariant" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button data-bs-target="#carouselDarkVariant" data-bs-slide-to="1" aria-label="Slide 1"></button>
-            <button data-bs-target="#carouselDarkVariant" data-bs-slide-to="2" aria-label="Slide 1"></button>
-          </div>
-          <div class="carousel-inner relative w-full overflow-hidden">
-            <div class="carousel-item active relative float-left w-full">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(19).webp" class="block w-full" alt="Motorbike Smoke"/>
-              <div class="carousel-caption hidden md:block absolute text-center">
-                <h5 class="text-xl">First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-              </div>
-            </div>
-            <div class="carousel-item active relative float-left w-full">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(35).webp" class="block w-full" alt="Mountaintop"/>
-              <div class="carousel-caption hidden md:block absolute text-center">
-                <h5 class="text-xl">First slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-              </div>
-            </div>
-            <div class="carousel-item active relative float-left w-full">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(40).webp" class="block w-full" alt="Woman Reading a Book"/>
-              <div class="carousel-caption hidden md:block absolute text-center">
-                <h5 class="text-xl">First slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
-              </div>
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-            type="button"
-            data-bs-target="#carouselDarkVariant"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-            type="button"
-            data-bs-target="#carouselDarkVariant"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      <div>
+      <Carousel>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200"/></CarouselItem>
+      </Carousel>
+      <div className='font-black text-2xl pt-20'>
         <p>Tickets en cours</p>
       </div>     
       <div class="relative overflow-x-auto my-6 rounded-lg"> 
@@ -109,7 +61,7 @@ const DetailsProject = () => {
           <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                <button class="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
+                <button class="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash" href="http://localhost:3000/issues">
                   #7762
                 </button>
               </th>
@@ -237,7 +189,10 @@ const DetailsProject = () => {
           </tbody>
         </table>
       </div>
-      <div className='project-liste-issues'>
+      <div class="rounded-full place-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-36 w-36" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
+        </svg>
       </div>
 
       
