@@ -3,7 +3,7 @@ services:
   web-client:
     # build: ./web-client
     image: axelcannit/wildmine-front
-    command: sh -c "npm run build"
+    # command: sh -c "npm run build"
     ports:
       - 3000:3000
     # volumes:
@@ -15,7 +15,7 @@ services:
   api:
     # build: ./server
     image: axelcannit/wildmine-back
-    command: sh -c "npm run build"
+    # command: sh -c "npm run build"
     # volumes:
     #   - ./server:/app
     #   - /app/node_modules
@@ -49,3 +49,4 @@ services:
 
 volumes:
   database-volume:
+  web-client-build:
