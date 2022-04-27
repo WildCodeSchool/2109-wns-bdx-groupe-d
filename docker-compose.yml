@@ -5,6 +5,7 @@ services:
     image: axelcannit/wildmine-front
     ports:
       - 3000:3000
+    command: npm run start
     # volumes:
     #   - ./web-client:/app
     #   - /app/node_modules
@@ -20,6 +21,7 @@ services:
       # - /app/build
     ports:
       - 3001:3001
+    command: npm run start
     depends_on:
       - database
     environment:
