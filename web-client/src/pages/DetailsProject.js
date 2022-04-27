@@ -22,11 +22,11 @@ const DetailsProject = () => {
         <img class="rounded-full h-8 w-8 mx-2" src="https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg" alt="collabo 1"/>
       </div>
       <Carousel>
-        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp"/></CarouselItem>
-        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp"/></CarouselItem>
-        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp"/></CarouselItem>
-        <CarouselItem><img class="object-none object-center" src="https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg"/></CarouselItem>
-        <CarouselItem><img class="object-none object-center" src="https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp" alt="collabo 1"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp" alt="collabo 1"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp" alt="collabo 1"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg" alt="collabo 1"/></CarouselItem>
+        <CarouselItem><img class="object-none object-center" src="https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200" alt="collabo 1"/></CarouselItem>
       </Carousel>
       <div className='font-black text-2xl pt-20'>
         <p>Tickets en cours</p>
@@ -194,7 +194,7 @@ const DetailsProject = () => {
           <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
         </svg>
       </div>
-      
+
     </div>
   );
 }
