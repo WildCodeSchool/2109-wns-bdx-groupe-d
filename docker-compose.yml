@@ -14,10 +14,10 @@ services:
   api:
     # build: ./server
     image: axelcannit/wildmine-back
-    # volumes:
+    volumes:
     #   - ./server:/app
     #   - /app/node_modules
-    #   - /app/build
+      - /app/build
     ports:
       - 3001:3001
     depends_on:
