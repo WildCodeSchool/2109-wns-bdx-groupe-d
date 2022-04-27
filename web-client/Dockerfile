@@ -1,4 +1,4 @@
-FROM node:lts-alpine as common
+FROM node:lts-alpine
 
 WORKDIR /app
 
@@ -7,10 +7,4 @@ RUN npm install
 
 COPY . ./
 
-# CMD npm run start
-
-FROM common as development
 CMD npm run start
-
-FROM common as ci
-CMD CI=true

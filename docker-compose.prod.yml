@@ -5,6 +5,7 @@ services:
     # - ./web-client
     # target: development
     image: axelcannit/wildmine-front
+    command: sh -c "npm run build"
     # ports:
     #   - 3000:3000
     # volumes:
@@ -16,6 +17,7 @@ services:
   api:
     # build: ./server
     image: axelcannit/wildmine-back
+    command: sh -c "npm run build && npm run start"
     # volumes:
     #   - ./server:/app
     #   - /app/node_modules
