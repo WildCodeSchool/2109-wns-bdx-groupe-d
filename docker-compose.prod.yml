@@ -1,22 +1,25 @@
 version: '3.8'
 services:
   web-client:
-    build:
-      context: ./web-client
-      target: development
-    # image: axelcannit/wildmine-front
-    ports:
-      - 3000:3000
-    volumes:
-      - ./web-client:/app
+    # build:
+    # - ./web-client
+    # target: development
+    image: axelcannit/wildmine-front
+    # ports:
+    #   - 3000:3000
+    # volumes:
+    #   - ./web-client:/app
+    #   - /app/node_modules
     environment:
       CHOKIDAR_USEPOLLING: 'true'
 
   api:
-    build: ./server
-    # image: axelcannit/wildmine-back
-    volumes:
-      - ./server:/app
+    # build: ./server
+    image: axelcannit/wildmine-back
+    # volumes:
+    #   - ./server:/app
+    #   - /app/node_modules
+      # - /app/build
     ports:
       - 3001:3001
     depends_on:
