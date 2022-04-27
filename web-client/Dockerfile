@@ -13,4 +13,4 @@ FROM common as development
 CMD npm run start
 
 FROM common as ci
-CMD CI=true npm test
+CMD CI=true
