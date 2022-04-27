@@ -3,18 +3,16 @@ services:
   web-client:
     build:
       context: ./web-client
-    # image: axelcannit/wildmine-front
     ports:
       - 3000:3000
     volumes:
       - ./web-client:/app
-      - web-client-build:/app/dist
+      - web-client-build:/app/build
     environment:
       CHOKIDAR_USEPOLLING: 'true'
 
   api:
     build: ./server
-    # image: axelcannit/wildmine-back
     volumes:
       - ./server:/app
     ports:
