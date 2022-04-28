@@ -39,7 +39,7 @@ const Login = ({ onLoginSuccess }) => {
                         label="Email"
                         value={email}
                         setValue={setEmail}
-                        placeHolder="Entrez votre email de mort"
+                        placeHolder="Entrez votre email"
                     />
                     
                     <LoginInput
