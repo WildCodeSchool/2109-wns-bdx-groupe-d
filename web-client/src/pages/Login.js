@@ -72,7 +72,7 @@ const Login = ({ onLoginSuccess }) => {
                         </button>
                     </div>
 
-                    <div className="w-full text-center text-teal_btn mt-4 underline">
+                    <div className="w-full text-center text-secondary_color mt-4 underline">
                         <NavLink to="/subscription">
                             Pas encore inscrit?
                         </NavLink>

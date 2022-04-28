@@ -1,7 +1,11 @@
 .button-general {
-  @apply cursor-pointer px-8 py-1 bg-blue_green_flash text-wildmine_black border border-wildmine_black rounded-full my-auto;
+  @apply cursor-pointer px-8 py-1 bg-wildmine_black text-secondary_color border border-secondary_color rounded-full my-auto;
+}
+
+.button-general:hover {
+  @apply bg-secondary_color text-wildmine_black border-wildmine_black;
 }
 
 .login-button {
-  @apply bg-teal_btn hover:bg-teal_btn_hover text-white font-bold py-2 px-4 rounded;
+  @apply bg-secondary_color hover:bg-secondary_color_hover text-white font-bold py-2 px-4 rounded;
 }

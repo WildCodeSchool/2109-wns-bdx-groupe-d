@@ -31,8 +31,8 @@ const Projects = () => {
     <div className="organization-container">
       <div className='flex justify-around mb-8'>
 
-        <div className='flex border border-blue_green_flash rounded-xl text-blue_green_flash'>
-          <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none' placeholder='Rechercher ...'/>
+        <div className='flex border border-secondary_color rounded-xl text-secondary_color'>
+          <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none placeholder-secondary_color' placeholder='Rechercher ...'/>
 
           <img className='cursor-pointer mr-4' src={loupe} alt='Rechercher'/>
         </div>

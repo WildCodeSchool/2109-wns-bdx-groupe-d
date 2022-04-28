@@ -33,10 +33,14 @@ const CreateProject = ({ setDisplayCreation }) => {
     });
   };
 
-  return (
-    <div className='bg-wildmine_middle rounded-2xl fixed z-30 w-1/2 left-1/4'>
+  const handleChange =  event => {
+    console.log(event.target.files[0])
+  };
 
-      <p className='font-bold text-2xl text-center my-8'>
+  return (
+    <div className='bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4'>
+
+      <p className='font-bold text-secondary_color text-2xl text-center my-8'>
         Créez votre projet
       </p>
 
@@ -52,7 +56,7 @@ const CreateProject = ({ setDisplayCreation }) => {
         <Input
           label='Titre de votre projet'
           placeHolder='Entrez le nom de votre projet'
-          labelClassName='text-lg'
+          labelClassName='text-sm'
           setValue={setName}
           value={name}
         />
@@ -60,10 +64,12 @@ const CreateProject = ({ setDisplayCreation }) => {
         <TextArea
           label='Description'
           placeHolder='Entrez une description de votre projet'
-          labelClassName='text-lg'
+          labelClassName='text-sm'
           setValue={setDescription}
           value={description}
         />
+
+        <input type='file' onChange={handleChange} />
 
         <div className='text-center'>
           <Button
