@@ -25,8 +25,6 @@ const Projects = () => {
 
   if (error) return `Error! ${error.message}`;
 
-  console.log(data.projects)
-
   return (
     <div className="organization-container">
       <div className='flex justify-around mb-8'>
