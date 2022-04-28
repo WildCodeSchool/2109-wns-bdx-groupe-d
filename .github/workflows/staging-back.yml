@@ -40,5 +40,6 @@ jobs:
         with:
           context: ./server
           file: ./server/Dockerfile
+          target: production
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_SERVER_IMAGE_NAME }}:latest

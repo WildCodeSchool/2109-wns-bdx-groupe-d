@@ -1,22 +1,14 @@
 version: '3.8'
 services:
   web-client:
-    build:
-      context: ./web-client
-      target: development
-    ports:
-      - 3000:3000
+    image: axelcannit/wildmine-front
     volumes:
-      - ./web-client:/app
+      - web-client-build:/app/build
     environment:
       CHOKIDAR_USEPOLLING: 'true'
 
   api:
-    build:
-      context: ./server
-      target: development
-    volumes:
-      - ./server:/app
+    image: axelcannit/wildmine-back
     ports:
       - 3001:3001
     depends_on:
@@ -31,5 +23,19 @@ services:
     volumes:
       - database-volume:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx:1.21.3
+    depends_on:
+      - api
+      - web-client
+    restart: always
+    ports:
+      - ${GATEWAY_PORT:-8000}:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - web-client-build:/web-client-build
+      - ./logs:/var/log/nginx
+
 volumes:
   database-volume:
+  web-client-build:
