@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from 'type-graphql';
 import User from '../models/User';
 import CreateUserInput from './input/CreateUserInput';
 import UserUtils from '../models/utils/UserUtils';
-import DeleteWilderInput from './input/DeleteWilderInput';
+import DeleteUserInput from './input/DeleteUserInput';
 
 @Resolver(User)
 class UserResolver {
@@ -35,7 +35,7 @@ class UserResolver {
 	}
 
 	@Mutation(() => User)
-	async deleteUser(@Args() { id }: DeleteWilderInput) {
+	async deleteUser(@Args() { id }: DeleteUserInput) {
 		return UserUtils.deleteUser({ id });
 	}
 }

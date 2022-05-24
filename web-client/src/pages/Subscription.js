@@ -14,7 +14,7 @@ const Subsription = () => {
     const [sendUserInformations] = useMutation(
         setUser,
         {
-          onCompleted: () => console.log('coucou'),
+          onCompleted: () => window.location.replace('/'),
           onError: (error) => {
             console.log(error.message);
           },
@@ -81,7 +81,7 @@ const Subsription = () => {
                         </button>
                     </div>
 
-                    <div className="w-full text-center text-teal_btn mt-4 underline">
+                    <div className="w-full text-center text-secondary_color mt-4 underline">
                         <NavLink to="/">
                             Déjà inscrit?
                         </NavLink>

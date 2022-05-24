@@ -1,9 +1,9 @@
 import { ArgsType, Field } from 'type-graphql';
 
 @ArgsType()
-class DeleteWilderInput {
+class DeleteUserInput {
   @Field()
   id!: number;
 }
 
-export default DeleteWilderInput;
+export default DeleteUserInput;

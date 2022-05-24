@@ -5,6 +5,7 @@
 @import './style.css';
 
 @import './components/TopBar.css';
+@import './components/Button.css';
+@import './components/Input.css';
 
 @import './pages/Projects.css';
-@import './pages/Login.css';
