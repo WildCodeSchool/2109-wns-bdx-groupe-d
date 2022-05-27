@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { userInfo } from "./graphql/UserSession.js";
@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
 import Issues from './pages/Issues.js';
 import Projects from './pages/Projects.js';
+import DetailsProject from './pages/DetailsProject.js';
 import TopBar from './components/TopBar.js';
 import Login from './pages/Login.js';
 import './css/tailwind.css';
@@ -36,6 +37,9 @@ const App = () => {
 					</Route>
 					<Route path="/projects">
 						<Projects />
+					</Route>
+					<Route path="/DetailsProject">
+						<DetailsProject />
 					</Route>
 					<Route path="/issues">
 						<Issues />

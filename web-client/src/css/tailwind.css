@@ -4,7 +4,10 @@
 
 @import './style.css';
 
+@import './components/Carousel.css';
 @import './components/TopBar.css';
 
 @import './pages/Projects.css';
+@import './pages/DetailsProject.css';
+@import './pages/Issues.css';
 @import './pages/Login.css';
