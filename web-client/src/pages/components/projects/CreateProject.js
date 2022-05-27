@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '../../../components/Button';
 import { useMutation } from "@apollo/client";
 
 import Input from '../../../components/Input';
@@ -32,10 +31,10 @@ const CreateProject = ({ setDisplayCreation }) => {
       uplaoaded.data.createFile && setProjectPictureName(file.name);
     }
   };
-  console.log(projectPictureName)
-  const onClick = () => {
-    console.log(projectPictureName)
-    // sendPicture({ variables: { picture }});
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
     sendProjectInformations({
       variables: {
         name,
@@ -60,7 +59,7 @@ const CreateProject = ({ setDisplayCreation }) => {
         onClick={() => setDisplayCreation(false)}
       />
       
-      <form className='w-2/3 mx-auto'>
+      <form onSubmit={onSubmit} className='w-2/3 mx-auto'>
 
         <Input
           label='Titre de votre projet'
@@ -68,6 +67,7 @@ const CreateProject = ({ setDisplayCreation }) => {
           labelClassName='text-sm'
           setValue={setName}
           value={name}
+          required
         />
         
         <TextArea
@@ -76,17 +76,28 @@ const CreateProject = ({ setDisplayCreation }) => {
           labelClassName='text-sm'
           setValue={setDescription}
           value={description}
+          required
         />
 
-        <input type='file' onChange={onChange}/>
+        <div className='w-5/12 mx-auto flex justify-center'>
+          <label className='button-general cursor-pointer'>
+              {projectPictureName || 'Sélectionnez une image'}
+
+              <input
+                type='file'
+                onChange={onChange}
+                accept='image/png, image/jpg, image/gif, image/jpeg'
+                className='hidden'
+              />
+          </label>
+        </div>
 
         <div className='text-center'>
-          <Button
-            buttonType='button'
-            onClick={onClick}
-            buttonLabel='Créer votre projet'
-            buttonClassName='mb-8'
-          />
+          <button
+            className='submit-button mb-8 mt-4'
+          >
+            Créer votre projet
+          </button>
         </div>
 
       </form>

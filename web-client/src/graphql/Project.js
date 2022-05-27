@@ -29,9 +29,3 @@ export const createFile = gql`
 		createFile(picture: $picture)
 	}
 `;
-
-export const getProjectPicture = gql`
-	query getPicture($pictureName: String!) {
-		getPicture(pictureName: $pictureName)
-	}
-`;

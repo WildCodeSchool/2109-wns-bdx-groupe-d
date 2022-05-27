@@ -8,6 +8,7 @@ import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js';
 import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';
 import UID from 'uid-safe';
+import indexRouter from './routes';
 // import Session from './models/Session';
 // import User from './models/User';
 
@@ -26,6 +27,8 @@ const runServer = async () => {
 	app.use(cookieParser());
 
 	app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
+
+	app.use('/', indexRouter);
 
 	app.use(async function (req, res, next) {
 		// check if client sent cookie

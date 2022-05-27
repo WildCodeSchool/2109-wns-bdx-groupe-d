@@ -1,12 +1,11 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Mutation, Resolver } from 'type-graphql';
 // @ts-ignore
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 // @ts-ignore
 import Upload from 'graphql-upload/Upload.js';
-import { createWriteStream, readFile } from 'fs';
+import { createWriteStream } from 'fs';
 
 import File from '../models/File';
-import GetPictureInput from './input/GetPictureInput';
 
 @Resolver(File)
 class FileResolver {
@@ -25,19 +24,6 @@ class FileResolver {
       }
       return false;
 	}
-
-  @Query(() => GraphQLUpload)
-	async getPicture({ pictureName }: GetPictureInput) {
-		readFile(`../../images/${pictureName}`, (err, data) => {
-      if (err) throw err;
-      return data;
-    });
-	}
-
-	// @Mutation(() => File)
-	// async deleteFile(@Args() { id }: DeleteFileInput) {
-	// 	return FileUtils.deleteFile({ id });
-	// }
 }
 
 export default FileResolver;

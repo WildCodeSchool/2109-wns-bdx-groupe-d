@@ -8,7 +8,6 @@ import Project from '../models/Project';
 import CreateProjectInput from './input/CreateProjectInput';
 import DeleteProjectInput from './input/DeleteProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
-import FileUtils from '../models/utils/FileUtils';
 
 @Resolver(Project)
 class ProjectResolver {
