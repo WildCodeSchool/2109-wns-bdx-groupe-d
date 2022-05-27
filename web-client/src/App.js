@@ -2,11 +2,13 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { userInfo } from "./graphql/UserSession.js";
+import 'mdbreact/dist/css/mdb.css';
 
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
-import Issues from './pages/Issues.js';
+import Issue from './pages/IssuesProject.js';
+import IssuesProject from './pages/Issue';
 import Projects from './pages/Projects.js';
 import DetailsProject from './pages/DetailsProject.js';
 import TopBar from './components/TopBar.js';
@@ -41,8 +43,11 @@ const App = () => {
 					<Route path="/DetailsProject">
 						<DetailsProject />
 					</Route>
-					<Route path="/issues">
-						<Issues />
+					<Route path="/IssuesProject">
+						<IssuesProject />
+					</Route>
+					<Route path="/issue">
+						<Issue />
 					</Route>
 					<Route path="/settings">
 						<Settings />

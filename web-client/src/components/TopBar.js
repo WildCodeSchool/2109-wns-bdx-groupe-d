@@ -30,8 +30,8 @@ const TopBar = () => {
             Projets
           </NavLink>
           
-          <NavLink to="/issues" className="topbar-menu-link">
-            Issues??
+          <NavLink to="/IssuesProject" className="topbar-menu-link">
+            IssuesProject
           </NavLink>
       </div>
 
