@@ -149,7 +149,7 @@ const ISSUES = [
   }
 ];
 
-const Issues = () => {
+const IssuesProject = () => {
 
   function Statut(value) {
     if (value === 'Done') {
@@ -249,4 +249,4 @@ const Issues = () => {
   );
 }
 
-export default Issues;
+export default IssuesProject;
