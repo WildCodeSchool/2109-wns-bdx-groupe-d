@@ -1,9 +1,14 @@
-import { Args, Mutation, Query, Resolver } from 'type-graphql';
+import { Args, Mutation, Query, Resolver, Arg } from 'type-graphql';
+// @ts-ignore
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
+// @ts-ignore
+import Upload from 'graphql-upload/Upload.js';
 
 import Project from '../models/Project';
 import CreateProjectInput from './input/CreateProjectInput';
 import DeleteProjectInput from './input/DeleteProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
+import FileUtils from '../models/utils/FileUtils';
 
 @Resolver(Project)
 class ProjectResolver {
@@ -15,16 +20,13 @@ class ProjectResolver {
 	@Mutation(() => Project)
 	async createProject(
 		@Args()
-		{
-			name,
-			description,
-			created_at
-		}: CreateProjectInput
+		{ name, description, created_at, projectPictureName	}: CreateProjectInput
 	) {
-		return ProjectUtils.createProject({
+		return await ProjectUtils.createProject({
 			name,
 			description,
-			created_at
+			created_at,
+			projectPictureName
 		})
 	}
 

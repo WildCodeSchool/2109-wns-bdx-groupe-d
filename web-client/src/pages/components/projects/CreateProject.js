@@ -5,14 +5,15 @@ import { useMutation } from "@apollo/client";
 import Input from '../../../components/Input';
 import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
-import { setProject } from '../../../graphql/Project';
+import { createProject, createFile } from '../../../graphql/Project';
 
 const CreateProject = ({ setDisplayCreation }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [projectPictureName, setProjectPictureName] = useState('');
 
   const [sendProjectInformations] = useMutation(
-    setProject,
+    createProject,
     {
       onCompleted: () => setDisplayCreation(false),
       onError: (error) => console.log(error.message),
@@ -20,21 +21,29 @@ const CreateProject = ({ setDisplayCreation }) => {
     }
   );
 
-  const onClick = () => {
-    console.log(name)
-    console.log(description)
+  const [sendPicture] = useMutation(createFile);
+  
+  const onChange = async ({
+    target: { validity, files: [file] }
+  }) => {
+    if (validity.valid) {
+      const uplaoaded = await sendPicture({ variables: { picture: file } });
 
+      uplaoaded.data.createFile && setProjectPictureName(file.name);
+    }
+  };
+  console.log(projectPictureName)
+  const onClick = () => {
+    console.log(projectPictureName)
+    // sendPicture({ variables: { picture }});
     sendProjectInformations({
       variables: {
         name,
         description,
-        createdAt: new Date().toJSON()
+        createdAt: new Date().toJSON(),
+        projectPictureName
       }
     });
-  };
-
-  const handleChange =  event => {
-    console.log(event.target.files[0])
   };
 
   return (
@@ -51,7 +60,7 @@ const CreateProject = ({ setDisplayCreation }) => {
         onClick={() => setDisplayCreation(false)}
       />
       
-      <div className='w-2/3 mx-auto'>
+      <form className='w-2/3 mx-auto'>
 
         <Input
           label='Titre de votre projet'
@@ -69,17 +78,18 @@ const CreateProject = ({ setDisplayCreation }) => {
           value={description}
         />
 
-        <input type='file' onChange={handleChange} />
+        <input type='file' onChange={onChange}/>
 
         <div className='text-center'>
           <Button
+            buttonType='button'
             onClick={onClick}
             buttonLabel='Créer votre projet'
             buttonClassName='mb-8'
           />
         </div>
 
-      </div>
+      </form>
     </div>
   );
 };

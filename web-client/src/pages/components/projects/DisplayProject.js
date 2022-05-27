@@ -1,6 +1,10 @@
 import React from 'react';
+import { useQuery } from "@apollo/client";
+import { getProjectPicture } from '../../../graphql/Project';
 
 const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, image, project }) => {
+  const { pictureData } = useQuery(getProjectPicture, { variables: { pictureName: project.projectPictureName}});
+  console.log(pictureData)
   return (
   <div
     onMouseEnter={() => setDisplayHover(index + 1)}
@@ -19,7 +23,7 @@ const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, i
         }</p>
       </div>
     }
-    <img src={image} alt="Sélection du projet" />
+    <img src={pictureData} alt="Sélection du projet" />
   </div>);
 };
 

@@ -21,6 +21,7 @@ const Projects = () => {
 
   const { loading, error, data } = useQuery(getProjects);
 
+
   if (loading) return 'Loading...';
 
   if (error) return `Error! ${error.message}`;
@@ -69,6 +70,7 @@ const Projects = () => {
 
           return (
             <DisplayProject
+              key={index}
               setDisplayHover={setDisplayHover}
               index={index}
               projectObject={projectObject}
