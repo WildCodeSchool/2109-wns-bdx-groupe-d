@@ -1,6 +1,7 @@
 import React from 'react';
+import smiley from '../../../images/smiley.png';
 
-const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, image, project }) => {
+const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, project }) => {
   return (
   <div
     onMouseEnter={() => setDisplayHover(index + 1)}
@@ -19,7 +20,12 @@ const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, i
         }</p>
       </div>
     }
-    <img src={image} alt="Sélection du projet" />
+
+    <img
+      src={project.projectPictureName ? `/images/${project.projectPictureName}` : smiley}
+      alt="Sélection du projet"
+    />
+
   </div>);
 };
 

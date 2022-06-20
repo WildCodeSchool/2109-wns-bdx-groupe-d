@@ -11,8 +11,7 @@
 }
 
 .organization-project-container img {
-	@apply w-full;
-	@apply h-full;
+  @apply w-full h-full;
 }
 
 .hover-container {
