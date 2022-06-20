@@ -1,13 +1,13 @@
-.organization-container {
+/* .organization-container {
   @apply px-4 mt-24;
-}
+} */
 
 .projects-container {
-  @apply flex flex-wrap justify-evenly;
+	@apply flex flex-wrap justify-evenly;
 }
 
 .organization-project-container {
-  @apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
+	@apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
 }
 
 .organization-project-container img {
@@ -15,14 +15,16 @@
 }
 
 .hover-container {
-  @apply w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4 rounded-t-2xl;
+	@apply w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4 rounded-t-2xl;
 }
 
 .hover-open {
-  bottom: -20rem;
-  animation: slideOpen 0.3s forwards;
+	bottom: -20rem;
+	animation: slideOpen 0.3s forwards;
 }
 
 @keyframes slideOpen {
-  100% { bottom: 0; }
+	100% {
+		bottom: 0;
+	}
 }
