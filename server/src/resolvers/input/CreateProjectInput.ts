@@ -10,6 +10,9 @@ class CreateProjectInput {
 
   @Field()
   created_at!: string;
+
+  @Field()
+  projectPictureName?: string;
 }
 
 export default CreateProjectInput;

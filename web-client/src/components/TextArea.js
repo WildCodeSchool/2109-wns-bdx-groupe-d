@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextArea = ({ label, value, setValue, placeHolder, labelClassName }) => (
+const TextArea = ({ label, value, setValue, placeHolder, labelClassName, required = false }) => (
   <div className="input-container">
       <label className={`label ${labelClassName}`}>
           {label}
@@ -10,6 +10,7 @@ const TextArea = ({ label, value, setValue, placeHolder, labelClassName }) => (
           onChange={(v) => setValue(v.target.value)}
           value={value}
           placeholder={placeHolder}
+          required={required}
       />
   </div>
 );

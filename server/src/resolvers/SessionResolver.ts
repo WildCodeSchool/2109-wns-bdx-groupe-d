@@ -5,10 +5,7 @@ import User from '../models/User';
 import LoginInput from './input/LoginInput';
 import SessionUtils from '../models/utils/SessionUtils';
 import UserInfoInput from './input/UserInfoInput';
-
-interface Context {
-  sessionId: string
-}
+import { Context } from '../apollo-server';
 
 @Resolver(Session)
 class SessionResolver {

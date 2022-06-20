@@ -26,9 +26,9 @@ class SessionUtils extends Session {
 	}
 
   static async userInfo({ sessionId }: UserInfoInput) {
-    const userSession: any = await Session.findOne({ uid: sessionId }, { relations: ["user"] });
+    const userSession = await Session.findOne({ uid: sessionId }, { relations: ["user"] });
  
-    return userSession.user;
+    return userSession?.user || null;
   }
 };
 

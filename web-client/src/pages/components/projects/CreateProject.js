@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import Button from '../../../components/Button';
 import { useMutation } from "@apollo/client";
 
 import Input from '../../../components/Input';
 import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
-import { setProject } from '../../../graphql/Project';
+import { createProject, createFile } from '../../../graphql/Project';
 
 const CreateProject = ({ setDisplayCreation }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [projectPictureName, setProjectPictureName] = useState('');
 
   const [sendProjectInformations] = useMutation(
-    setProject,
+    createProject,
     {
       onCompleted: () => setDisplayCreation(false),
       onError: (error) => console.log(error.message),
@@ -20,21 +20,29 @@ const CreateProject = ({ setDisplayCreation }) => {
     }
   );
 
-  const onClick = () => {
-    console.log(name)
-    console.log(description)
+  const [sendPicture] = useMutation(createFile);
+  
+  const onChange = async ({
+    target: { validity, files: [file] }
+  }) => {
+    if (validity.valid) {
+      const uplaoaded = await sendPicture({ variables: { picture: file } });
+
+      uplaoaded.data.createFile && setProjectPictureName(file.name);
+    }
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
 
     sendProjectInformations({
       variables: {
         name,
         description,
-        createdAt: new Date().toJSON()
+        createdAt: new Date().toJSON(),
+        projectPictureName
       }
     });
-  };
-
-  const handleChange =  event => {
-    console.log(event.target.files[0])
   };
 
   return (
@@ -51,7 +59,7 @@ const CreateProject = ({ setDisplayCreation }) => {
         onClick={() => setDisplayCreation(false)}
       />
       
-      <div className='w-2/3 mx-auto'>
+      <form onSubmit={onSubmit} className='w-2/3 mx-auto'>
 
         <Input
           label='Titre de votre projet'
@@ -59,6 +67,7 @@ const CreateProject = ({ setDisplayCreation }) => {
           labelClassName='text-sm'
           setValue={setName}
           value={name}
+          required
         />
         
         <TextArea
@@ -67,19 +76,31 @@ const CreateProject = ({ setDisplayCreation }) => {
           labelClassName='text-sm'
           setValue={setDescription}
           value={description}
+          required
         />
 
-        <input type='file' onChange={handleChange} />
+        <div className='w-5/12 mx-auto flex justify-center'>
+          <label className='button-general cursor-pointer'>
+              {projectPictureName || 'Sélectionnez une image'}
 
-        <div className='text-center'>
-          <Button
-            onClick={onClick}
-            buttonLabel='Créer votre projet'
-            buttonClassName='mb-8'
-          />
+              <input
+                type='file'
+                onChange={onChange}
+                accept='image/png, image/jpg, image/gif, image/jpeg'
+                className='hidden'
+              />
+          </label>
         </div>
 
-      </div>
+        <div className='text-center'>
+          <button
+            className='submit-button mb-8 mt-4'
+          >
+            Créer votre projet
+          </button>
+        </div>
+
+      </form>
     </div>
   );
 };

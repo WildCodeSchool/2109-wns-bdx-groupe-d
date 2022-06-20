@@ -2,12 +2,14 @@ import dotenv from 'dotenv';
 import 'reflect-metadata';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';
 import UID from 'uid-safe';
-import Session from './models/Session';
-import User from './models/User';
+import indexRouter from './routes';
+// import Session from './models/Session';
+// import User from './models/User';
 
 dotenv.config();
 
@@ -22,6 +24,10 @@ const runServer = async () => {
 	const app = express();
 
 	app.use(cookieParser());
+
+	app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
+
+	app.use('/', indexRouter);
 
 	app.use(async function (req, res, next) {
 		// check if client sent cookie
