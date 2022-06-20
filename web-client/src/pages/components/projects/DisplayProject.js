@@ -20,7 +20,12 @@ const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, p
         }</p>
       </div>
     }
-    <img src={project.projectPictureName ? `/images/${project.projectPictureName}` : smiley} alt="Sélection du projet" />
+
+    <img
+      src={project.projectPictureName ? `/images/${project.projectPictureName}` : smiley}
+      alt="Sélection du projet"
+    />
+
   </div>);
 };
 
