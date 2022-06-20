@@ -2,8 +2,7 @@ import dotenv from 'dotenv';
 import 'reflect-metadata';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-// @ts-ignore
-import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';

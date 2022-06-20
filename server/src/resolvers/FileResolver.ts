@@ -1,8 +1,6 @@
 import { Arg, Mutation, Resolver } from 'type-graphql';
-// @ts-ignore
-import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
-// @ts-ignore
-import Upload from 'graphql-upload/Upload.js';
+import { GraphQLUpload } from 'graphql-upload';
+import { FileUpload } from 'graphql-upload';
 import { createWriteStream } from 'fs';
 
 import File from '../models/File';
@@ -12,7 +10,7 @@ class FileResolver {
 	@Mutation(() => Boolean)
 	async createFile(
     @Arg('picture', () => GraphQLUpload)
-      { createReadStream, filename }: Upload
+      { createReadStream, filename }: FileUpload
     ) {
       if (createReadStream && filename) {
         return await new Promise(async (resolve, reject) => createReadStream()
