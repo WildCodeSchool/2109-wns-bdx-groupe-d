@@ -112,14 +112,14 @@ const Dashboard = ({ actualUser }) => {
 									<tbody className="bg-gradient-to-b from-wildmine_black to-gray-700 text-text_color_light">
 										<tr className="dark:bg-gray-800 dark:border-gray-700">
 											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span class="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
+												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
 													#16257
 												</span>
 											</th>
 											<td className="px-6 py-4">Pb affichage</td>
 											<td className="px-6 py-4">Le problème résulte...</td>
 											<td className="px-6 py-4">
-												<strong class="border border-warning text-white bg-warning uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
+												<strong className="border border-warning text-white bg-warning uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
 											</td>
 											<td className="px-6 py-4">dev</td>
 											<td className="px-6 py-4">OPC</td>
@@ -127,14 +127,14 @@ const Dashboard = ({ actualUser }) => {
 										</tr>
 										<tr className="dark:bg-gray-800 dark:border-gray-700">
 											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span class="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
+												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
 													#28760
 												</span>
 											</th>
 											<td className="px-6 py-4">Bug avec Docker</td>
 											<td className="px-6 py-4">Launch des cont...</td>
 											<td className="px-6 py-4">
-												<strong class="border border-success text-white bg-success uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
+												<strong className="border border-success text-white bg-success uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
 											</td>
 											<td className="px-6 py-4">dev</td>
 											<td className="px-6 py-4">SGB</td>
@@ -142,7 +142,7 @@ const Dashboard = ({ actualUser }) => {
 										</tr>
 										<tr className="dark:bg-gray-800">
 											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span class="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
+												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
 													#82635
 												</span>
 											</th>
@@ -150,7 +150,7 @@ const Dashboard = ({ actualUser }) => {
 											<td className="px-6 py-4">La base de données...</td>
 											<td className="px-6 py-4">
 												{' '}
-												<strong class="border border-danger text-white bg-danger uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
+												<strong className="border border-danger text-white bg-danger uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
 											</td>
 											<td className="px-6 py-4">dev</td>
 											<td className="px-6 py-4">Surf Coffee Shop</td>
