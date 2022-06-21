@@ -13,7 +13,6 @@ const Dashboard = ({ actualUser }) => {
 		<div className="dashboard-container">
 			{actualUser ? (
 				<>
-					{/* Hello {actualUser.first_name} {actualUser.last_name} <button>Test</button> */}
 					<div className="grid grid-cols-3 gap-6">
 						<div className="col-span-1">
 							<div className="max-w-sm rounded overflow-hidden shadow-lg bg-secondary_color columns-2">

@@ -33,6 +33,10 @@ class Project extends BaseEntity {
 	@Field()
 	created_at!: string;
 
+	@Column()
+	@Field()
+	projectPictureName?: string;
+
 	// @Column()
 	// @Field()
 	// updated_at!: Date;

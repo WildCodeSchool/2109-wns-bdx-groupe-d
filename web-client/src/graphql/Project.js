@@ -6,18 +6,26 @@ export const getProjects = gql`
 			id
 			name
 			description
+			projectPictureName
 			created_at
 		}
 	}
 `;
 
-export const setProject = gql`
-	mutation createProject($name: String!, $description: String!, $createdAt: String!) {
-		createProject(name: $name, description: $description, created_at: $createdAt) {
+export const createProject = gql`
+	mutation createProject($name: String!, $description: String!, $createdAt: String!, $projectPictureName: String!) {
+		createProject(name: $name, description: $description, created_at: $createdAt, projectPictureName: $projectPictureName) {
 			id
 			name
 			description
+			projectPictureName
 			created_at
 		}
+	}
+`;
+
+export const createFile = gql`
+	mutation createFile($picture: Upload!) {
+		createFile(picture: $picture)
 	}
 `;

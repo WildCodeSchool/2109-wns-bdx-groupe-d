@@ -5,11 +5,14 @@ import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
 
 const client = new ApolloClient({
-  uri: "/graphql",
   cache: new InMemoryCache(),
-  credentials: 'same-origin'
+  credentials: 'same-origin',
+  link: createUploadLink({
+    uri: '/graphql'
+  })
 });
 
 ReactDOM.render(
