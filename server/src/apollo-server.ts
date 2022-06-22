@@ -1,8 +1,9 @@
 import { ApolloServer } from "apollo-server-express";
-import { userInfo } from "os";
 import { AuthChecker, buildSchema } from "type-graphql";
 import User from "./models/User";
 import SessionUtils from "./models/utils/SessionUtils";
+import FileResolver from "./resolvers/FileResolver";
+import ProjectResolver from "./resolvers/ProjectResolver";
 import SessionResolver from "./resolvers/SessionResolver";
 import UserResolver from "./resolvers/UserResolver";
 
@@ -17,7 +18,7 @@ export const customAuthChecker: AuthChecker<Context> = ({ context }) => {
 
 export default async function getServer() {
   const schema = await buildSchema({
-    resolvers: [UserResolver, SessionResolver],
+    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver],
     authChecker: customAuthChecker,
   });
 
