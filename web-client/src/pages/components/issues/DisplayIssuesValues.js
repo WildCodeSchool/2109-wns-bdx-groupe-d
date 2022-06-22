@@ -1,15 +1,39 @@
 import React from 'react';
 
-const DisplayIssuesValues = issue => (
-  <div className='grid grid-cols-7 p-4 bg-grey_light text-wildmine_black font-bold shadow-md'>
-    <p>{issue.nbr}</p>
+const DisplayIssuesValues = ({ issue, issueIndex, issues }) => {
+  let priorityColor;
+  let statusColor;
+
+  const dateToDisplay = `${issue.date.getDate()}/${issue.date.getMonth()}/${issue.date.getFullYear()}`
+
+  if (issue.priority === 'HIGH') priorityColor = 'bg-issue_red'
+  if (issue.priority === 'NORMAL') priorityColor = 'bg-issue_orange'
+  if (issue.priority === 'LOW') priorityColor = 'bg-issue_green'
+
+  if (issue.status === 'DONE') statusColor = 'bg-issue_green'
+  if (issue.status === 'IN_PROGRESS') statusColor = 'bg-issue_orange'
+  if (issue.status === 'IN_WAIT') statusColor = 'bg-issue_grey'
+
+
+
+  return <div className={`grid grid-cols-7 p-4 bg-grey_light text-wildmine_black shadow-md text-center border relative -z-10 ${issueIndex === issues.length - 1 ? 'rounded-b-lg' : 'border-b-black'}`}>
+    <div className='p-2 bg-wildmine_black rounded-lg w-[110px] mx-auto'>
+      <p className='font-extrabold text-secondary_color'>#{issue.nbr}</p>
+    </div>
+
+    <div className={`${priorityColor} w-[25px] h-[25px] border rounded-full mx-auto`}/>
+
     <p>{issue.title}</p>
-    <p>{issue.description}</p>
-    <p>{issue.projectName}</p>
-    <p>{issue.status}</p>
-    <p>{issue.priority}</p>
-    <p>{issue.date}</p>
-  </div>
-);
+
+    <p className='italic'>{issue.projectName}</p>
+
+    <p className='italic'>{`${issue.description.slice(0, 20)}...`}</p>
+
+    <div className={`${statusColor} w-[25px] h-[25px] border rounded-full mx-auto`}/>
+
+    <p className='italic'>{dateToDisplay}</p>
+
+  </div>;
+};
 
 export default DisplayIssuesValues;

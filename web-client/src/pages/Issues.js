@@ -10,7 +10,7 @@ const mockedIssues = [
     description: 'Mais j’ai jamais dit qu’ça devait être vrai! Mais vous êtes complètement con? C’est quand même pas de bol pour lui, hein. Parce que les rares fois où il arrive à faire quelque chose de ses dix doigts, il se goure quand on lui demande son nom.',
     projectName: 'Société pas générale',
     status: 'DONE',
-    priority: 'NORMAL',
+    priority: 'HIGH',
     date: new Date()
   },
   {
@@ -19,7 +19,7 @@ const mockedIssues = [
     description: 'Mais j’ai jamais dit qu’ça devait être vrai! Mais vous êtes complètement con? C’est quand même pas de bol pour lui, hein. Parce que les rares fois où il arrive à faire quelque chose de ses dix doigts, il se goure quand on lui demande son nom.',
     projectName: "Clara's mac",
     status: 'IN_PROGRESS',
-    priority: 'HIGH',
+    priority: 'NORMAL',
     date: new Date()
   },
   {
@@ -43,8 +43,8 @@ const Issues = () => {
       <DisplayIssuesTitle/>
 
       <div>
-        {mockedIssues.map(issue => (
-          <DisplayIssuesValues issue={issue}/>
+        {mockedIssues.map((issue, issueIndex) => (
+          <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={mockedIssues}/>
         ))}
       </div>
     </div>
