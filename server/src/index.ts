@@ -8,8 +8,6 @@ import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';
 import UID from 'uid-safe';
 import indexRouter from './routes';
-// import Session from './models/Session';
-// import User from './models/User';
 
 dotenv.config();
 

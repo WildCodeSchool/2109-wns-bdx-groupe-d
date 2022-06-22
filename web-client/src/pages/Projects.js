@@ -20,7 +20,7 @@ const Projects = () => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div className="organization-container">
+    <div>
       <div className='flex justify-around mb-8'>
 
         <SearchButton/>
