@@ -3,16 +3,16 @@ import {
 	BaseEntity,
 	Column,
 	Entity,
-	JoinColumn,
-	JoinTable,
-	ManyToMany,
-	ManyToOne,
+	// JoinColumn,
+	// JoinTable,
+	// ManyToMany,
+	// ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import User from './User';
-import Organization from './Organization';
-import Issue from './Issue';
+// import User from './User';
+// import Organization from './Organization';
+// import Issue from './Issue';
 
 @Entity()
 @ObjectType()
@@ -31,43 +31,47 @@ class Project extends BaseEntity {
 
 	@Column()
 	@Field()
-	created_at!: Date;
+	created_at!: string;
 
 	@Column()
 	@Field()
-	updated_at!: Date;
+	projectPictureName?: string;
 
-	@ManyToOne(() => Organization, (organization) => organization.id)
-	@JoinColumn({ name: 'organization_id' })
-	organization_id!: number;
+	// @Column()
+	// @Field()
+	// updated_at!: Date;
 
-	@ManyToMany(() => User)
-	@JoinTable({
-		name: 'project_user',
-		joinColumn: {
-			name: 'project_id',
-			referencedColumnName: 'id',
-		},
-		inverseJoinColumn: {
-			name: 'user_id',
-			referencedColumnName: 'id',
-		},
-	})
-	user_id!: User;
+	// @ManyToOne(() => Organization, (organization) => organization.id)
+	// @JoinColumn({ name: 'organization_id' })
+	// organization_id!: number;
 
-	@ManyToMany(() => Issue)
-	@JoinTable({
-	    name: "project_issues",
-	    joinColumn: {
-	        name: "project_id",
-	        referencedColumnName: "id"
-	    },
-	    inverseJoinColumn: {
-	        name: "issue_id",
-	        referencedColumnName: "id"
-	    }
-	})
-	project_id!: Issue;
+	// @ManyToMany(() => User)
+	// @JoinTable({
+	// 	name: 'project_user',
+	// 	joinColumn: {
+	// 		name: 'project_id',
+	// 		referencedColumnName: 'id',
+	// 	},
+	// 	inverseJoinColumn: {
+	// 		name: 'user_id',
+	// 		referencedColumnName: 'id',
+	// 	},
+	// })
+	// user_id!: User;
+
+	// @ManyToMany(() => Issue)
+	// @JoinTable({
+	//     name: "project_issues",
+	//     joinColumn: {
+	//         name: "project_id",
+	//         referencedColumnName: "id"
+	//     },
+	//     inverseJoinColumn: {
+	//         name: "issue_id",
+	//         referencedColumnName: "id"
+	//     }
+	// })
+	// project_id!: Issue;
 }
 
 export default Project;

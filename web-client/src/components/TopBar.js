@@ -1,47 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
+import logo from '../images/wildmine-logo.svg'
 
 import '../css/components/TopBar.css';
 
 const TopBar = () => {
-  const { data } = useQuery(userInfo);
+	const [currentLoc, setCurrentLoc] = useState(window.location.pathname);
+	const { data } = useQuery(userInfo);
+	const currentUser = data.userInfo;
+	return (
+		<nav className="topbar-container">
+			<div className="logo-container"><img src={logo} alt='Logo wildmine'/></div>
 
-  const currentUser = data.userInfo;
-  return (
-    <nav className="topbar-container">
+			<div className="topbar-menu-links-container">
+				<NavLink
+					to="/"
+					className={`topbar-menu-link ${currentLoc === '/' ? 'topbar-menu-link-selected' : ''}`}
+					onClick={() => setCurrentLoc('/')}
+				>
+					Accueil
+				</NavLink>
 
-      <div className="logo-container">
-        LOGO
-      </div>
+				<NavLink
+					to="/organization"
+					className={`topbar-menu-link ${currentLoc === '/organization' ? 'topbar-menu-link-selected' : ''}`}
+					onClick={() => setCurrentLoc('/organization')}
+				>
+					Organisation
+				</NavLink>
 
-      <div className="topbar-menu-links-container">
+				<NavLink
+					to="/projects"
+					className={`topbar-menu-link ${currentLoc === '/projects' ? 'topbar-menu-link-selected' : ''}`}
+					onClick={() => setCurrentLoc('/projects')}
+				>
+					Projets
+				</NavLink>
 
-          <NavLink to="/" className="topbar-menu-link">
-            Accueil
-          </NavLink>
-          
-          <NavLink to="/organization" className="topbar-menu-link">
-            Organisation
-          </NavLink>
-          
-          <NavLink to="/projects" className="topbar-menu-link">
-            Projets
-          </NavLink>
-          
-          <NavLink to="/IssuesProject" className="topbar-menu-link">
-            IssuesProject
-          </NavLink>
-      </div>
+				<NavLink
+					to="/issues"
+					className={`topbar-menu-link ${currentLoc === '/issues' ? 'topbar-menu-link-selected' : ''}`}
+					onClick={() => setCurrentLoc('/issues')}
+				>
+					Tickets
+				</NavLink>
+			</div>
 
-      <div className="topbar-menu-settings">
-        <NavLink to="/settings">
-          {currentUser.first_name} {currentUser.last_name}
-        </NavLink>
-      </div>
-    </nav>
-  );
+			<div className="topbar-menu-settings">
+				<NavLink to="/settings" onClick={() => setCurrentLoc('/settings')}>
+					{currentUser.first_name} {currentUser.last_name}
+				</NavLink>
+			</div>
+		</nav>
+	);
 };
 
 export default TopBar;

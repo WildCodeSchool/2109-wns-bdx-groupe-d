@@ -1,40 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQuery } from "@apollo/client";
+import { getProjects } from "../graphql/Project.js";
 
-import projectImage from '../images/dev.jpeg';
+import DisplayProject from './components/projects/DisplayProject';
+import CreateProject from './components/projects/CreateProject';
+import Button from '../components/Button';
+import SearchButton from '../components/SearchButton.js';
 
 
 const Projects = () => {
-  const organizationProjects = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-  ]
+	const [displayHover, setDisplayHover] = useState(false);
+  const [displayCreation, setDisplayCreation] = useState(false);
+
+  const { loading, error, data } = useQuery(getProjects);
+
+
+  if (loading) return 'Loading...';
+
+  if (error) return `Error! ${error.message}`;
+
   return (
     <div className="organization-container">
-      {organizationProjects.map((projectObject) => {
-        return (
-          <div className="organization-project-container" key={projectObject}>
-            <img src={projectImage} alt="Sélection du projet" />
-          </div>
-        );
-      })}
+      <div className='flex justify-around mb-8'>
+
+        <SearchButton/>
+
+        <Button
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
+          buttonLabel='Créer un projet'
+          buttonType='button'
+        />
+
+      </div>
+
+      {displayCreation &&
+        <CreateProject setDisplayCreation={setDisplayCreation}/>
+      }
+
+      <div className="projects-container">
+
+        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
+          return <DisplayProject
+              key={index}
+              setDisplayHover={setDisplayHover}
+              index={index}
+              projectObject={projectObject}
+              displayHover={displayHover}
+              project={data.projects[index]}
+            />;
+        })
+      :<p>Aucun projet pour le moment</p>}
+
+      </div>
     </div>
   );
 }

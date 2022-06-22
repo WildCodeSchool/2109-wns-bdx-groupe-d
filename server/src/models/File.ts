@@ -16,10 +16,6 @@ class File extends BaseEntity {
     @Column()
     @Field()
     name!: string;
-    
-    // @Column()
-    // @Field()
-    // file!: Buffer;
 }
 
 export default File;
