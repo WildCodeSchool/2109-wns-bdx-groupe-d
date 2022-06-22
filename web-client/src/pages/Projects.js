@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useQuery } from "@apollo/client";
 import { getProjects } from "../graphql/Project.js";
 
-import loupe from '../images/loupe.svg';
 import DisplayProject from './components/projects/DisplayProject';
 import CreateProject from './components/projects/CreateProject';
 import Button from '../components/Button';
+import SearchButton from '../components/SearchButton.js';
 
 
 const Projects = () => {
@@ -23,11 +23,7 @@ const Projects = () => {
     <div className="organization-container">
       <div className='flex justify-around mb-8'>
 
-        <div className='flex border border-secondary_color rounded-xl text-secondary_color'>
-          <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none placeholder-secondary_color' placeholder='Rechercher ...'/>
-
-          <img className='cursor-pointer mr-4' src={loupe} alt='Rechercher'/>
-        </div>
+        <SearchButton/>
 
         <Button
           onClick={setDisplayCreation}
