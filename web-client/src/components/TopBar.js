@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
+import logo from '../images/wildmine-logo.svg'
 
 import '../css/components/TopBar.css';
 
@@ -11,7 +12,7 @@ const TopBar = () => {
 	const currentUser = data.userInfo;
 	return (
 		<nav className="topbar-container">
-			<div className="logo-container">LOGO</div>
+			<div className="logo-container"><img src={logo} alt='Logo wildmine'/></div>
 
 			<div className="topbar-menu-links-container">
 				<NavLink
