@@ -45,15 +45,15 @@ const CreateProject = ({ setDisplayCreation }) => {
     });
   };
 
-  return (
-    <div className='bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4'>
+  return <div className='modal-background'>
+    <div className='modal-container'>
 
-      <p className='font-bold text-secondary_color text-2xl text-center my-8'>
+      <p className='modal-title'>
         Créez votre projet
       </p>
 
       <img
-        className='cursor-pointer absolute right-8 top-6'
+        className='cursor-pointer fixed right-[27%] top-[22%]'
         src={Close}
         alt='Fermer la fenêtre'
         onClick={() => setDisplayCreation(false)}
@@ -79,7 +79,7 @@ const CreateProject = ({ setDisplayCreation }) => {
           required
         />
 
-        <div className='w-5/12 mx-auto flex justify-center'>
+        <div className='w-[48%] mx-auto flex justify-center'>
           <label className='button-general cursor-pointer'>
               {projectPictureName || 'Sélectionnez une image'}
 
@@ -102,7 +102,7 @@ const CreateProject = ({ setDisplayCreation }) => {
 
       </form>
     </div>
-  );
+  </div>;
 };
 
 export default CreateProject;

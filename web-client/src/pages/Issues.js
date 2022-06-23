@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchButton from '../components/SearchButton';
 import DisplayIssuesTitle from './components/issues/DisplayIssuesTitle';
 import DisplayIssuesValues from './components/issues/DisplayIssuesValues';
+import Button from '../components/Button';
+import CreateIssue from './components/issues/CreateIssue';
 
 const mockedIssues = [
   {
@@ -34,11 +36,23 @@ const mockedIssues = [
 ];
 
 const Issues = () => {
+  const [displayCreation, setDisplayCreation] = useState(false);
   return (
     <div>
-      <div className=''>
+      <div className='flex justify-around mb-8'>
         <SearchButton/>
+
+        <Button
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
+          buttonLabel='Créer un ticket'
+          buttonType='button'
+        />
       </div>
+
+      {displayCreation &&
+        <CreateIssue setDisplayCreation={setDisplayCreation}/>
+      }
 
       <DisplayIssuesTitle/>
 
