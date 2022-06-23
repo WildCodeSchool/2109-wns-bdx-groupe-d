@@ -48,6 +48,7 @@ const Projects = () => {
               projectObject={projectObject}
               displayHover={displayHover}
               project={data.projects[index]}
+              to="/issue"
             />;
         })
       :<p>Aucun projet pour le moment</p>}

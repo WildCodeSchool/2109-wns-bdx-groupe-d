@@ -4,9 +4,12 @@
 
 @import './style.css';
 
+@import './components/Carousel.css';
 @import './components/TopBar.css';
 @import './components/Button.css';
 @import './components/Input.css';
 @import './components/Modal.css';
 
 @import './pages/Projects.css';
+@import './pages/DetailsProject.css';
+@import './pages/IssuesProject.css';
