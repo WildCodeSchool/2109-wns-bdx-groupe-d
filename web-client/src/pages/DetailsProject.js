@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+import { getProjects, getProjectById } from "../graphql/Project.js";
+import smiley from '../images/smiley.png'
+
 
 const projectIssus = [
   { id: 1, 
@@ -39,7 +43,7 @@ const projectIssus = [
     statut: 'Done', 
     categorie: 'intégration', 
     avatars: [
-      { id: 1,
+      { id: 2,
         img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
       }
     ], 
@@ -191,6 +195,19 @@ const DetailsProject = () => {
 
   const [showFiveTickets, setShowFiveTickets] = useState(false)
 
+  let { id } = useParams()
+
+  //const { loading, error, data } = useQuery(getProjects);
+  const { loading, error, data } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
+
+  if (loading) return 'Loading...';
+
+  if (error) return `Error! ${error.message}`;
+
+  console.log(data)
+
+  console.log(id)
+
   function Statut(value) {
     if (value === 'Done') {
       return <div className="bg-green-500 rounded-full h-5 w-5 inline-block"></div>;
@@ -205,22 +222,23 @@ const DetailsProject = () => {
         <a href='http://localhost:3000/projects'>Projects {' > '} The Smiling Green Bean</a>
       </div>
       <div className='project-name'>
-        <h1>SURF COFFEE SHOP</h1>
+        <h1>{ data.getProjectById.name }</h1>
       </div>
       <div className='project-description'>
-        <h2>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h2>
+        <h2>{ data.getProjectById.description }</h2>
       </div>
       <div className='project-collaborators flex items-start justify-start'>
         <h3 className="mr-10">Collaborateurs du projet :</h3>
         {collaboratorsProject && collaboratorsProject.map(collaborator =>
           <img key={collaborator.id} className="rounded-full h-8 w-8 mx-2" src={collaborator.img} alt="collabo 1"/>
         )}  
-      </div>
+      </div> 
+      <img className="object-none object-center" src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"/>  
       <Carousel>
         {imagesProject && imagesProject.map(image =>
           <CarouselItem><img key={image.id} className="object-none object-center" src={image.url} alt="collabo 1"/></CarouselItem>
         )}
-      </Carousel>
+      </Carousel> 
       <div className='font-black text-2xl pt-20'>
         <NavLink to="/IssuesProject" >
           <p>Tickets en cours</p>
@@ -257,7 +275,7 @@ const DetailsProject = () => {
             {projectIssus && projectIssus.slice(0, 5).map(projectIssu =>
               <tr key={projectIssu.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                  <NavLink to="/IssuesProject" className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
+                  <NavLink to={"/issue/" + projectIssu.id} className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
                     {projectIssu.ticketNumber}
                   </NavLink>
                 </td>
@@ -277,7 +295,7 @@ const DetailsProject = () => {
               ? projectIssus && projectIssus.slice(6, 10).map(projectIssu =>
                   <tr key={projectIssu.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                      <NavLink to="/IssuesProject" className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
+                      <NavLink to={"/issue/" + projectIssu.id} className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
                         {projectIssu.ticketNumber}
                       </NavLink>
                     </td>
@@ -300,8 +318,8 @@ const DetailsProject = () => {
       </div>
       <div>
         { !showFiveTickets 
-            ? <button className="bg-blue_green_flash text-black rounded-full flex items-center justify-center" onClick={() => { setShowFiveTickets(true) }}><svg class="w-14 h-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg></button>
-            : <button className="bg-blue_green_flash text-black rounded-full" onClick={() => { setShowFiveTickets(false) }}><svg class="h-14 w-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
+            ? <button className="bg-blue_green_flash text-black rounded-full flex items-center justify-center" onClick={() => { setShowFiveTickets(true) }}><svg className="w-14 h-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg></button>
+            : <button className="bg-blue_green_flash text-black rounded-full" onClick={() => { setShowFiveTickets(false) }}><svg className="h-14 w-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
         }
       </div>
       

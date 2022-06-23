@@ -161,6 +161,8 @@ const IssuesProject = () => {
 
   const [issues, setIssues] = useState('');
 
+  //const [filterResult, setFilterResult] = useState('');
+
   const [foundIssues, setFoundIssues] = useState(ISSUES);
 
   const filter = (e) => {
@@ -169,16 +171,16 @@ const IssuesProject = () => {
     if (keyword !== '') {
       const results = ISSUES.filter((issue) => {
         return issue.ticketName.toLowerCase().startsWith(keyword.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
       });
       setFoundIssues(results);
+
     } else {
       setFoundIssues(ISSUES);
-      // If the text field is empty, show all users
     }
-
     setIssues(keyword);
   };
+
+  
 
 
   return (
@@ -223,10 +225,10 @@ const IssuesProject = () => {
             </tr>
           </thead>
           <tbody>
-            {ISSUES && ISSUES.map(issue =>
+          {foundIssues && foundIssues.map(issue =>
               <tr key={issue.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                  <NavLink to="/issues" className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
+                  <NavLink to={"/issue/" + issue.id} className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
                     {issue.ticketNumber}
                   </NavLink>
                 </td>
@@ -242,6 +244,7 @@ const IssuesProject = () => {
                 <td className="px-6 py-4 text-lg">{issue.date}</td>
               </tr>
             )}
+            
           </tbody>
         </table>
       </div>

@@ -3,7 +3,7 @@
   }
   
   .detail-project-rollback {
-    @apply py-4 text-blue_green_flash italic text-base;
+    @apply py-4 italic text-base;
   }
   
   .project-name {

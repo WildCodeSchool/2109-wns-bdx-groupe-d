@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const ISSUES = [
   { id: 1, 
@@ -151,6 +151,8 @@ const ISSUES = [
 
 const Issue = () => {
 
+  let { id } = useParams()
+
   function Statut(value) {
     if (value === 'Done') {
       return <div className="bg-green-500 rounded-full h-5 w-5 inline-block"></div>;
@@ -163,28 +165,15 @@ const Issue = () => {
 
   const [foundIssues, setFoundIssues] = useState(ISSUES);
 
-  const filter = (e) => {
-    const keyword = e.target.value;
+  let issueIndex = id -1
 
-    if (keyword !== '') {
-      const results = ISSUES.filter((issue) => {
-        return issue.ticketName.toLowerCase().startsWith(keyword.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
-      });
-      setFoundIssues(results);
-    } else {
-      setFoundIssues(ISSUES);
-      // If the text field is empty, show all users
-    }
-
-    setIssues(keyword);
-  };
+  
 
 
   return (
     <div className="issues-container">
       <div className='font-black text-2xl pt-20 pb-8'>
-        <p>Tickets #7762</p>
+        <p>{ISSUES[issueIndex].ticketNumber}</p>
       </div> 
       <div className="relative overflow-x-auto my-6 rounded-lg"> 
         <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
@@ -214,25 +203,25 @@ const Issue = () => {
             </tr>
           </thead>
           <tbody>
-            {ISSUES && ISSUES.slice(0, 1).map(issue =>
-              <tr key={issue.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+
+              <tr key={ISSUES[issueIndex].id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
                   <NavLink to="/issues" className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
-                    {issue.ticketNumber}
+                    {ISSUES[issueIndex].ticketNumber}
                   </NavLink>
                 </td>
-                <td className="px-6 py-4 font-mono text-black text-lg font-semibold ">{issue.ticketName}</td>
-                <td className="px-6 py-4 font-serif text-lg">{issue.comment}</td>
-                <td className="px-6 py-4 font-serif text-lg"><Statut value={issue.statut}/></td>
-                <td className="px-6 py-4 font-sans italic font-black text-black text-lg">{issue.categorie}</td>
+                <td className="px-6 py-4 font-mono text-black text-lg font-semibold ">{ISSUES[issueIndex].ticketName}</td>
+                <td className="px-6 py-4 font-serif text-lg">{ISSUES[issueIndex].comment}</td>
+                <td className="px-6 py-4 font-serif text-lg"><Statut value={ISSUES[issueIndex].statut}/></td>
+                <td className="px-6 py-4 font-sans italic font-black text-black text-lg">{ISSUES[issueIndex].categorie}</td>
                 <td className="px-6 py-4 space-x-2 flex items-center justify-center">
-                  {issue.avatars && issue.avatars.map(avatar =>
+                  {ISSUES[issueIndex].avatars && ISSUES[issueIndex].avatars.map(avatar =>
                     <img key={avatar} className="rounded-full h-8 w-8" src={avatar.img} alt="collabo 1"/>
                   )}
                 </td>
-                <td className="px-6 py-4 text-lg">{issue.date}</td>
+                <td className="px-6 py-4 text-lg">{ISSUES[issueIndex].date}</td>
               </tr>
-            )}
+            
           </tbody>
         </table>
       </div>
