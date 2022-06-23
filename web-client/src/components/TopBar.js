@@ -40,7 +40,7 @@ const TopBar = () => {
 				</NavLink>
 
 				<NavLink
-					to="/issues"
+					to="/issuesProject"
 					className={`topbar-menu-link ${currentLoc === '/issues' ? 'topbar-menu-link-selected' : ''}`}
 					onClick={() => setCurrentLoc('/issues')}
 				>

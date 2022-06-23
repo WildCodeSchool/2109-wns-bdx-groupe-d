@@ -6,8 +6,10 @@ import { userInfo } from './graphql/UserSession.js';
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
-import Issues from './pages/Issues.js';
+import IssuesProject from './pages/IssuesProject.js';
+import Issue from './pages/Issue';
 import Projects from './pages/Projects.js';
+import DetailsProject from './pages/DetailsProject.js';
 import TopBar from './components/TopBar.js';
 import Login from './pages/Login.js';
 import './css/tailwind.css';
@@ -42,8 +44,14 @@ const App = () => {
 							<Route path="/projects">
 								<Projects />
 							</Route>
-							<Route path="/issues">
-								<Issues />
+							<Route path="/detailsProject/:id" children={<DetailsProject />}>
+								
+							</Route>
+							<Route path="/issuesProject">
+								<IssuesProject />
+							</Route>
+							<Route path="/issue/:id" children={<Issue/>}>
+						
 							</Route>
 							<Route path="/settings">
 								<Settings />
