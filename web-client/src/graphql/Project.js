@@ -12,6 +12,18 @@ export const getProjects = gql`
 	}
 `;
 
+export const getProjectById = gql`
+	query getProjectById($id: Float!) {
+		getProjectById(id: $id) {
+			id
+			name
+			description
+			created_at
+			projectPictureName
+		}
+	}
+`;
+
 export const createProject = gql`
 	mutation createProject($name: String!, $description: String!, $createdAt: String!, $projectPictureName: String!) {
 		createProject(name: $name, description: $description, created_at: $createdAt, projectPictureName: $projectPictureName) {

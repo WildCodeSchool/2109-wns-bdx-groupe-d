@@ -1,29 +1,37 @@
-import { ApolloServer } from 'apollo-server-express';
-import { buildSchema } from 'type-graphql';
-
-import SessionResolver from './resolvers/SessionResolver';
-import UserResolver from './resolvers/UserResolver';
-import ProjectResolver from './resolvers/ProjectResolver';
-import FileResolver from './resolvers/FileResolver';
-import User from './models/User';
+import { ApolloServer } from "apollo-server-express";
+import { AuthChecker, buildSchema } from "type-graphql";
+import User from "./models/User";
+import SessionUtils from "./models/utils/SessionUtils";
+import FileResolver from "./resolvers/FileResolver";
+import ProjectResolver from "./resolvers/ProjectResolver";
+import SessionResolver from "./resolvers/SessionResolver";
+import UserResolver from "./resolvers/UserResolver";
 
 export interface Context {
   sessionId: string;
-	user: User | null;
+  user: User | null;
 }
 
+export const customAuthChecker: AuthChecker<Context> = ({ context }) => {
+  return Boolean(context.user);
+};
+
 export default async function getServer() {
-	const schema = await buildSchema({
-		resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver],
-	});
+  const schema = await buildSchema({
+    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver],
+    authChecker: customAuthChecker,
+  });
 
-	const apolloServer = new ApolloServer({
-		schema,
-		context: async ({ req }) => {
-			const { sessionId } = req.cookies;
+  const apolloServer = new ApolloServer({
+    schema,
+    context: async ({ req }): Promise<Context> => {
+      const sessionId = req.cookies.sessionId || "";
+      const user = sessionId
+        ? await SessionUtils.userInfo({ sessionId })
+        : null;
 
-			return { sessionId };
-		}
-	});
-	return apolloServer;
+      return { sessionId, user };
+    },
+  });
+  return apolloServer;
 }

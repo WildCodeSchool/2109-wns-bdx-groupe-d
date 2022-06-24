@@ -4,6 +4,7 @@
 
 @import './style.css';
 
+@import './components/Carousel.css';
 @import './components/TopBar.css';
 @import './components/Button.css';
 @import './components/Input.css';
@@ -14,3 +15,5 @@
 	font-family: 'Chaney';
 	src: url('../assets/fonts/chaney-regular-webfont.ttf');
 } */
+@import './pages/DetailsProject.css';
+@import './pages/IssuesProject.css';

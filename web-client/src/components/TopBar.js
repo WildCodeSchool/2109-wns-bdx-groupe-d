@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
+import logo from '../images/wildmine-logo.svg';
 
 import '../css/components/TopBar.css';
 
@@ -11,22 +12,6 @@ const TopBar = () => {
 	// const [element, setElement] = useState();
 	const { data } = useQuery(userInfo);
 	const currentUser = data.userInfo;
-
-	// const changeNavBackground = () => {
-	// 	window.scrollY >= 100 ? setNavbar(true) : setNavbar(false);
-	// };
-
-	// if(window.scrollY >= 100) {
-	// 	setNavbar(true)
-	// } else {
-	// 	setNavbar(false)
-	// };
-
-	// window.addEventListener('scroll', changeNavBackground());
-
-	// useEffect(() => {
-	// 	window.addEventListener('scroll', changeNavBackground);
-	// }, []);
 
 	window.onscroll = () => {
 		if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -65,7 +50,7 @@ const TopBar = () => {
 				</NavLink>
 
 				<NavLink
-					to="/issues"
+					to="/issuesProject"
 					className={`topbar-menu-link ${currentLoc === '/issues' ? 'topbar-menu-link-selected' : ''}`}
 					onClick={() => setCurrentLoc('/issues')}
 				>

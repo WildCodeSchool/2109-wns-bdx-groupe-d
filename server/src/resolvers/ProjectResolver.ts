@@ -1,12 +1,9 @@
-import { Args, Mutation, Query, Resolver, Arg } from 'type-graphql';
-// @ts-ignore
-import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
-// @ts-ignore
-import Upload from 'graphql-upload/Upload.js';
+import { Args, Mutation, Query, Resolver } from 'type-graphql';
 
 import Project from '../models/Project';
 import CreateProjectInput from './input/CreateProjectInput';
 import DeleteProjectInput from './input/DeleteProjectInput';
+import GetProjectInput from './input/GetProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
 
 @Resolver(Project)
@@ -33,6 +30,12 @@ class ProjectResolver {
 	async deleteProject(@Args() { id }: DeleteProjectInput) {
 		return ProjectUtils.deleteProject({ id });
 	}
+
+	@Query(() => Project)
+	async getProjectById(@Args() { id }: GetProjectInput) {
+		return ProjectUtils.getProjectById({ id });
+	}
+
 }
 
 export default ProjectResolver;
