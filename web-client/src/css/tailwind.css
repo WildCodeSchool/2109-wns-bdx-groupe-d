@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @import './style.css';
 
@@ -10,5 +10,10 @@
 @import './components/Input.css';
 
 @import './pages/Projects.css';
+
+/* @font-face {
+	font-family: 'Chaney';
+	src: url('../assets/fonts/chaney-regular-webfont.ttf');
+} */
 @import './pages/DetailsProject.css';
 @import './pages/IssuesProject.css';
