@@ -1,0 +1,96 @@
+import gql from 'graphql-tag';
+
+export const createIssue = gql`
+mutation createIssue($name: String!, $description: String!, $projectName: String!, $status: String!, $priority: String!, $projectId: Float!, $createdAt: DateTime!, $updatedAt: DateTime!) {
+  createIssue(name: $name, description: $description, project_name: $projectName, status: $status, priority: $priority, project_id: $projectId, created_at: $createdAt, updated_at: $updatedAt) {
+    id
+    name
+    description
+    created_at
+    updated_at
+    status
+    priority
+    project_name
+    project_id
+    user {
+      id
+      roles
+      first_name
+      last_name
+      email
+      created_at
+    }
+  }
+}
+`;
+
+export const getIssues = gql`
+	query getIssues {
+		issues {
+      id
+      name
+      description
+      created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
+    }
+	}
+`;
+
+export const getIssuesByProjectId = gql`
+  query GetIssuesByProjectId($projectId: Float!) {
+    getIssuesByProjectId(project_id: $projectId) {
+      id
+      name
+      description
+      created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user {
+        id
+        roles
+        first_name
+        email
+        last_name
+        created_at
+      }
+    }
+  }
+`;
+
+export const getIssueById = gql`
+  query getIssueById($id: Float!) {
+    getIssueById(id: $id) {
+      id
+      name
+      description
+      created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user {
+        id
+        roles
+        first_name
+        last_name
+        email
+      }
+    }
+  }
+`;

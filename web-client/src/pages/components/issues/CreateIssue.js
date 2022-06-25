@@ -1,23 +1,48 @@
 import React, { useState } from 'react';
+import { useMutation } from "@apollo/client";
 
 import Close from '../../../images/icon-close.svg';
 import Input from '../../../components/Input';
 import TextArea from '../../../components/TextArea';
 import Select from '../../../components/Select';
 import priorityOptions from '../../../components/options/priorityOptions';
+import { createIssue } from '../../../graphql/Issue';
 
-const CreateIssue = ({ setDisplayCreation}) => {
+const CreateIssue = ({ setDisplayCreation, projectName, projectId, userId, refetch }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
-  const [author, setAuthor] = useState('');
 
-  // status, priorité, auteur, description, titre, assigné
+  const [sendIssueInformations] = useMutation(
+    createIssue,
+    {
+      onCompleted: () => {
+        refetch();
+        setDisplayCreation(false);
+      },
+      onError: (error) => console.log(error.message),
+      refetchQueries: ["getIssuesByProjectId"],
+    }
+  );
+
   const onSubmit = event => {
     event.preventDefault();
-    console.log('submit')
+    
+    sendIssueInformations({
+      variables: {
+        name,
+        description,
+        status: 'IN_WAIT',
+        priority,
+        projectName,
+        projectId: parseInt(projectId),
+        userId,
+        createdAt: new Date().toJSON(),
+        updatedAt: new Date().toJSON(),
+      }
+    });
   }
+
   return <div className='modal-background'>
     <div className='modal-container'>
         <p className='modal-title'>

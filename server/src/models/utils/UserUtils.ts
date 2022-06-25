@@ -1,6 +1,6 @@
 import md5 from "md5";
-import CreateUserInput from "../../resolvers/input/CreateUserInput";
-import DeleteWilderInput from "../../resolvers/input/DeleteUserInput";
+import CreateUserInput from "../../resolvers/input/user/CreateUserInput";
+import DeleteWilderInput from "../../resolvers/input/user/DeleteUserInput";
 import User from "../User";
 
 class UserUtils extends User {

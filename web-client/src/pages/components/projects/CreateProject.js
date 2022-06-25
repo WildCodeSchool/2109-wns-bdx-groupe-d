@@ -80,7 +80,7 @@ const CreateProject = ({ setDisplayCreation }) => {
         />
 
         <div className='w-[48%] mx-auto flex justify-center'>
-          <label className='button-general cursor-pointer'>
+          <label className='button-general my-auto cursor-pointer'>
               {projectPictureName || 'Sélectionnez une image'}
 
               <input

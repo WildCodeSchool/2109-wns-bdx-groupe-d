@@ -40,23 +40,34 @@ class Issue extends BaseEntity {
 	@Field()
 	status!: string;
 
-	@ManyToOne(() => Project, (project) => project.id)
-	@JoinColumn({ name: 'project_id' })
+	@Column()
+	@Field()
+	priority!: string;
+
+	@Column()
+	@Field()
+	project_name!: string;
+
+	@Column()
+	@Field()
 	project_id!: number;
 
-	@ManyToMany(() => User)
-	@JoinTable({
-		name: 'issue_user',
-		joinColumn: {
-			name: 'issue_id',
-			referencedColumnName: 'id',
-		},
-		inverseJoinColumn: {
-			name: 'user_id',
-			referencedColumnName: 'id',
-		},
-	})
-	user_id!: User;
+	// @ManyToMany(() => User)
+	// @JoinTable({
+	// 	name: 'issue_user',
+	// 	joinColumn: {
+	// 		name: 'issue_id',
+	// 		referencedColumnName: 'id',
+	// 	},
+	// 	inverseJoinColumn: {
+	// 		name: 'user_id',
+	// 		referencedColumnName: 'id',
+	// 	},
+	// })
+	@ManyToOne(() => User, (user) => user.id)
+	@JoinColumn({ name: 'user' })
+	@Field()
+	user?: User;
 }
 
 export default Issue;

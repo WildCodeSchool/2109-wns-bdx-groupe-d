@@ -4,7 +4,8 @@ const DisplayIssuesValues = ({ issue, issueIndex, issues }) => {
   let priorityColor;
   let statusColor;
 
-  const dateToDisplay = `${issue.date.getDate()}/${issue.date.getMonth()}/${issue.date.getFullYear()}`
+  const newDate = new Date(issue.created_at)
+  const dateToDisplay = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`
 
   if (issue.priority === 'HIGH') priorityColor = 'bg-issue_red'
   if (issue.priority === 'NORMAL') priorityColor = 'bg-issue_orange'
@@ -18,14 +19,14 @@ const DisplayIssuesValues = ({ issue, issueIndex, issues }) => {
 
   return <div className={`grid grid-cols-7 p-4 bg-grey_light text-wildmine_black shadow-md text-center border relative -z-10 ${issueIndex === issues.length - 1 ? 'rounded-b-lg' : 'border-b-black'}`}>
     <div className='p-2 bg-wildmine_black rounded-lg w-[110px] mx-auto'>
-      <p className='font-extrabold text-secondary_color'>#{issue.nbr}</p>
+      <p className='font-extrabold text-secondary_color'>#{issue.id}</p>
     </div>
 
     <div className={`${priorityColor} w-[25px] h-[25px] border rounded-full mx-auto`}/>
 
-    <p>{issue.title}</p>
+    <p>{issue.name}</p>
 
-    <p className='italic'>{issue.projectName}</p>
+    <p className='italic'>{issue.project_name}</p>
 
     <p className='italic'>{`${issue.description.slice(0, 20)}...`}</p>
 

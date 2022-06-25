@@ -1,158 +1,13 @@
 import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { getProjectById } from "../graphql/Project.js";
-import smiley from '../images/smiley.png'
-
-
-// const projectIssus = [
-//   { id: 1, 
-//     ticketNumber: '#7762', 
-//     ticketName: 'Pb affichage', 
-//     comment: 'Le problème résul...', 
-//     statut: 'Done', 
-//     categorie: 'design', 
-//     avatars: [
-//       { id: 1,
-//         img : 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-//       },
-//       { id: 2,
-//         img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-//       }
-//     ], 
-//     date: '28/12/2021' 
-//   },
-//   { id: 2, 
-//     ticketNumber: '#5642', 
-//     ticketName: 'Bug avec Docker', 
-//     comment: 'Launch des cont...', 
-//     statut: 'In progress', 
-//     categorie: 'dev', 
-//     avatars: [
-//       { id: 1,
-//         img:'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-//       }
-//     ], 
-//     date: '26/12/2021' 
-//   },
-//   { id: 3, 
-//     ticketNumber: '#3126', 
-//     ticketName: 'Link erroné', 
-//     comment: 'Le link de la partie...', 
-//     statut: 'Done', 
-//     categorie: 'intégration', 
-//     avatars: [
-//       { id: 2,
-//         img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-//       }
-//     ], 
-//     date: '23/12/2021' 
-//   },
-//   { id: 4, 
-//     ticketNumber: '#3226', 
-//     ticketName: 'Base de données', 
-//     comment: 'La base de donnée...', 
-//     statut: 'In progress', 
-//     categorie: 'dev', 
-//     avatars: [
-//       { id: 1,
-//         img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-//       },
-//       { id: 2,
-//         img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-//       }
-//     ], 
-//     date: '21/12/2021' 
-//   },
-//   { id: 5, 
-//     ticketNumber: '#8756', 
-//     ticketName: 'Qualité d\'image', 
-//     comment: 'La qualité des imag...', 
-//     statut: 'In progress', 
-//     categorie: 'design', 
-//     avatars: [
-//       { id: 1,
-//         img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-//       }
-//     ], 
-//     date: '17/12/2021' 
-//   },
-//   { id: 6, 
-//     ticketNumber: '#7864', 
-//     ticketName: 'Mauvais resposive', 
-//     comment: 'Les éléments sont...', 
-//     statut: 'Done', 
-//     categorie: 'intégration', 
-//     avatars: [
-//       { id: 1,
-//         img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-//       },
-//       { id: 2,
-//         img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-//       }
-//     ], 
-//     date: '15/12/2021' 
-//   },
-//   { id: 7, 
-//     ticketNumber: '#6314', 
-//     ticketName: 'Erreur chargement', 
-//     comment: 'Erreur lors du...', 
-//     statut: 'In progress', 
-//     categorie: 'dev', 
-//     avatars: [
-//       { id: 1,
-//         img:'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-//       }
-//     ], 
-//     date: '13/12/2021' 
-//   },
-//   { id: 8, 
-//     ticketNumber: '#9982', 
-//     ticketName: 'Décalage navbar', 
-//     comment: 'Navbar à déca...', 
-//     statut: 'In progress', 
-//     categorie: 'intégration', 
-//     avatars: [
-//       { id: 1,
-//         img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-//       }
-//     ], 
-//     date: '11/12/2021' 
-//   },
-//   { id: 9, 
-//     ticketNumber: '#2457', 
-//     ticketName: 'Changement chart graphic', 
-//     comment: 'Chagement des coul...', 
-//     statut: 'Done', 
-//     categorie: 'design', 
-//     avatars: [
-//       { id: 1,
-//         img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-//       },
-//       { id: 2,
-//         img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-//       }
-//     ], 
-//     date: '10/12/2021' 
-//   },
-//   { id: 10, 
-//     ticketNumber: '#6791', 
-//     ticketName: 'Etude parcours utilisateur', 
-//     comment: 'Parcours utilisa...', 
-//     statut: 'In progress', 
-//     categorie: 'design', 
-//     avatars: [
-//       { id: 1,
-//         img : 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-//       },
-//       { id: 2,
-//         img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-//       }
-//     ], 
-//     date: '9/12/2021' 
-//   }
-// ];
+import smiley from '../images/smiley.png';
+import Button from '../components/Button';
+import CreateIssue from './components/issues/CreateIssue';
+import { getIssuesByProjectId } from '../graphql/Issue';
+import Issues from './Issues';
 
 const imagesProject = [
   { id: 1,
@@ -191,58 +46,102 @@ const collaboratorsProject = [
 ];
 
 
-const DetailsProject = () => {
-
+const DetailsProject = ({ actualUser }) => {
+  const [displayCreation, setDisplayCreation] = useState(false);
   const [showFiveTickets, setShowFiveTickets] = useState(false)
 
   let { id } = useParams();
 
-  const { loading, error, data } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
+  const { loading, error, data, refetch } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
+
+  const issuesQuery = useQuery(getIssuesByProjectId, { variables: { projectId: parseInt(id) } });
+  console.log(issuesQuery)
 
   if (loading) return 'Loading...';
 
   if (error) return `Error! ${error.message}`;
 
-  console.log(data)
-
-  console.log(id)
-
-  // function Statut(value) {
-  //   if (value === 'Done') {
-  //     return <div className="bg-green-500 rounded-full h-5 w-5 inline-block"></div>;
-  //   } else {
-  //     return <div className="bg-yellow-300 rounded-full h-5 w-5 inline-block"></div>;
-  //   }
-  // }
-
   return (
     <div className="detail-project-container">
-      <div className='detail-project-rollback'>
-        <a href='http://localhost:3000/projects'>Projects {' > '} The Smiling Green Bean</a>
+      <div className='flex justify-between mb-8'>
+        <div>
+          <div className='detail-project-rollback'>
+            {/* <a href='http://localhost:3000/projects'> */}
+              {`Projets > ${data.getProjectById.name}`}
+            {/* </a> */}
+          </div>
+
+          <div className='project-name'>
+            <h1>{data.getProjectById.name}</h1>
+          </div>
+
+          <div className='project-description'>
+            <h2>{ data.getProjectById.description }</h2>
+          </div>
+
+          <div className='project-collaborators flex items-start justify-start'>
+
+            <h3 className="mr-10">
+              Collaborateurs du projet :
+            </h3>
+
+            {collaboratorsProject && collaboratorsProject.map(collaborator =>
+              <img key={collaborator.id} className="rounded-full h-8 w-8 mx-2" src={collaborator.img} alt="collabo 1"/>
+            )}
+
+          </div>
+        </div>
+        
+        <Button
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
+          buttonLabel='Créer un ticket'
+          buttonType='button'
+        />
+
+      {displayCreation &&
+        <CreateIssue
+          setDisplayCreation={setDisplayCreation}
+          projectName={data.getProjectById.name}  
+          projectId={data.getProjectById.id}
+          userId={actualUser.id}
+          refetch={() => refetch()}
+        />
+      }
+
       </div>
-      <div className='project-name'>
-        <h1>{ data.getProjectById.name }</h1>
-      </div>
-      <div className='project-description'>
-        <h2>{ data.getProjectById.description }</h2>
-      </div>
-      <div className='project-collaborators flex items-start justify-start'>
-        <h3 className="mr-10">Collaborateurs du projet :</h3>
-        {collaboratorsProject && collaboratorsProject.map(collaborator =>
-          <img key={collaborator.id} className="rounded-full h-8 w-8 mx-2" src={collaborator.img} alt="collabo 1"/>
-        )}  
-      </div> 
-      <img className="object-none object-center" src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"/>  
+
+      <img
+        className="object-none object-center"
+        src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"
+      />
+
       <Carousel>
         {imagesProject && imagesProject.map(image =>
-          <CarouselItem><img key={image.id} className="object-none object-center" src={image.url} alt="collabo 1"/></CarouselItem>
+          <CarouselItem>
+            <img
+              key={image.id}
+              className="object-none object-center"
+              src={image.url} alt="collabo 1"
+            />
+          </CarouselItem>
         )}
-      </Carousel> 
-      <div className='font-black text-2xl pt-20'>
+      </Carousel>
+
+      {/* <div className='font-black text-2xl pt-20'>
         <NavLink to="/IssuesProject" >
           <p>Tickets en cours</p>
         </NavLink>
-      </div>     
+      </div> */}
+      
+      {!issuesQuery.loading && issuesQuery.data.getIssuesByProjectId[0]
+      ? <div>
+        <p className='font-black text-2xl pt-20'>Tickets en cours</p>
+        
+        <Issues issues={issuesQuery.data.getIssuesByProjectId}/>
+      </div>
+      : <p className='mx-auto text-xl font-bold tracking-wide py-20'>Aucun ticket associé à ce projet pour le moment</p>
+      }
       {/* <div className="relative overflow-x-auto my-6 rounded-lg"> 
         <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 shadow-md">
@@ -316,7 +215,7 @@ const DetailsProject = () => {
         </table>
       </div> */}
       <div>
-        { !showFiveTickets 
+        {!showFiveTickets
             ? <button className="bg-blue_green_flash text-black rounded-full flex items-center justify-center" onClick={() => { setShowFiveTickets(true) }}><svg className="w-14 h-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg></button>
             : <button className="bg-blue_green_flash text-black rounded-full" onClick={() => { setShowFiveTickets(false) }}><svg className="h-14 w-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
         }

@@ -1,7 +1,7 @@
 
-import CreateProjectInput from "../../resolvers/input/CreateProjectInput";
-import DeleteProjectInput from "../../resolvers/input/DeleteProjectInput";
-import GetProjectInput from "../../resolvers/input/GetProjectInput";
+import CreateProjectInput from "../../resolvers/input/project/CreateProjectInput";
+import DeleteProjectInput from "../../resolvers/input/project/DeleteProjectInput";
+import GetProjectInput from "../../resolvers/input/project/GetProjectInput";
 import Project from "../Project";
 
 class ProjectUtils extends Project {

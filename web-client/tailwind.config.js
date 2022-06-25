@@ -13,7 +13,8 @@ module.exports = {
         issue_green: '#00957A',
         issue_orange: '#EACC73',
         issue_grey: '#C1C1C1',
-        issue_red: '#C24C3A'
+        issue_red: '#C24C3A',
+        bg_issue: '#E5E5E5'
       }
     },
   },

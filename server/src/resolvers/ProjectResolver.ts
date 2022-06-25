@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from 'type-graphql';
 
 import Project from '../models/Project';
-import CreateProjectInput from './input/CreateProjectInput';
-import DeleteProjectInput from './input/DeleteProjectInput';
-import GetProjectInput from './input/GetProjectInput';
+import CreateProjectInput from './input/project/CreateProjectInput';
+import DeleteProjectInput from './input/project/DeleteProjectInput';
+import GetProjectInput from './input/project/GetProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
 
 @Resolver(Project)

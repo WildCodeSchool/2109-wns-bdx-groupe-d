@@ -2,9 +2,8 @@ import { Args, Resolver, Mutation, Ctx, Query } from "type-graphql";
 import Session from "../models/Session";
 
 import User from "../models/User";
-import LoginInput from "./input/LoginInput";
+import LoginInput from "./input/user/LoginInput";
 import SessionUtils from "../models/utils/SessionUtils";
-import UserInfoInput from "./input/UserInfoInput";
 import { Context } from "../apollo-server";
 
 @Resolver(Session)

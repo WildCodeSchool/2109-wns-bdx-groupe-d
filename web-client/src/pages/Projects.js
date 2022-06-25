@@ -30,6 +30,7 @@ const Projects = () => {
           onClickValue={displayCreation}
           buttonLabel='Créer un projet'
           buttonType='button'
+          buttonClassName='my-auto'
         />
 
       </div>

@@ -36,7 +36,7 @@ const App = () => {
 					<Layout>
 						<Switch>
 							<Route exact path="/">
-								<Dashboard actualUser={data.userInfo} />
+								<Dashboard actualUser={data.userInfo}/>
 							</Route>
 							<Route path="/organization">
 								<Organization />
@@ -44,7 +44,7 @@ const App = () => {
 							<Route path="/projects">
 								<Projects />
 							</Route>
-							<Route path="/detailsProject/:id" children={<DetailsProject />}/>
+							<Route path="/detailsProject/:id" children={<DetailsProject actualUser={data.userInfo}/>}/>
 							<Route path="/issuesProject">
 								<IssuesProject />
 							</Route>

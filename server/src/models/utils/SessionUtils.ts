@@ -1,8 +1,8 @@
 import md5 from "md5";
-import SignInInput from "../../resolvers/input/SignInInput";
+import SignInInput from "../../resolvers/input/user/SignInInput";
 import User from "../User";
 import Session from "../Session";
-import UserInfoInput from "../../resolvers/input/UserInfoInput";
+import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
 
 class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {

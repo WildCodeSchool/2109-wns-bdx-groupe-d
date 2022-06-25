@@ -1,9 +1,9 @@
 import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 
 import User from "../models/User";
-import CreateUserInput from "./input/CreateUserInput";
+import CreateUserInput from "./input/user/CreateUserInput";
 import UserUtils from "../models/utils/UserUtils";
-import DeleteUserInput from "./input/DeleteUserInput";
+import DeleteUserInput from "./input/user/DeleteUserInput";
 import { Context } from "../apollo-server";
 
 @Resolver(User)

@@ -1,6 +1,6 @@
 .button-general,
 .submit-button {
-  @apply px-8 py-1 border border-secondary_color rounded-full my-auto;
+  @apply px-8 py-1 border border-secondary_color rounded-full h-[34px];
 }
 
 .button-general {
