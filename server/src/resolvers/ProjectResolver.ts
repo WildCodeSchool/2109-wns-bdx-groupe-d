@@ -5,12 +5,14 @@ import CreateProjectInput from './input/project/CreateProjectInput';
 import DeleteProjectInput from './input/project/DeleteProjectInput';
 import GetProjectInput from './input/project/GetProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
+import AssignUserInput from './input/project/AssigneUserInput';
+import UserUtils from '../models/utils/UserUtils';
 
 @Resolver(Project)
 class ProjectResolver {
   @Query(() => [Project])
 	async projects() {
-		return await Project.find();
+		return await Project.find({ relations: ["user_assigned"]});
 	}
 
 	@Mutation(() => Project)
@@ -36,6 +38,15 @@ class ProjectResolver {
 		return ProjectUtils.getProjectById({ id });
 	}
 
+	@Mutation(() => Project)
+	async assignUserToProject(@Args() { email, projectId }: AssignUserInput) {
+		return ProjectUtils.assignUserToProject({ email, projectId});
+	}
+
+	@Query(() => [Project])
+	async projectsByUserId(@Args() { id }: GetProjectInput) {
+		return await Project.find({ where: { user_assigned: id }, relations: ["user_assigned"] });
+	}
 }
 
 export default ProjectResolver;

@@ -7,6 +7,7 @@ import CreateIssueInput from "./input/issues/CreateIssueInput";
 import DeleteIssueInput from "./input/issues/DeleteIssueInput";
 import GetIssueByIdInput from "./input/issues/GetIssueByIdInput";
 import GetIssueByProjectIdInput from './input/issues/GetIssueByProjectId';
+import AssignUserInput from './input/issues/AssignUserInput';
 
 @Resolver(Issue)
 class IssueResolver {
@@ -60,6 +61,10 @@ class IssueResolver {
 		return await IssueUtils.getIssueById({ id });
 	}
 
+  @Mutation(() => Issue)
+	async assignUserToIssue(@Args() { email, issueId }: AssignUserInput) {
+		return IssueUtils.assignUserToIssue({ email, issueId});
+	}
 }
 
 export default IssueResolver;

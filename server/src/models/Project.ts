@@ -4,13 +4,13 @@ import {
 	Column,
 	Entity,
 	// JoinColumn,
-	// JoinTable,
-	// ManyToMany,
+	JoinTable,
+	ManyToMany,
 	// ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
-// import User from './User';
+import User from './User';
 // import Organization from './Organization';
 // import Issue from './Issue';
 
@@ -45,19 +45,10 @@ class Project extends BaseEntity {
 	// @JoinColumn({ name: 'organization_id' })
 	// organization_id!: number;
 
-	// @ManyToMany(() => User)
-	// @JoinTable({
-	// 	name: 'project_user',
-	// 	joinColumn: {
-	// 		name: 'project_id',
-	// 		referencedColumnName: 'id',
-	// 	},
-	// 	inverseJoinColumn: {
-	// 		name: 'user_id',
-	// 		referencedColumnName: 'id',
-	// 	},
-	// })
-	// user_id!: User;
+	@ManyToMany(() => User, (user) => user.id)
+	@JoinTable()
+	@Field(() => [User])
+	user_assigned?: User[];
 
 	// @ManyToMany(() => Issue)
 	// @JoinTable({

@@ -14,9 +14,12 @@ const Issues = ({ issues }) => {
 
       <div>
         {issues.map((issue, issueIndex) => (
+          <div className='relative'>
+            <button className='absolute right-2 top-2'>Hello le bouton</button>
           <NavLink to={`/issue/${issue.id}`}>
             <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={issues}/>
           </NavLink>
+          </div>
         ))}
       </div>
     </div>

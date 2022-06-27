@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { getIssueById } from '../graphql/Issue';
 
@@ -155,7 +155,7 @@ const Issue = () => {
 
   let { id } = useParams()
 
-  const { loading, error, data, refetch } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
+  const { data } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
   
   const issue = data.getIssueById;
   console.log(issue)
@@ -167,10 +167,6 @@ const Issue = () => {
       return <div className="bg-yellow-300 rounded-full h-5 w-5 inline-block"></div>;
     }
   }
-
-  const [issues, setIssues] = useState('');
-
-  const [foundIssues, setFoundIssues] = useState(ISSUES);
 
   let issueIndex = id -1
 
@@ -212,7 +208,7 @@ const Issue = () => {
           <tbody>
 
               <tr key={ISSUES[issueIndex].id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
                   <NavLink to="/issues" className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
                     {ISSUES[issueIndex].ticketNumber}
                   </NavLink>

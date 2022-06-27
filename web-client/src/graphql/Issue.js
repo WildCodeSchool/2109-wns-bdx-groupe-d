@@ -94,3 +94,27 @@ export const getIssueById = gql`
     }
   }
 `;
+
+export const assignUserToIssue = gql`
+mutation assignUserToIssue($email: String!, $issueId: Float!) {
+  assignUserToIssue(email: $email, issueId: $issueId) {
+    id
+    name
+    description
+    created_at
+    updated_at
+    status
+    priority
+    project_name
+    project_id
+    user_assigned {
+      id
+      roles
+      first_name
+      last_name
+      email
+      created_at
+    }
+  }
+}
+`;

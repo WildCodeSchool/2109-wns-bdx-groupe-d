@@ -5,13 +5,12 @@ import {
 	Entity,
 	JoinColumn,
 	JoinTable,
-	ManyToMany,
+	OneToMany,
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import User from './User';
-import Project from './Project';
 
 @Entity()
 @ObjectType()
@@ -52,22 +51,15 @@ class Issue extends BaseEntity {
 	@Field()
 	project_id!: number;
 
-	// @ManyToMany(() => User)
-	// @JoinTable({
-	// 	name: 'issue_user',
-	// 	joinColumn: {
-	// 		name: 'issue_id',
-	// 		referencedColumnName: 'id',
-	// 	},
-	// 	inverseJoinColumn: {
-	// 		name: 'user_id',
-	// 		referencedColumnName: 'id',
-	// 	},
-	// })
 	@ManyToOne(() => User, (user) => user.id)
 	@JoinColumn({ name: 'user' })
-	@Field()
+	@Field(() => User)
 	user?: User;
+
+	@ManyToOne(() => User, (user) => user.id)
+	@JoinTable()
+	@Field(() => User)
+	user_assigned?: User;
 }
 
 export default Issue;

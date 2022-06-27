@@ -1,24 +1,47 @@
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getIssueById } from '../graphql/Issue';
+import Button from '../components/Button';
+import AddUserToIssue from './components/issues/AddUserToIssue';
+
 
 const capitalizeFirstLetter = value => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
 const Issue = () => {
+  const [displayAddUserOnIssue, setDisplayAddUserOnIssue] = useState(false);
 
   let { id } = useParams();
 
-  const { loading, data } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
+  const { loading, data, refetch } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
 
   if (loading) return <>Chargement</>
   
   const issue = data.getIssueById;
 
   return <div className='px-20'>
-    <p className='text-2xl font-extrabold'>ANOMALIE N° #{issue.id}</p>
+
+    <div className='flex justify-between'>
+      <p className='text-2xl font-extrabold'>ANOMALIE N° #{issue.id}</p>
+
+
+      <Button
+        onClick={setDisplayAddUserOnIssue}
+        onClickValue={displayAddUserOnIssue}
+        buttonLabel='Assigner le ticket à un collaborateur'
+        buttonType='button'
+      />
+    </div>
+
+    {displayAddUserOnIssue &&
+      <AddUserToIssue
+        setDisplayAddUserOnIssue={setDisplayAddUserOnIssue}
+        issueId={id}
+        refetch={() => refetch()}
+      />
+    }
 
     <div className='my-8 w-11/12 border border-b border-secondary_color'/>
 

@@ -4,6 +4,8 @@ import DeleteIssueInput from "../../resolvers/input/issues/DeleteIssueInput";
 import GetIssueByIdInput from "../../resolvers/input/issues/GetIssueByIdInput";
 import SessionUtils from "./SessionUtils";
 import GetIssueByProjectIdInput from "../../resolvers/input/issues/GetIssueByProjectId";
+import UserUtils from "./UserUtils";
+import AssignUserInput from "../../resolvers/input/issues/AssignUserInput";
 
 class IssueUtils extends Issue {
   static async createIssue({ name, description, status, priority, project_id, sessionId, created_at, updated_at, project_name }: CreateIssueUtilsInput) {
@@ -38,6 +40,20 @@ class IssueUtils extends Issue {
 
   static async getIssueById({ id }: GetIssueByIdInput) {
     return await Issue.findOneOrFail({ id }, { relations: ["user"] });
+  }
+
+  static async assignUserToIssue({ email, issueId }: AssignUserInput) {
+    let user = await UserUtils.getUserByEmail({ email });
+
+    let issue = await this.getIssueById({ id: issueId });
+
+    issue.user_assigned = user;
+    user.issues_assigned = [issue];
+
+    await issue.save();
+    await user.save();
+
+    return issue;
   }
 };
 

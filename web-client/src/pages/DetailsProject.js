@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import CreateIssue from './components/issues/CreateIssue';
 import { getIssuesByProjectId } from '../graphql/Issue';
 import Issues from './Issues';
+import AddUserToProject from './components/projects/AddUserToProject';
 
 const imagesProject = [
   { id: 1,
@@ -48,7 +49,8 @@ const collaboratorsProject = [
 
 const DetailsProject = ({ actualUser }) => {
   const [displayCreation, setDisplayCreation] = useState(false);
-  const [showFiveTickets, setShowFiveTickets] = useState(false)
+  const [displayAddUserOnProject, setDisplayAddUserOnProject] = useState(false);
+  const [showFiveTickets, setShowFiveTickets] = useState(false);
 
   let { id } = useParams();
 
@@ -66,9 +68,7 @@ const DetailsProject = ({ actualUser }) => {
       <div className='flex justify-between mb-8'>
         <div>
           <div className='detail-project-rollback'>
-            {/* <a href='http://localhost:3000/projects'> */}
-              {`Projets > ${data.getProjectById.name}`}
-            {/* </a> */}
+            {`Projets > ${data.getProjectById.name}`}
           </div>
 
           <div className='project-name'>
@@ -91,20 +91,39 @@ const DetailsProject = ({ actualUser }) => {
 
           </div>
         </div>
+
+        <div className='flex flex-col justify-around'>
         
-        <Button
-          onClick={setDisplayCreation}
-          onClickValue={displayCreation}
-          buttonLabel='Créer un ticket'
-          buttonType='button'
-        />
+          <Button
+            onClick={setDisplayCreation}
+            onClickValue={displayCreation}
+            buttonLabel='Créer un ticket'
+            buttonType='button'
+          />
+
+          <Button
+            onClick={setDisplayAddUserOnProject}
+            onClickValue={displayAddUserOnProject}
+            buttonLabel='Ajouter un collaborateur au projet'
+            buttonType='button'
+          />
+
+        </div>
 
       {displayCreation &&
         <CreateIssue
           setDisplayCreation={setDisplayCreation}
-          projectName={data.getProjectById.name}  
+          projectName={data.getProjectById.name}
           projectId={data.getProjectById.id}
           userId={actualUser.id}
+          refetch={() => refetch()}
+        />
+      }
+
+      {displayAddUserOnProject &&
+        <AddUserToProject
+          setDisplayAddUserOnProject={setDisplayAddUserOnProject}
+          projectId={data.getProjectById.id}
           refetch={() => refetch()}
         />
       }
@@ -127,12 +146,6 @@ const DetailsProject = ({ actualUser }) => {
           </CarouselItem>
         )}
       </Carousel>
-
-      {/* <div className='font-black text-2xl pt-20'>
-        <NavLink to="/IssuesProject" >
-          <p>Tickets en cours</p>
-        </NavLink>
-      </div> */}
       
       {!issuesQuery.loading && issuesQuery.data.getIssuesByProjectId[0]
       ? <div>
@@ -142,88 +155,55 @@ const DetailsProject = ({ actualUser }) => {
       </div>
       : <p className='mx-auto text-xl font-bold tracking-wide py-20'>Aucun ticket associé à ce projet pour le moment</p>
       }
-      {/* <div className="relative overflow-x-auto my-6 rounded-lg"> 
-        <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 shadow-md">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-              N° de ticket
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Nom du ticket
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Commentaire
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Statut
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Catégorie
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Personne assigné
-              </th>
-              <th scope="col" className="px-6 py-3">
-              Date
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {projectIssus && projectIssus.slice(0, 5).map(projectIssu =>
-              <tr key={projectIssu.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                  <NavLink to={"/issue/" + projectIssu.id} className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
-                    {projectIssu.ticketNumber}
-                  </NavLink>
-                </td>
-                <td className="px-6 py-4 font-mono text-black text-lg font-semibold ">{projectIssu.ticketName}</td>
-                <td className="px-6 py-4 font-serif text-lg">{projectIssu.comment}</td>
-                <td className="px-6 py-4 font-serif text-lg"><Statut value={projectIssu.statut}/></td>
-                <td className="px-6 py-4 font-sans italic font-black text-black text-lg">{projectIssu.categorie}</td>
-                <td className="px-6 py-4 space-x-2 flex items-center justify-center">
-                  {projectIssu.avatars && projectIssu.avatars.map(avatar =>
-                    <img key={avatar} className="rounded-full h-8 w-8" src={avatar.img} alt="collabo 1"/>
-                  )}
-                </td>
-                <td className="px-6 py-4 text-lg">{projectIssu.date}</td>
-              </tr>
-            )}
-            { showFiveTickets 
-              ? projectIssus && projectIssus.slice(6, 10).map(projectIssu =>
-                  <tr key={projectIssu.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-lg">
-                      <NavLink to={"/issue/" + projectIssu.id} className="rounded-full py-1 px-4 bg-wildmine_black text-blue_green_flash">
-                        {projectIssu.ticketNumber}
-                      </NavLink>
-                    </td>
-                    <td className="px-6 py-4 font-mono text-black text-lg font-semibold ">{projectIssu.ticketName}</td>
-                    <td className="px-6 py-4 font-serif text-lg">{projectIssu.comment}</td>
-                    <td className="px-6 py-4 font-serif text-lg"><Statut value={projectIssu.statut}/></td>
-                    <td className="px-6 py-4 font-sans italic font-black text-black text-lg">{projectIssu.categorie}</td>
-                    <td className="px-6 py-4 space-x-2 flex items-center justify-center">
-                      {projectIssu.avatars && projectIssu.avatars.map(avatar =>
-                        <img key={avatar} className="rounded-full h-8 w-8" src={avatar.img} alt="collabo 1"/>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-lg">{projectIssu.date}</td>
-                  </tr>
-                )
-              : null
-            }
-          </tbody>
-        </table>
-      </div> */}
       <div>
         {!showFiveTickets
-            ? <button className="bg-blue_green_flash text-black rounded-full flex items-center justify-center" onClick={() => { setShowFiveTickets(true) }}><svg className="w-14 h-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"></path></svg></button>
-            : <button className="bg-blue_green_flash text-black rounded-full" onClick={() => { setShowFiveTickets(false) }}><svg className="h-14 w-14 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></button>
+            ? <button
+              className="bg-blue_green_flash text-black rounded-full flex items-center justify-center"
+              onClick={() => { setShowFiveTickets(true) }}
+            >
+              <svg
+                className="w-14 h-14 dark:text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"/>
+              </svg>
+            </button>
+            : <button
+              className="bg-blue_green_flash text-black rounded-full"
+              onClick={() => { setShowFiveTickets(false) }}
+            >
+              <svg
+                className="h-14 w-14 dark:text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+                />
+              </svg>
+            </button>
         }
       </div>
       
       <div className="rounded-full place-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-36 w-36" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+          <path
+            fillRule="evenodd"
+            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+            clipRule="evenodd"
+          />
         </svg>
       </div>
     </div>
