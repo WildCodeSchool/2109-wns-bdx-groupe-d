@@ -1,36 +1,21 @@
 import React from 'react';
-import smiley from '../../../images/smiley.png';
+import arrow from '../../../assets/images/arrow-right.svg';
 
-
-const DisplayOrganization = ({ setDisplayHover, index, organizationObject, displayHover, organization }) => {
-  return (
-                   
-      <div
-        onMouseEnter={() => setDisplayHover(index + 1)}
-        onMouseLeave={() => setDisplayHover(0)}
-        className="organization-project-container"
-        key={organizationObject}
-        style={{ height: '30rem'}}
-      >
-          {displayHover === index + 1 &&
-            <div className={`hover-container ${displayHover === index + 1 ? 'hover-open' : ''}`}>
-              <p className='font-bold mb-8'>{organization ? organization.name : 'Un joli hoover'}</p>
-              <p>{
-                organization ? organization.description :
-                `C'est l'histoire d'un joli hoover, il était petit et donc pas très grand. Mais un jour il décida de se relevé et devenir un grand hoover!
-                C'est pour cela qu'il décida de grandir et donc d'être grand. Merci d'avoir perdu du temps à lire ce hoover, bisous!`
-              }</p>
-            </div>
-          }
-          
-          <img
-            src={smiley}
-            alt="Sélection du projet"
-          />
-
-
-      </div>
-    );
+const DisplayOrganization = ({ organizationObject, organization }) => {
+	return (
+		<div className="organization-projects-container" key={organizationObject}>
+			<div className="grid grid-flow-col">
+				<div className="col-span-10">
+					<h3 className="organization-title">{organization.name}</h3>
+					<p className="organization-desc">{organization.description}</p>
+					<p className="organization-collaborators">Liste des collaborateurs (wip)</p>
+				</div>
+				<div className="col-span-2 organization-btn">
+					<img className="h-6 w-6" src={arrow} />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default DisplayOrganization;

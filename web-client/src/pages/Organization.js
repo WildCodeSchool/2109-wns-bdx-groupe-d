@@ -20,7 +20,8 @@ const Organization = () => {
 
 	return (
 		<div className="organization-container">
-			<div className="flex justify-around mb-8">
+			<h2 className="font-chaney_title py-6 text-2xl">Organisations</h2>
+			<div className="flex justify-around my-8">
 				<SearchButton />
 
 				<Button
@@ -33,7 +34,7 @@ const Organization = () => {
 
 			{displayCreation && <CreateOrganization setDisplayCreation={setDisplayCreation} />}
 
-			<div className="projects-container">
+			<div className="my-24">
 				{data.Organizations.length > 0 ? (
 					data.Organizations.map((organizationObject, index) => {
 						return (
