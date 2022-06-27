@@ -20,6 +20,11 @@ export const getProjectById = gql`
 			description
 			created_at
 			projectPictureName
+			images {
+				id
+				name
+				created_at
+			  }
 		}
 	}
 `;

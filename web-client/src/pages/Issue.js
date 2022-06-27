@@ -173,7 +173,7 @@ const Issue = () => {
   return (
     <div className="issues-container">
       <div className='font-black text-2xl pt-20 pb-8'>
-        <p>{ISSUES[issueIndex].ticketNumber}</p>
+        <p>Issue {ISSUES[issueIndex].ticketNumber}</p>
       </div> 
       <div className="relative overflow-x-auto my-6 rounded-lg"> 
         <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">

@@ -235,8 +235,8 @@ const DetailsProject = () => {
       </div> 
       <img className="object-none object-center" src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"/>  
       <Carousel>
-        {imagesProject && imagesProject.map(image =>
-          <CarouselItem><img key={image.id} className="object-none object-center" src={image.url} alt="collabo 1"/></CarouselItem>
+        {data.getProjectById.images && data.getProjectById.images.map(image =>
+          <CarouselItem><img key={image.id} className="object-none object-center" src={image.name ? `/images/${image.name}` : smiley} alt="collabo 1"/></CarouselItem>
         )}
       </Carousel> 
       <div className='font-black text-2xl pt-20'>

@@ -25,7 +25,7 @@ class ProjectUtils extends Project {
   }
 
   static async getProjectById({ id }: GetProjectInput) {
-    return await Project.findOneOrFail({ id });
+    return await Project.findOneOrFail({ where: { id }, relations: ["images"] });
   }
 };
 

@@ -3,13 +3,15 @@ import {
 	BaseEntity,
 	Column,
 	Entity,
-	// JoinColumn,
-	// JoinTable,
+	OneToMany,
+	JoinColumn,
+	JoinTable,
 	// ManyToMany,
 	// ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import Image from './Image';
 // import User from './User';
 // import Organization from './Organization';
 // import Issue from './Issue';
@@ -36,6 +38,10 @@ class Project extends BaseEntity {
 	@Column()
 	@Field()
 	projectPictureName?: string;
+
+	@OneToMany(() => Image, image => image.project)
+	@Field(() => [Image])
+	images!: Image[]
 
 	// @Column()
 	// @Field()
