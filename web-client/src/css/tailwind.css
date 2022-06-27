@@ -10,10 +10,37 @@
 @import './components/Input.css';
 
 @import './pages/Projects.css';
+@import './pages/Organization.css';
 
-/* @font-face {
-	font-family: 'Chaney';
-	src: url('../assets/fonts/chaney-regular-webfont.ttf');
-} */
 @import './pages/DetailsProject.css';
 @import './pages/IssuesProject.css';
+
+@font-face {
+	font-family: 'Chaney Title';
+	src: url('../assets/fonts/chaney-regular-webfont.ttf');
+}
+
+@font-face {
+	font-family: 'Proza Main Title';
+	src: url('../assets/fonts/ProzaLibre-ExtraBold.ttf');
+}
+
+@font-face {
+	font-family: 'Proza Second Title';
+	src: url('../assets/fonts/ProzaLibre-SemiBold.ttf');
+}
+
+@font-face {
+	font-family: 'Proza Tags';
+	src: url('../assets/fonts/ProzaLibre-BoldItalic.ttf');
+}
+
+@font-face {
+	font-family: 'Proza Body';
+	src: url('../assets/fonts/ProzaLibre-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Proza Descriptions';
+	src: url('../assets/fonts/ProzaLibre-Italic.ttf');
+}
