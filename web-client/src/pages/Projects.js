@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
-import { getProjects } from "../graphql/Project.js";
+import { useQuery } from '@apollo/client';
+import { getProjects } from '../graphql/Project.js';
 
 import DisplayProject from './components/projects/DisplayProject';
 import CreateProject from './components/projects/CreateProject';
 import CreateImage from './components/images/CreateImage';
 import Button from '../components/Button';
 import SearchButton from '../components/SearchButton.js';
-
 
 const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);

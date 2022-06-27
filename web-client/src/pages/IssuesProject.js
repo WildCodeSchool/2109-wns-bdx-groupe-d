@@ -238,7 +238,7 @@ const IssuesProject = () => {
                 <td className="px-6 py-4 font-sans italic font-black text-black text-lg">{issue.categorie}</td>
                 <td className="px-6 py-4 space-x-2 flex items-center justify-center">
                   {issue.avatars && issue.avatars.map(avatar =>
-                    <img key={avatar} className="rounded-full h-8 w-8" src={avatar.img} alt="collabo 1"/>
+                    <img key={avatar} className="rounded-full h-8 w-8 object-cover" src={avatar.img} alt="collabo 1"/>
                   )}
                 </td>
                 <td className="px-6 py-4 text-lg">{issue.date}</td>

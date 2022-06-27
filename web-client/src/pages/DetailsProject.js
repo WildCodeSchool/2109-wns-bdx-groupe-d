@@ -1,220 +1,234 @@
 import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
 import { NavLink, useParams } from 'react-router-dom';
-import { useQuery } from "@apollo/client";
-import { getProjects, getProjectById } from "../graphql/Project.js";
-import smiley from '../images/smiley.png'
-
+import { useQuery } from '@apollo/client';
+import { getProjects, getProjectById } from '../graphql/Project.js';
+import smiley from '../images/smiley.png';
 
 const projectIssus = [
-  { id: 1, 
-    ticketNumber: '#7762', 
-    ticketName: 'Pb affichage', 
-    comment: 'Le problème résul...', 
-    statut: 'Done', 
-    categorie: 'design', 
-    avatars: [
-      { id: 1,
-        img : 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-      },
-      { id: 2,
-        img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-      }
-    ], 
-    date: '28/12/2021' 
-  },
-  { id: 2, 
-    ticketNumber: '#5642', 
-    ticketName: 'Bug avec Docker', 
-    comment: 'Launch des cont...', 
-    statut: 'In progress', 
-    categorie: 'dev', 
-    avatars: [
-      { id: 1,
-        img:'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-      }
-    ], 
-    date: '26/12/2021' 
-  },
-  { id: 3, 
-    ticketNumber: '#3126', 
-    ticketName: 'Link erroné', 
-    comment: 'Le link de la partie...', 
-    statut: 'Done', 
-    categorie: 'intégration', 
-    avatars: [
-      { id: 2,
-        img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-      }
-    ], 
-    date: '23/12/2021' 
-  },
-  { id: 4, 
-    ticketNumber: '#3226', 
-    ticketName: 'Base de données', 
-    comment: 'La base de donnée...', 
-    statut: 'In progress', 
-    categorie: 'dev', 
-    avatars: [
-      { id: 1,
-        img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-      },
-      { id: 2,
-        img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-      }
-    ], 
-    date: '21/12/2021' 
-  },
-  { id: 5, 
-    ticketNumber: '#8756', 
-    ticketName: 'Qualité d\'image', 
-    comment: 'La qualité des imag...', 
-    statut: 'In progress', 
-    categorie: 'design', 
-    avatars: [
-      { id: 1,
-        img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-      }
-    ], 
-    date: '17/12/2021' 
-  },
-  { id: 6, 
-    ticketNumber: '#7864', 
-    ticketName: 'Mauvais resposive', 
-    comment: 'Les éléments sont...', 
-    statut: 'Done', 
-    categorie: 'intégration', 
-    avatars: [
-      { id: 1,
-        img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-      },
-      { id: 2,
-        img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-      }
-    ], 
-    date: '15/12/2021' 
-  },
-  { id: 7, 
-    ticketNumber: '#6314', 
-    ticketName: 'Erreur chargement', 
-    comment: 'Erreur lors du...', 
-    statut: 'In progress', 
-    categorie: 'dev', 
-    avatars: [
-      { id: 1,
-        img:'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-      }
-    ], 
-    date: '13/12/2021' 
-  },
-  { id: 8, 
-    ticketNumber: '#9982', 
-    ticketName: 'Décalage navbar', 
-    comment: 'Navbar à déca...', 
-    statut: 'In progress', 
-    categorie: 'intégration', 
-    avatars: [
-      { id: 1,
-        img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-      }
-    ], 
-    date: '11/12/2021' 
-  },
-  { id: 9, 
-    ticketNumber: '#2457', 
-    ticketName: 'Changement chart graphic', 
-    comment: 'Chagement des coul...', 
-    statut: 'Done', 
-    categorie: 'design', 
-    avatars: [
-      { id: 1,
-        img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-      },
-      { id: 2,
-        img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-      }
-    ], 
-    date: '10/12/2021' 
-  },
-  { id: 10, 
-    ticketNumber: '#6791', 
-    ticketName: 'Etude parcours utilisateur', 
-    comment: 'Parcours utilisa...', 
-    statut: 'In progress', 
-    categorie: 'design', 
-    avatars: [
-      { id: 1,
-        img : 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-      },
-      { id: 2,
-        img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-      }
-    ], 
-    date: '9/12/2021' 
-  }
+	{
+		id: 1,
+		ticketNumber: '#7762',
+		ticketName: 'Pb affichage',
+		comment: 'Le problème résul...',
+		statut: 'Done',
+		categorie: 'design',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+			},
+			{
+				id: 2,
+				img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg',
+			},
+		],
+		date: '28/12/2021',
+	},
+	{
+		id: 2,
+		ticketNumber: '#5642',
+		ticketName: 'Bug avec Docker',
+		comment: 'Launch des cont...',
+		statut: 'In progress',
+		categorie: 'dev',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg',
+			},
+		],
+		date: '26/12/2021',
+	},
+	{
+		id: 3,
+		ticketNumber: '#3126',
+		ticketName: 'Link erroné',
+		comment: 'Le link de la partie...',
+		statut: 'Done',
+		categorie: 'intégration',
+		avatars: [
+			{
+				id: 2,
+				img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+			},
+		],
+		date: '23/12/2021',
+	},
+	{
+		id: 4,
+		ticketNumber: '#3226',
+		ticketName: 'Base de données',
+		comment: 'La base de donnée...',
+		statut: 'In progress',
+		categorie: 'dev',
+		avatars: [
+			{ id: 1, img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg' },
+			{
+				id: 2,
+				img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+			},
+		],
+		date: '21/12/2021',
+	},
+	{
+		id: 5,
+		ticketNumber: '#8756',
+		ticketName: "Qualité d'image",
+		comment: 'La qualité des imag...',
+		statut: 'In progress',
+		categorie: 'design',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+			},
+		],
+		date: '17/12/2021',
+	},
+	{
+		id: 6,
+		ticketNumber: '#7864',
+		ticketName: 'Mauvais resposive',
+		comment: 'Les éléments sont...',
+		statut: 'Done',
+		categorie: 'intégration',
+		avatars: [
+			{ id: 1, img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg' },
+			{
+				id: 2,
+				img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+			},
+		],
+		date: '15/12/2021',
+	},
+	{
+		id: 7,
+		ticketNumber: '#6314',
+		ticketName: 'Erreur chargement',
+		comment: 'Erreur lors du...',
+		statut: 'In progress',
+		categorie: 'dev',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg',
+			},
+		],
+		date: '13/12/2021',
+	},
+	{
+		id: 8,
+		ticketNumber: '#9982',
+		ticketName: 'Décalage navbar',
+		comment: 'Navbar à déca...',
+		statut: 'In progress',
+		categorie: 'intégration',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+			},
+		],
+		date: '11/12/2021',
+	},
+	{
+		id: 9,
+		ticketNumber: '#2457',
+		ticketName: 'Changement chart graphic',
+		comment: 'Chagement des coul...',
+		statut: 'Done',
+		categorie: 'design',
+		avatars: [
+			{ id: 1, img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg' },
+			{
+				id: 2,
+				img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+			},
+		],
+		date: '10/12/2021',
+	},
+	{
+		id: 10,
+		ticketNumber: '#6791',
+		ticketName: 'Etude parcours utilisateur',
+		comment: 'Parcours utilisa...',
+		statut: 'In progress',
+		categorie: 'design',
+		avatars: [
+			{
+				id: 1,
+				img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+			},
+			{
+				id: 2,
+				img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg',
+			},
+		],
+		date: '9/12/2021',
+	},
 ];
 
 const imagesProject = [
-  { id: 1,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp'
-  },
-  { id: 2,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp'
-  },
-  { id: 3,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp'
-  },
-  { id: 4,
-    url: 'https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg'
-  },
-  { id: 5,
-    url: 'https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200'
-  },
+	{ id: 1, url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp' },
+	{
+		id: 2,
+		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp',
+	},
+	{
+		id: 3,
+		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp',
+	},
+	{ id: 4, url: 'https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg' },
+	{
+		id: 5,
+		url: 'https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200',
+	},
 ];
 
 const collaboratorsProject = [
-  { id: 1,
-    img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-  },
-  { id: 2,
-    img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-  },
-  { id: 3,
-    img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-  },
-  { id: 4,
-    img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-  },
-  { id: 5,
-    img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-  },
+	{
+		id: 1,
+		img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+	},
+	{
+		id: 2,
+		img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg',
+	},
+	{
+		id: 3,
+		img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg',
+	},
+	{ id: 4, img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg' },
+	{
+		id: 5,
+		img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+	},
 ];
 
-
 const DetailsProject = () => {
+	const [showFiveTickets, setShowFiveTickets] = useState(false);
 
-  const [showFiveTickets, setShowFiveTickets] = useState(false)
+	let { id } = useParams();
 
-  let { id } = useParams()
+	//const { loading, error, data } = useQuery(getProjects);
+	const { loading, error, data } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
 
-  //const { loading, error, data } = useQuery(getProjects);
-  const { loading, error, data } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
+	if (loading) return 'Loading...';
 
-  if (loading) return 'Loading...';
+	if (error) return `Error! ${error.message}`;
 
-  if (error) return `Error! ${error.message}`;
+	console.log(data);
 
-  console.log(data)
+	console.log(id);
 
-  console.log(id)
-
-  function Statut(value) {
-    if (value === 'Done') {
-      return <div className="bg-green-500 rounded-full h-5 w-5 inline-block"></div>;
-    } else {
-      return <div className="bg-yellow-300 rounded-full h-5 w-5 inline-block"></div>;
-    }
-  }
+	function Statut(value) {
+		if (value === 'Done') {
+			return <div className="bg-green-500 rounded-full h-5 w-5 inline-block"></div>;
+		} else {
+			return <div className="bg-yellow-300 rounded-full h-5 w-5 inline-block"></div>;
+		}
+	}
 
   return (
     <div className="detail-project-container">
