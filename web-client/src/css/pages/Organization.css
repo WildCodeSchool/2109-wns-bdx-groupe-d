@@ -1,0 +1,7 @@
+.organization-project-container {
+	@apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
+}
+
+.organization-project-container img {
+	@apply w-full h-full object-cover;
+}

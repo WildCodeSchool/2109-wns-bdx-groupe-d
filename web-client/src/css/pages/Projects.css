@@ -6,14 +6,6 @@
 	@apply flex flex-wrap justify-evenly;
 }
 
-.organization-project-container {
-	@apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
-}
-
-.organization-project-container img {
-	@apply w-full h-full object-cover;
-}
-
 .hover-container {
 	@apply w-full h-2/3 bottom-0 bg-white text-black absolute z-10 opacity-80 text-center p-4 rounded-t-2xl;
 }
