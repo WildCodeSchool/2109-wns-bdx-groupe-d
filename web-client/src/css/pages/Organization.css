@@ -1,7 +1,13 @@
-.organization-project-container {
-	@apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
+.organization-projects-container {
+	@apply w-full mb-4 bg-altered_white-color h-4/6 rounded-lg;
 }
 
-.organization-project-container img {
-	@apply w-full h-full object-cover;
+.organization-container {
+	@apply mt-6;
 }
+
+/* w-1/4  relative cursor-pointer overflow-hidden rounded-3xl */
+
+/* .organization-project-container img {
+	@apply w-full h-full object-cover;
+} */
