@@ -21,7 +21,12 @@ module.exports = {
         bg_issue: '#E5E5E5'
 			},
 			fontFamily: {
-				chaney: ['Chaney', 'regular'],
+				chaney_title: ['Chaney Title', 'regular'],
+				proza_main_title: ['Proza Main Title', 'extrabold'],
+				proza_second_title: ['Proza Second Title', 'semibold'],
+				proza_body: ['Proza Regular', 'regular'],
+				proza_tags: ['Proza Tags', 'bolditalic'],
+				proza_desc: ['Proza Descriptions', 'italic'],
 			},
 		},
 	},

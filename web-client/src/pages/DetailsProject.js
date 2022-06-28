@@ -11,39 +11,40 @@ import Issues from './Issues';
 import AddUserToProject from './components/projects/AddUserToProject';
 
 const imagesProject = [
-  { id: 1,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp'
-  },
-  { id: 2,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp'
-  },
-  { id: 3,
-    url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp'
-  },
-  { id: 4,
-    url: 'https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg'
-  },
-  { id: 5,
-    url: 'https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200'
-  },
+	{ id: 1, url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp' },
+	{
+		id: 2,
+		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp',
+	},
+	{
+		id: 3,
+		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp',
+	},
+	{ id: 4, url: 'https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg' },
+	{
+		id: 5,
+		url: 'https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200',
+	},
 ];
 
 const collaboratorsProject = [
-  { id: 1,
-    img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg'
-  },
-  { id: 2,
-    img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg'
-  },
-  { id: 3,
-    img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg'
-  },
-  { id: 4,
-    img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg'
-  },
-  { id: 5,
-    img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg'
-  },
+	{
+		id: 1,
+		img: 'https://cdn.futura-sciences.com/buildsv6/images/largeoriginal/d/9/a/d9a1058910_50163142_elon-musk1.jpg',
+	},
+	{
+		id: 2,
+		img: 'https://img-0.journaldunet.com/PujDkZ9YAmFXrZxdCBLKNgiEnRg=/1500x/smart/45776488e7eb4b8080d4ad6e0da4bd74/ccmcms-jdn/11517282.jpg',
+	},
+	{
+		id: 3,
+		img: 'https://img-0.journaldunet.com/qFp6OxCIE6wbPymheqNsAcTShUo=/1500x/smart/7cfa455788b7461ea1782b0b72e31c8f/ccmcms-jdn/2383369.jpg',
+	},
+	{ id: 4, img: 'https://planete.lesechos.fr/wp-content/uploads/2021/02/Mav-1-itv-gates-scaled.jpg' },
+	{
+		id: 5,
+		img: 'https://resize-elle.ladmedia.fr/rcrop/796,1024/img/var/plain_site/storage/images/loisirs/livres/news/la-biographie-de-steve-jobs-paraitra-plus-tot-que-prevu-1755076/19393192-1-fre-FR/La-biographie-de-Steve-Jobs-paraitra-plus-tot-que-prevu.jpg',
+	},
 ];
 
 
@@ -57,11 +58,12 @@ const DetailsProject = ({ actualUser }) => {
   const { loading, error, data, refetch } = useQuery(getProjectById, { variables: { id: parseInt(id) } });
 
   const issuesQuery = useQuery(getIssuesByProjectId, { variables: { projectId: parseInt(id) } });
-  console.log(issuesQuery)
 
-  if (loading) return 'Loading...';
+	if (error) return `Error! ${error.message}`;
 
-  if (error) return `Error! ${error.message}`;
+	if (loading) return <div className='mx-auto'>Charngement ...</div>
+
+	if (issuesQuery.loading) return <div className='mx-auto'>Charngement ...</div>
 
   return (
     <div className="detail-project-container">
