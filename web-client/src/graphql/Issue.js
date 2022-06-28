@@ -44,6 +44,14 @@ export const getIssues = gql`
         email
         created_at
       }
+      user_assigned {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
     }
 	}
 `;
@@ -91,6 +99,14 @@ export const getIssueById = gql`
         last_name
         email
       }
+      user_assigned {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
     }
   }
 `;
@@ -115,6 +131,22 @@ mutation assignUserToIssue($email: String!, $issueId: Float!) {
       email
       created_at
     }
+  }
+}
+`;
+
+export const getMyIssues = gql`
+query getMyIssues {
+  getMyIssues {
+    id
+    name
+    description
+    created_at
+    updated_at
+    status
+    priority
+    project_name
+    project_id
   }
 }
 `;

@@ -35,11 +35,11 @@ class IssueUtils extends Issue {
   }
 
   static async getIssuesByProjectId({ project_id }: GetIssueByProjectIdInput) {
-    return await Issue.find({ relations: ["user"], where: { project_id } });
+    return await Issue.find({ where: { project_id }, relations: ["user", "user_assigned"] });
   }
 
   static async getIssueById({ id }: GetIssueByIdInput) {
-    return await Issue.findOneOrFail({ id }, { relations: ["user"] });
+    return await Issue.findOneOrFail({ id }, { relations: ["user", "user_assigned"] });
   }
 
   static async assignUserToIssue({ email, issueId }: AssignUserInput) {

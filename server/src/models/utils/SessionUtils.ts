@@ -31,7 +31,12 @@ class SessionUtils extends Session {
       { relations: ["user"] }
     );
 
-    return userSession?.user || null;
+    const currentUser = await User.findOneOrFail({
+      where: {id: userSession?.user.id},
+      relations: ["project_assigned", "issues_assigned"]
+    });
+
+    return currentUser;
   }
 }
 

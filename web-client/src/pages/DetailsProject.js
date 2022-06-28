@@ -147,7 +147,7 @@ const DetailsProject = ({ actualUser }) => {
         )}
       </Carousel>
       
-      {!issuesQuery.loading && issuesQuery.data.getIssuesByProjectId[0]
+      {!issuesQuery.loading && issuesQuery.data.getIssuesByProjectId[0] && !issuesQuery.error
       ? <div>
         <p className='font-black text-2xl pt-20'>Tickets en cours</p>
         

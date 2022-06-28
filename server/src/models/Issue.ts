@@ -56,9 +56,8 @@ class Issue extends BaseEntity {
 	@Field(() => User)
 	user?: User;
 
-	@ManyToOne(() => User, (user) => user.id)
-	@JoinTable()
-	@Field(() => User)
+	@ManyToOne(() => User, (user) => user.issues_assigned)
+	@Field(() => User, {nullable: true})
 	user_assigned?: User;
 }
 

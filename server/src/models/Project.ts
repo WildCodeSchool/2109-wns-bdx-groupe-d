@@ -45,7 +45,7 @@ class Project extends BaseEntity {
 	// @JoinColumn({ name: 'organization_id' })
 	// organization_id!: number;
 
-	@ManyToMany(() => User, (user) => user.id)
+	@ManyToMany(() => User, (user) => user.project_assigned)
 	@JoinTable()
 	@Field(() => [User])
 	user_assigned?: User[];

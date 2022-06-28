@@ -8,12 +8,13 @@ import DeleteIssueInput from "./input/issues/DeleteIssueInput";
 import GetIssueByIdInput from "./input/issues/GetIssueByIdInput";
 import GetIssueByProjectIdInput from './input/issues/GetIssueByProjectId';
 import AssignUserInput from './input/issues/AssignUserInput';
+import User from '../models/User';
 
 @Resolver(Issue)
 class IssueResolver {
   @Query(() => [Issue])
 	async issues() {
-		return await Issue.find({ relations: ["user"] });
+		return await Issue.find({ relations: ["user", "user_assigned"] });
 	}
 
 	@Mutation(() => Issue)
@@ -64,6 +65,16 @@ class IssueResolver {
   @Mutation(() => Issue)
 	async assignUserToIssue(@Args() { email, issueId }: AssignUserInput) {
 		return IssueUtils.assignUserToIssue({ email, issueId});
+	}
+
+  @Query(() => [Issue])
+	async getMyIssues(@Ctx() context: Context,) {
+    const currentUser = context.user as User;
+
+		return await Issue.find({
+      where: {user_assigned: currentUser, user: currentUser},
+      relations: ["user_assigned", "user"]
+    });
 	}
 }
 

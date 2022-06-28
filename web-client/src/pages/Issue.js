@@ -4,22 +4,30 @@ import { useParams } from 'react-router-dom';
 import { getIssueById } from '../graphql/Issue';
 import Button from '../components/Button';
 import AddUserToIssue from './components/issues/AddUserToIssue';
+import priorityOptions from '../components/options/priorityOptions';
+import statusOptions from '../components/options/statusOptions';
 
 
 const capitalizeFirstLetter = value => {
   return value.charAt(0).toUpperCase() + value.slice(1);
-}
+};
+
 
 const Issue = () => {
   const [displayAddUserOnIssue, setDisplayAddUserOnIssue] = useState(false);
 
   let { id } = useParams();
 
-  const { loading, data, refetch } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
+  const { loading, data, error, refetch } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
 
   if (loading) return <>Chargement</>
+
+  if (error) return `Error! ${error.message}`;
   
   const issue = data.getIssueById;
+
+  const statusLabel = statusOptions.find(value => value.value === issue.status).label;
+  const priorityLabel = priorityOptions.find(value => value.value === issue.priority).label;
 
   return <div className='px-20'>
 
@@ -63,11 +71,19 @@ const Issue = () => {
 
       <div className='grid grid-cols-3 mt-8'>
         <div>
-          <p><span className='font-bold'>Statut : </span>{issue.status}</p>
+          <p><span className='font-bold'>Statut : </span>{statusLabel}</p>
 
-          <p className='my-6'><span className='font-bold'>Priorité : </span>{issue.priority}</p>
+          <p className='my-6'><span className='font-bold'>Priorité : </span>{priorityLabel}</p>
 
-          <p><span className='font-bold'>Assigné à : </span>{issue.assignedTo || 'Non assigné'}</p>
+          <p>
+            <span className='font-bold'>
+              Assigné à :
+            </span>
+            {issue.user_assigned
+              ? ` ${capitalizeFirstLetter(issue.user_assigned.first_name)} ${capitalizeFirstLetter(issue.user_assigned.last_name)}`
+              : 'Non assigné'
+            }
+          </p>
         </div>
 
         <div>
