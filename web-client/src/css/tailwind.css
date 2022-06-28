@@ -8,6 +8,8 @@
 @import './components/TopBar.css';
 @import './components/Button.css';
 @import './components/Input.css';
+@import './components/Modal.css';
+@import './components/Select.css';
 
 @import './pages/Projects.css';
 @import './pages/Organization.css';

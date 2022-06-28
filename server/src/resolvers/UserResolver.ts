@@ -1,16 +1,17 @@
 import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Context } from "../apollo-server";
 
 import User from "../models/User";
-import CreateUserInput from "./input/CreateUserInput";
+import CreateUserInput from "./input/user/CreateUserInput";
 import UserUtils from "../models/utils/UserUtils";
-import DeleteUserInput from "./input/DeleteUserInput";
-import { Context } from "../apollo-server";
+import DeleteUserInput from "./input/user/DeleteUserInput";
+import GetUserByEmailInput from "./input/user/getUserByEmailInput";
 
 @Resolver(User)
 class UserResolver {
   @Query(() => [User])
   async users() {
-    return await User.find();
+    return await User.find({ relations: ["project_assigned"] });
   }
 
   @Mutation(() => User)
@@ -45,6 +46,11 @@ class UserResolver {
   async deleteMe(@Ctx() context: Context) {
     const currentUser = context.user as User;
     return UserUtils.deleteUser({ id: currentUser.id });
+  }
+
+  @Query(() => User)
+  async getUserByEmail(@Args() { email }: GetUserByEmailInput ) {
+    return await UserUtils.getUserByEmail({ email });
   }
 }
 

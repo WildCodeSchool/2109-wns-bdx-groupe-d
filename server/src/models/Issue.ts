@@ -5,13 +5,12 @@ import {
 	Entity,
 	JoinColumn,
 	JoinTable,
-	ManyToMany,
+	OneToMany,
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import User from './User';
-import Project from './Project';
 
 @Entity()
 @ObjectType()
@@ -40,23 +39,26 @@ class Issue extends BaseEntity {
 	@Field()
 	status!: string;
 
-	@ManyToOne(() => Project, (project) => project.id)
-	@JoinColumn({ name: 'project_id' })
+	@Column()
+	@Field()
+	priority!: string;
+
+	@Column()
+	@Field()
+	project_name!: string;
+
+	@Column()
+	@Field()
 	project_id!: number;
 
-	@ManyToMany(() => User)
-	@JoinTable({
-		name: 'issue_user',
-		joinColumn: {
-			name: 'issue_id',
-			referencedColumnName: 'id',
-		},
-		inverseJoinColumn: {
-			name: 'user_id',
-			referencedColumnName: 'id',
-		},
-	})
-	user_id!: User;
+	@ManyToOne(() => User, (user) => user.id)
+	@JoinColumn({ name: 'user' })
+	@Field(() => User)
+	user?: User;
+
+	@ManyToOne(() => User, (user) => user.issues_assigned)
+	@Field(() => User, {nullable: true})
+	user_assigned?: User;
 }
 
 export default Issue;

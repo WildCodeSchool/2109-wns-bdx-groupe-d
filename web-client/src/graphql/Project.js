@@ -8,6 +8,14 @@ export const getProjects = gql`
 			description
 			projectPictureName
 			created_at
+			user_assigned {
+				id
+				roles
+				first_name
+				last_name
+				email
+				created_at
+			}
 		}
 	}
 `;
@@ -20,6 +28,14 @@ export const getProjectById = gql`
 			description
 			created_at
 			projectPictureName
+			user_assigned {
+				id
+				roles
+				first_name
+				last_name
+				email
+				created_at
+			}
 		}
 	}
 `;
@@ -40,4 +56,24 @@ export const createFile = gql`
 	mutation createFile($picture: Upload!) {
 		createFile(picture: $picture)
 	}
+`;
+
+export const assignUserToProject = gql`
+mutation assignUserToProject($email: String!, $projectId: Float!) {
+  assignUserToProject(email: $email, projectId: $projectId) {
+    id
+    name
+    description
+    created_at
+    projectPictureName
+    user_assigned {
+      id
+      roles
+      first_name
+      last_name
+      email
+      created_at
+    }
+  }
+}
 `;

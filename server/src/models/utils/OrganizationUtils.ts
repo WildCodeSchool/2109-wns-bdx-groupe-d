@@ -1,7 +1,7 @@
 
-import CreateOrganizationInput from "../../resolvers/input/CreateOrganizationInput";
-import DeleteOrganizationInput from "../../resolvers/input/DeleteOrganizationInput";
-import GetOrganizationInput from "../../resolvers/input/GetOrganizationInput";
+import CreateOrganizationInput from "../../resolvers/input/organization/CreateOrganizationInput";
+import DeleteOrganizationInput from "../../resolvers/input/organization/DeleteOrganizationInput";
+import GetOrganizationInput from "../../resolvers/input/organization/GetOrganizationInput";
 import Organization from "../Organization";
 
 class OrganizationUtils extends Organization {
