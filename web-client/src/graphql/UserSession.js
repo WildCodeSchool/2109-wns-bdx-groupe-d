@@ -17,11 +17,29 @@ export const userInfo = gql`
 	query userInfo {
 		userInfo {
 			id
+			roles
 			first_name
 			last_name
-			roles
 			email
 			created_at
+			project_assigned {
+				id
+				name
+				description
+				created_at
+				projectPictureName
+			}
+			issues_assigned {
+				id
+				name
+				description
+				created_at
+				updated_at
+				status
+				priority
+				project_name
+				project_id
+			}
 		}
 	}
 `;

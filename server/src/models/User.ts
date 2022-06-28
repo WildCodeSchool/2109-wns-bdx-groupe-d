@@ -1,4 +1,3 @@
-import { isEmail } from 'class-validator';
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
 	BaseEntity,
@@ -6,11 +5,16 @@ import {
 	Entity,
 	JoinColumn,
 	ManyToOne,
+	ManyToMany,
+	JoinTable,
 	PrimaryGeneratedColumn,
+	OneToMany,
 } from 'typeorm';
 
 import Color from './Color';
+import Issue from './Issue';
 import Organization from './Organization';
+import Project from './Project';
 
 @Entity()
 @ObjectType()
@@ -42,6 +46,16 @@ class User extends BaseEntity {
 	@Column()
 	@Field()
 	created_at!: string;
+
+	@ManyToMany(() => Project, (project) => project.user_assigned)
+	@JoinTable()
+	@Field(() => [Project])
+	project_assigned?: Project[];
+
+	@OneToMany(() => Issue, (issue) => issue.user_assigned)
+	@Field(() => [Issue], { nullable: true })
+	issues_assigned?: Issue[];
+	
 
 	// @ManyToOne(() => Organization, (organization) => organization.id)
 	// @JoinColumn({ name: 'organization_id' })

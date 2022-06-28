@@ -9,6 +9,13 @@ export const getUser = gql`
 			roles
 			email
 			created_at
+			project_assigned {
+				id
+				name
+				description
+				created_at
+				projectPictureName
+			}
 		}
 	}
 `;

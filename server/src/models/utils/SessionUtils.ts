@@ -1,35 +1,43 @@
 import md5 from "md5";
-import SignInInput from "../../resolvers/input/SignInInput";
+import SignInInput from "../../resolvers/input/user/SignInInput";
 import User from "../User";
 import Session from "../Session";
-import UserInfoInput from "../../resolvers/input/UserInfoInput";
+import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
 
 class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {
-		const user = await User.findOne({ email });
-		const hash = md5(password);
+    const user = await User.findOne({ email });
+    const hash = md5(password);
 
-		if (hash !== user?.password) {
-      throw new Error('Invalid email or password');
+    if (hash !== user?.password) {
+      throw new Error("Invalid email or password");
     } else if (!sessionId) {
-      throw new Error('A problem occured');
+      throw new Error("A problem occured");
     } else {
       const session = new Session();
 
       session.uid = sessionId;
       session.user = user;
-    
+
       await session.save();
 
       return user;
     }
-	}
+  }
 
   static async userInfo({ sessionId }: UserInfoInput) {
-    const userSession = await Session.findOne({ uid: sessionId }, { relations: ["user"] });
- 
-    return userSession?.user || null;
+    const userSession = await Session.findOne(
+      { uid: sessionId },
+      { relations: ["user"] }
+    );
+
+    const currentUser = await User.findOneOrFail({
+      where: {id: userSession?.user.id},
+      relations: ["project_assigned", "issues_assigned"]
+    });
+
+    return currentUser;
   }
-};
+}
 
 export default SessionUtils;

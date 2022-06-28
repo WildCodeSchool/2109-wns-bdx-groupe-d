@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
+import logo from '../images/wildmine-logo.svg';
 
 import '../css/components/TopBar.css';
 
 const TopBar = () => {
 	const [currentLoc, setCurrentLoc] = useState(window.location.pathname);
+	const [navbar, setNavbar] = useState(false);
+	// const [element, setElement] = useState();
 	const { data } = useQuery(userInfo);
 	const currentUser = data.userInfo;
-	return (
-		<nav className="topbar-container">
-			<div className="logo-container">LOGO</div>
 
+	window.onscroll = () => {
+		if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+			setNavbar(true);
+		} else {
+			setNavbar(false);
+		}
+	};
+
+	return (
+		<nav className={`navbar ${navbar ? 'navActive' : 'navInactive'}`}>
+			<div className="logo-container">LOGO</div>
 			<div className="topbar-menu-links-container">
 				<NavLink
 					to="/"
@@ -39,14 +50,13 @@ const TopBar = () => {
 				</NavLink>
 
 				<NavLink
-					to="/issues"
+					to="/issuesProject"
 					className={`topbar-menu-link ${currentLoc === '/issues' ? 'topbar-menu-link-selected' : ''}`}
 					onClick={() => setCurrentLoc('/issues')}
 				>
 					Tickets
 				</NavLink>
 			</div>
-
 			<div className="topbar-menu-settings">
 				<NavLink to="/settings" onClick={() => setCurrentLoc('/settings')}>
 					{currentUser.first_name} {currentUser.last_name}
