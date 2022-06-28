@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from 'type-graphql';
 
 import Organization from '../models/Organization';
-import CreateOrganizationInput from './input/CreateOrganizationInput';
-import DeleteOrganizationInput from './input/DeleteOrganizationInput';
-import GetOrganizationInput from './input/GetOrganizationInput';
+import CreateOrganizationInput from './input/organization/CreateOrganizationInput';
+import DeleteOrganizationInput from './input/organization/DeleteOrganizationInput';
+import GetOrganizationInput from './input/organization/GetOrganizationInput';
 import OrganizationUtils from '../models/utils/OrganizationUtils';
 
 @Resolver(Organization)

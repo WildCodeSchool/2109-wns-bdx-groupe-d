@@ -1,7 +1,6 @@
 import React from 'react';
 import smiley from '../../../images/smiley.png';
 import { NavLink } from 'react-router-dom';
-import DetailsProject from '../../DetailsProject';
 
 const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, project }) => {
   return (

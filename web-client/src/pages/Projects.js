@@ -9,50 +9,53 @@ import SearchButton from '../components/SearchButton.js';
 
 const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);
-	const [displayCreation, setDisplayCreation] = useState(false);
+  const [displayCreation, setDisplayCreation] = useState(false);
 
-	const { loading, error, data } = useQuery(getProjects);
+  const { loading, error, data } = useQuery(getProjects);
 
-	if (loading) return 'Loading...';
 
-	if (error) return `Error! ${error.message}`;
+  if (loading) return 'Loading...';
 
-	return (
-		<div className="organization-container">
-			<div className="flex justify-around mb-8">
-				<SearchButton />
+  if (error) return `Error! ${error.message}`;
 
-				<Button
-					onClick={setDisplayCreation}
-					onClickValue={displayCreation}
-					buttonLabel="Créer un projet"
-					buttonType="button"
-				/>
-			</div>
+  return (
+    <div>
+      <div className='flex justify-around mb-8'>
 
-			{displayCreation && <CreateProject setDisplayCreation={setDisplayCreation} />}
+        <SearchButton/>
 
-			<div className="projects-container">
-				{data.projects.length > 0 ? (
-					data.projects.map((projectObject, index) => {
-						return (
-							<DisplayProject
-								key={index}
-								setDisplayHover={setDisplayHover}
-								index={index}
-								projectObject={projectObject}
-								displayHover={displayHover}
-								project={data.projects[index]}
-								to="/issue"
-							/>
-						);
-					})
-				) : (
-					<p>Aucun projet pour le moment</p>
-				)}
-			</div>
-		</div>
-	);
-};
+        <Button
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
+          buttonLabel='Créer un projet'
+          buttonType='button'
+          buttonClassName='my-auto'
+        />
+
+      </div>
+
+      {displayCreation &&
+        <CreateProject setDisplayCreation={setDisplayCreation}/>
+      }
+
+      <div className="projects-container">
+
+        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
+          return <DisplayProject
+              key={index}
+              setDisplayHover={setDisplayHover}
+              index={index}
+              projectObject={projectObject}
+              displayHover={displayHover}
+              project={data.projects[index]}
+              to="/issue"
+            />;
+        })
+      :<p>Aucun projet pour le moment</p>}
+
+      </div>
+    </div>
+  );
+}
 
 export default Projects;
