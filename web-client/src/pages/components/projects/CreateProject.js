@@ -6,31 +6,35 @@ import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
 import { createProject, createFile } from '../../../graphql/Project';
 
-const CreateProject = ({ setDisplayCreation }) => {
+const CreateProject = ({ setDisplayCreationProject }) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [projectPictureName, setProjectPictureName] = useState('');
 
-	const [sendProjectInformations] = useMutation(createProject, {
-		onCompleted: () => setDisplayCreation(false),
-		onError: (error) => console.log(error.message),
-		refetchQueries: ['getProjects'],
-	});
+	const [ImageName, setImageName] = useState('');
+	const [Images, setImages] = useState([]);
+
+
+	const [sendProjectInformations] = useMutation(
+		createProject, 
+		{
+			onCompleted: () => setDisplayCreationProject(false),
+			onError: (error) => console.log(error.message),
+			refetchQueries: ['getProjects'],	
+		}
+	);
 
 	const [sendPicture] = useMutation(createFile);
 
 	const onChange = async ({
-		target: {
-			validity,
-			files: [file],
-		},
-	}) => {
-		if (validity.valid) {
-			const uplaoaded = await sendPicture({ variables: { picture: file } });
+        target: { validity, files: [file] }
+    }) => {
+        if (validity.valid) {
+        const uplaoaded = await sendPicture({ variables: { picture: file } });
 
-			uplaoaded.data.createFile && setProjectPictureName(file.name);
-		}
-	};
+        uplaoaded.data.createFile && setImageName(file.name);
+        }
+    };
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -41,6 +45,7 @@ const CreateProject = ({ setDisplayCreation }) => {
 				description,
 				createdAt: new Date().toJSON(),
 				projectPictureName,
+				images: Images			
 			},
 		});
 	};
@@ -51,14 +56,14 @@ const CreateProject = ({ setDisplayCreation }) => {
 				className="cursor-pointer absolute right-8 top-6"
 				src={Close}
 				alt="Fermer la fenêtre"
-				onClick={() => setDisplayCreation(false)}
+				onClick={() => setDisplayCreationProject(false)}
 			/>
 
 			<img
 				className="cursor-pointer absolute right-8 top-6"
 				src={Close}
 				alt="Fermer la fenêtre"
-				onClick={() => setDisplayCreation(false)}
+				onClick={() => setDisplayCreationProject(false)}
 			/>
 
 			<form onSubmit={onSubmit} className="w-2/3 mx-auto">
@@ -82,7 +87,7 @@ const CreateProject = ({ setDisplayCreation }) => {
 
 				<div className="w-5/12 mx-auto flex justify-center">
 					<label className="button-general cursor-pointer">
-						{projectPictureName || 'Sélectionnez une image'}
+						{ImageName || 'Sélectionnez une image'}
 
 						<input
 							type="file"
@@ -91,6 +96,11 @@ const CreateProject = ({ setDisplayCreation }) => {
 							className="hidden"
 						/>
 					</label>
+					{ImageName &&
+						<div className="text-center">
+							<button type="button" className="submit-button mb-8 mt-4" onClick={() => setImages([...Images, ImageName])} >Ajouter l'image</button>
+						</div>
+					}			
 				</div>
 
 				<div className="text-center">

@@ -7,7 +7,7 @@ class CreateUserInput {
   name!: string;
 
   @Field()
-  project!: string;
+  project!: number;
 
   @Field()
   created_at!: string;

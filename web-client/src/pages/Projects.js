@@ -10,7 +10,8 @@ import SearchButton from '../components/SearchButton.js';
 
 const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);
-  const [displayCreation, setDisplayCreation] = useState(false);
+  const [displayCreationProject, setDisplayCreationProject] = useState(false);
+  const [displayCreationImage, setDisplayCreationImage] = useState(false);
 
   const { loading, error, data } = useQuery(getProjects);
 
@@ -26,20 +27,28 @@ const Projects = () => {
         <SearchButton/>
 
         <Button
-          onClick={setDisplayCreation}
-          onClickValue={displayCreation}
+          onClick={setDisplayCreationProject}
+          onClickValue={displayCreationProject}
           buttonLabel='Créer un projet'
+          buttonType='button'
+        />
+
+        <Button
+          onClick={setDisplayCreationImage}
+          onClickValue={displayCreationImage}
+          buttonLabel='Créer une image'
           buttonType='button'
         />
 
       </div>
 
-      {displayCreation &&
-        <CreateProject setDisplayCreation={setDisplayCreation}/>
+      {displayCreationProject &&
+        <CreateProject setDisplayCreationProject={setDisplayCreationProject}/>
       }
 
-      
-      <CreateImage setDisplayCreation={setDisplayCreation}/>
+      {displayCreationImage &&
+        <CreateImage setDisplayCreationImage={setDisplayCreationImage}/>
+      }
       
 
       <div className="projects-container">

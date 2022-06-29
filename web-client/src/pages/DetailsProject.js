@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
 import { NavLink, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { getProjects, getProjectById } from '../graphql/Project.js';
+import { getProjectById } from '../graphql/Project.js';
 import smiley from '../images/smiley.png';
 
 const projectIssus = [
@@ -169,22 +169,6 @@ const projectIssus = [
 	},
 ];
 
-const imagesProject = [
-	{ id: 1, url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-animaux-sauvages-drole-1.jpg.webp' },
-	{
-		id: 2,
-		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauavge-drole-6.jpg.webp',
-	},
-	{
-		id: 3,
-		url: 'https://www.consoglobe.com/wp-content/uploads/2015/12/concours-photo-animaux-sauvages-drole-8.jpg.webp',
-	},
-	{ id: 4, url: 'https://www.buzzwebzine.fr/wp-content/uploads/2017/02/animaux-selfie-01.jpg' },
-	{
-		id: 5,
-		url: 'https://i-mom.unimedias.fr/2020/09/16/les-photos-d-animaux-les-plus-droles-de-l-annee.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=675&w=1200',
-	},
-];
 
 const collaboratorsProject = [
 	{

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 
-import Input from '../../../components/Input';
-import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
 import { createImage, createFile } from '../../../graphql/Image';
 
-const CreateImage = ({ setDisplayCreation }) => {
-    const [name, setName] = useState('');
+const CreateImage = ({ setDisplayCreationImage }) => {
+  const [name, setName] = useState('');
 
     const [sendImageInformations] = useMutation(
         createImage,
         {
-          onCompleted: () => setDisplayCreation(false),
+          onCompleted: () => setDisplayCreationImage(false),
           onError: (error) => console.log(error.message),
         }
       );
@@ -52,7 +50,7 @@ const CreateImage = ({ setDisplayCreation }) => {
         className='cursor-pointer absolute right-8 top-6'
         src={Close}
         alt='Fermer la fenêtre'
-        onClick={() => setDisplayCreation(false)}
+        onClick={() => setDisplayCreationImage(false)}
       />
       
       <form onSubmit={onSubmit} className='w-2/3 mx-auto'>

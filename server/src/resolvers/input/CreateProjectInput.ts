@@ -13,6 +13,9 @@ class CreateProjectInput {
 
   @Field()
   projectPictureName?: string;
+
+  @Field(() => [String])
+	images!: string[];
 }
 
 export default CreateProjectInput;

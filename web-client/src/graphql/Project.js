@@ -30,13 +30,18 @@ export const getProjectById = gql`
 `;
 
 export const createProject = gql`
-	mutation createProject($name: String!, $description: String!, $createdAt: String!, $projectPictureName: String!) {
-		createProject(name: $name, description: $description, created_at: $createdAt, projectPictureName: $projectPictureName) {
+	mutation createProject($name: String!, $description: String!, $createdAt: String!, $projectPictureName: String!, $images: [String!]!) {
+		createProject(name: $name, description: $description, created_at: $createdAt, projectPictureName: $projectPictureName, images: $images) {
 			id
 			name
 			description
 			projectPictureName
 			created_at
+			images {
+				id 
+				name
+				created_at
+			}
 		}
 	}
 `;

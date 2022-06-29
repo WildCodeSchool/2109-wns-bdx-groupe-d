@@ -7,14 +7,18 @@ import ProjectUtils from "./ProjectUtils";
 
 class ImageUtils extends Image {
   static async createImage({ name, project, created_at }: CreateImageInput) {
-      const newProject = await ProjectUtils.getProjectById({id: parseInt(project) })
+      const newProject = await ProjectUtils.getProjectById({id: project })
       const image = new Image();
       image.name = name;
       image.project = newProject;
       image.created_at = created_at;
   
       await image.save();
-  
+
+      newProject.images = [...newProject.images, image]
+
+      await newProject.save();
+
       return image;
   }
 
