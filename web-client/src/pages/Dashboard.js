@@ -1,11 +1,12 @@
 import React from 'react';
 import diagram from '../assets/images/diagram.png';
-// import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { getMyIssues } from '../graphql/Issue';
 // import { getUser } from "../graphql/User.js";
 
 const Dashboard = ({ actualUser }) => {
-	// const { loading, error, data } = useQuery(getUser);
-
+	const { loading, error, data } = useQuery(getMyIssues);
+	console.log(data)
 	// if (loading) return 'Loading...';
 
 	// if (error) return `Error! ${error.message}`;

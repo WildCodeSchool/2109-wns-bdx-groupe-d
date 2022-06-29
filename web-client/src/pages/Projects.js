@@ -10,8 +10,7 @@ import SearchButton from '../components/SearchButton.js';
 
 const Projects = () => {
 	const [displayHover, setDisplayHover] = useState(false);
-  const [displayCreationProject, setDisplayCreationProject] = useState(false);
-  const [displayCreationImage, setDisplayCreationImage] = useState(false);
+  const [displayCreation, setDisplayCreation] = useState(false);
 
   const { loading, error, data } = useQuery(getProjects);
 
@@ -21,35 +20,24 @@ const Projects = () => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div className="organization-container">
+    <div>
       <div className='flex justify-around mb-8'>
 
         <SearchButton/>
 
         <Button
-          onClick={setDisplayCreationProject}
-          onClickValue={displayCreationProject}
+          onClick={setDisplayCreation}
+          onClickValue={displayCreation}
           buttonLabel='Créer un projet'
           buttonType='button'
-        />
-
-        <Button
-          onClick={setDisplayCreationImage}
-          onClickValue={displayCreationImage}
-          buttonLabel='Créer une image'
-          buttonType='button'
+          buttonClassName='my-auto'
         />
 
       </div>
 
-      {displayCreationProject &&
-        <CreateProject setDisplayCreationProject={setDisplayCreationProject}/>
+      {displayCreation &&
+        <CreateProject setDisplayCreation={setDisplayCreation}/>
       }
-
-      {displayCreationImage &&
-        <CreateImage setDisplayCreationImage={setDisplayCreationImage}/>
-      }
-      
 
       <div className="projects-container">
 

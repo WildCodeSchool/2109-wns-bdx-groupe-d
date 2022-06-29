@@ -1,7 +1,8 @@
 import md5 from "md5";
-import CreateUserInput from "../../resolvers/input/CreateUserInput";
-import DeleteWilderInput from "../../resolvers/input/DeleteUserInput";
+import CreateUserInput from "../../resolvers/input/user/CreateUserInput";
+import DeleteWilderInput from "../../resolvers/input/user/DeleteUserInput";
 import User from "../User";
+import GetUserByEmailInput from "../../resolvers/input/user/getUserByEmailInput";
 
 class UserUtils extends User {
   static async createUser({ first_name, last_name, email, password, roles, created_at }: CreateUserInput) {
@@ -25,6 +26,10 @@ class UserUtils extends User {
     const email = user.email;
 
     return await User.remove(user);
+  }
+
+  static async getUserByEmail({ email }: GetUserByEmailInput ) {
+    return await User.findOneOrFail({ where: { email } });
   }
 };
 

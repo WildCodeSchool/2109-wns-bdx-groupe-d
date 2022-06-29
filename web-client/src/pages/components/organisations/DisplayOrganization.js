@@ -11,7 +11,7 @@ const DisplayOrganization = ({ organizationObject, organization }) => {
 					<p className="organization-collaborators">Liste des collaborateurs (wip)</p>
 				</div>
 				<div className="col-span-2 organization-btn">
-					<img className="h-6 w-6" src={arrow} />
+					<img className="h-6 w-6" src={arrow} alt="Accéder au détail de l'organisation"/>
 				</div>
 			</div>
 		</div>

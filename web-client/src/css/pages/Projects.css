@@ -1,13 +1,9 @@
-/* .organization-container {
-  @apply px-4 mt-24;
-} */
-
 .projects-container {
-	@apply flex flex-wrap justify-evenly;
+	@apply flex flex-wrap justify-between;
 }
 
 .organization-project-container {
-	@apply w-1/4 mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
+	@apply w-[30%] mr-4 mb-16 relative cursor-pointer overflow-hidden rounded-3xl;
 }
 
 .organization-project-container img {
