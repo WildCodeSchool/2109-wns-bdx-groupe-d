@@ -26,7 +26,6 @@ class UserResolver {
       created_at,
     }: CreateUserInput
   ) {
-    console.log("laaaaa")
     return UserUtils.createUser({
       first_name,
       last_name,

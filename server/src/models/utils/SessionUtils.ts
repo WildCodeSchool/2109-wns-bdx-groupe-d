@@ -6,10 +6,7 @@ import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
 
 class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {
-    const user = await User.findOne({
-      where: { email },
-      relations: ["project_assigned", "issues_assigned"]
-    });
+    const user = await User.findOne({ email });
     const hash = md5(password);
 
     if (hash !== user?.password) {
@@ -34,6 +31,16 @@ class SessionUtils extends Session {
       { relations: ["user"] }
     );
 
+    return userSession?.user;
+  }
+
+  static async userWithRelations({ sessionId }: UserInfoInput) {
+    const userSession = await Session.findOne(
+      { uid: sessionId },
+      { relations: ["user"] }
+    );
+      console.log(sessionId);
+      
     const currentUser = await User.findOne({
       where: { id: userSession?.user.id },
       relations: ["project_assigned", "issues_assigned"]

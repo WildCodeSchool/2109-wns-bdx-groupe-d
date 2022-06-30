@@ -32,9 +32,9 @@ class ProjectUtils extends Project {
   }
 
   static async assignUserToProject({ email, projectId }: AssignUserInput) {
-    let user = await UserUtils.getUserByEmail({ email });
+    const user = await UserUtils.getUserByEmail({ email });
 
-    let project = await this.getProjectById({ id: projectId });
+    const project = await this.getProjectById({ id: projectId });
     
     project.user_assigned = project.user_assigned ? [...project.user_assigned, user] : [user];
     user.project_assigned = user.project_assigned ? [...user.project_assigned, project] : [project];
