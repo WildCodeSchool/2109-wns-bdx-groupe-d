@@ -17,8 +17,8 @@ const DisplayIssuesValues = ({ issue, issueIndex, issues }) => {
 
 
 
-  return <div className={`grid grid-cols-7 p-4 bg-grey_light text-wildmine_black shadow-md text-center border relative -z-10 ${issueIndex === issues.length - 1 ? 'rounded-b-lg' : 'border-b-black'}`}>
-    <div className='p-2 bg-wildmine_black rounded-lg w-[110px] mx-auto'>
+  return <div className={`grid grid-cols-7 p-4 text-xs sm:text-sm md:text-base bg-grey_light text-wildmine_black shadow-md text-center border relative -z-10 ${issueIndex === issues.length - 1 ? 'rounded-b-lg' : 'border-b-black'}`}>
+    <div className='py-2 px-4 bg-wildmine_black rounded-lg mx-auto'>
       <p className='font-extrabold text-secondary_color'>#{issue.id}</p>
     </div>
 

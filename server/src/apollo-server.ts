@@ -29,9 +29,7 @@ export default async function getServer() {
     schema,
     context: async ({ req }): Promise<Context> => {
       const sessionId = req.cookies.sessionId || "";
-      const user = sessionId
-        ? await SessionUtils.userInfo({ sessionId })
-        : null;
+      const user = await SessionUtils.userInfo({ sessionId }) || null;
 
       return { sessionId, user };
     },

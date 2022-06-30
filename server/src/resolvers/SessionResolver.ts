@@ -21,7 +21,19 @@ class SessionResolver {
   @Query(() => User)
   async userInfo(@Ctx() context: Context) {
     const { sessionId } = context;
-    return SessionUtils.userInfo({ sessionId });
+
+    const session = await SessionUtils.userInfo({ sessionId });
+
+    return session;
+    
+  }
+
+  @Query(() => User)
+  async userWithRelations(@Ctx() context: Context) {
+    const { sessionId } = context;
+    console.log(sessionId);
+
+    return await SessionUtils.userWithRelations({ sessionId });    
   }
 }
 

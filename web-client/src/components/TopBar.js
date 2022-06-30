@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
-//import logo from '../images/wildmine-logo.svg';
+import logo from '../images/wildmine-logo.svg';
 
 import '../css/components/TopBar.css';
 
@@ -23,7 +23,7 @@ const TopBar = () => {
 
 	return (
 		<nav className={`navbar ${navbar ? 'navActive' : 'navInactive'}`}>
-			<div className="logo-container">LOGO</div>
+			<div className="logo-container"><img src={logo} alt="Logo wildmine"/></div>
 			<div className="topbar-menu-links-container">
 				<NavLink
 					to="/"

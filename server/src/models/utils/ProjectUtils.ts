@@ -5,6 +5,7 @@ import DeleteProjectInput from "../../resolvers/input/project/DeleteProjectInput
 import GetProjectInput from "../../resolvers/input/project/GetProjectInput";
 import Project from "../Project";
 import UserUtils from "./UserUtils";
+import User from "../User";
 
 class ProjectUtils extends Project {
   static async createProject({ name, description, created_at, projectPictureName }: CreateProjectInput) {
@@ -31,12 +32,12 @@ class ProjectUtils extends Project {
   }
 
   static async assignUserToProject({ email, projectId }: AssignUserInput) {
-    let user = await UserUtils.getUserByEmail({ email });
+    const user = await UserUtils.getUserByEmail({ email });
 
-    let project = await this.getProjectById({ id: projectId });
-
-    project.user_assigned = [user];
-    user.project_assigned = [project];
+    const project = await this.getProjectById({ id: projectId });
+    
+    project.user_assigned = project.user_assigned ? [...project.user_assigned, user] : [user];
+    user.project_assigned = user.project_assigned ? [...user.project_assigned, project] : [project];
 
     await project.save();
     await user.save();

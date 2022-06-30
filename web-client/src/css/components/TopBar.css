@@ -19,7 +19,7 @@
 }
 
 .topbar-menu-link {
-	@apply cursor-pointer px-8 py-1 bg-wildmine_black text-secondary_color border border-secondary_color rounded-full my-auto;
+	@apply cursor-pointer px-8 py-1 text-center bg-wildmine_black text-secondary_color border border-secondary_color rounded-full my-auto;
 }
 
 .topbar-menu-link:hover {

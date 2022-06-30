@@ -16,7 +16,7 @@ const AddUserToProject = ({ setDisplayAddUserOnProject, refetch, projectId }) =>
         setDisplayAddUserOnProject(false);
       },
       onError: (error) => console.log(error.message),
-      refetchQueries: ["getIssuesByProjectId"],
+      refetchQueries: ["getProjectById"],
     }
   );
 

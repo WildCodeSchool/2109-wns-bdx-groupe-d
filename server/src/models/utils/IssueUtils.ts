@@ -19,7 +19,7 @@ class IssueUtils extends Issue {
       issue.project_name = project_name;
       issue.priority = priority;
       issue.project_id = project_id;
-      issue.user = user || undefined;
+      issue.user = user;
       issue.created_at = created_at;
       issue.updated_at = updated_at;
   
@@ -39,7 +39,7 @@ class IssueUtils extends Issue {
   }
 
   static async getIssueById({ id }: GetIssueByIdInput) {
-    return await Issue.findOneOrFail({ id }, { relations: ["user", "user_assigned"] });
+    return await Issue.findOneOrFail({ where: { id }, relations: ["user", "user_assigned"] });
   }
 
   static async assignUserToIssue({ email, issueId }: AssignUserInput) {
@@ -48,7 +48,7 @@ class IssueUtils extends Issue {
     let issue = await this.getIssueById({ id: issueId });
 
     issue.user_assigned = user;
-    user.issues_assigned = [issue];
+    user.issues_assigned = user.issues_assigned ? [...user.issues_assigned, issue] : [issue];
 
     await issue.save();
     await user.save();

@@ -7,7 +7,7 @@ import CreateProject from './components/projects/CreateProject';
 import Button from '../components/Button';
 import SearchButton from '../components/SearchButton.js';
 
-const Projects = () => {
+const Projects = ({ isMobile }) => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
 
@@ -38,7 +38,7 @@ const Projects = () => {
         <CreateProject setDisplayCreation={setDisplayCreation}/>
       }
 
-      <div className="projects-container">
+      <div className='projects-container'>
 
         {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
           return <DisplayProject
@@ -49,6 +49,7 @@ const Projects = () => {
               displayHover={displayHover}
               project={data.projects[index]}
               to="/issue"
+              isMobile={isMobile}
             />;
         })
       :<p>Aucun projet pour le moment</p>}
