@@ -23,7 +23,7 @@ const TopBar = () => {
 
 	return (
 		<nav className={`navbar ${navbar ? 'navActive' : 'navInactive'}`}>
-			<div className="logo-container">LOGO</div>
+			<div className="logo-container"><img src={logo} alt="Logo wildmine"/></div>
 			<div className="topbar-menu-links-container">
 				<NavLink
 					to="/"

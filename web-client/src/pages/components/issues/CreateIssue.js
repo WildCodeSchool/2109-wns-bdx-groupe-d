@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from "@apollo/client";
 
 import Close from '../../../images/icon-close.svg';
@@ -41,7 +41,14 @@ const CreateIssue = ({ setDisplayCreation, projectName, projectId, userId, refet
         updatedAt: new Date().toJSON(),
       }
     });
-  }
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, []);
 
   return <div className='modal-background'>
     <div className='modal-container'>
