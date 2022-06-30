@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from "@apollo/client";
 
 import Close from '../../../images/icon-close.svg';
@@ -30,6 +30,14 @@ const AddUserToIssue = ({ setDisplayAddUserOnIssue, refetch, issueId }) => {
       }
     });
   }
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, []);
+
   return <div className='modal-background'>
     <div className='modal-container'>
       <p className='modal-title'>Assigner ce ticket à un collaborateur</p>

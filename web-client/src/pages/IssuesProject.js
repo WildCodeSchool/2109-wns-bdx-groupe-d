@@ -12,16 +12,18 @@ const IssuesProject = () => {
   if (loading) return <div className='mx-auto'>Chargement...</div>
 
   return <div>
-  <SearchButton/>
+    <div className='w-[230px]'>
+      <SearchButton/>
+    </div>
 
-  <DisplayIssuesTitle/>
+    <DisplayIssuesTitle/>
 
-  <div>
-    {data.getMyIssues.map((issue, issueIndex) => (
-        <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={data.getMyIssues}/>
-    ))}
-  </div>
-</div>;
+    <div>
+      {data.getMyIssues.map((issue, issueIndex) => (
+          <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={data.getMyIssues}/>
+      ))}
+    </div>
+  </div>;
 };
 
 export default IssuesProject;
