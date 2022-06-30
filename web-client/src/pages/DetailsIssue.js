@@ -32,10 +32,10 @@ const DetailsIssue = () => {
   const newDate = new Date(issue.created_at)
   const dateToDisplay = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`
 
-  return <div className='px-20'>
+  return <div className='px-8 md:px-20'>
 
-    <div className='flex justify-between'>
-      <p className='text-2xl font-extrabold'>ANOMALIE N° #{issue.id}</p>
+    <div className='md:flex md:justify-between'>
+      <p className='mb-4 md:mb-0 text-2xl font-extrabold'>ANOMALIE N° #{issue.id}</p>
 
 
       <Button

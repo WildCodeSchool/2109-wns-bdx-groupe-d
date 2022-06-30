@@ -1,6 +1,6 @@
 .button-general,
 .submit-button {
-  @apply px-2 md:px-4 py-1 border border-secondary_color text-center rounded-full lg:h-[34px];
+  @apply px-4 md:px-4 py-1 border border-secondary_color text-center rounded-full lg:h-[34px];
 }
 
 .button-general {
