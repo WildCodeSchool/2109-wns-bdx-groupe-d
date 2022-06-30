@@ -57,7 +57,7 @@ class Issue extends BaseEntity {
 	user?: User;
 
 	@ManyToOne(() => User, (user) => user.issues_assigned)
-	@Field(() => User, {nullable: true})
+	@Field(() => User, { nullable: true })
 	user_assigned?: User;
 }
 

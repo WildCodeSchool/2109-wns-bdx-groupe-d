@@ -4,24 +4,28 @@ import { useQuery } from "@apollo/client";
 import SearchButton from '../components/SearchButton';
 import DisplayIssuesTitle from './components/issues/DisplayIssuesTitle';
 import DisplayIssuesValues from './components/issues/DisplayIssuesValues';
-import { getMyIssues } from '../graphql/Issue';
+import { userWithRelations } from '../graphql/UserSession';
 
 const IssuesProject = () => {
-	const { loading, data } = useQuery(getMyIssues);
+	const { loading, data } = useQuery(userWithRelations);
 
   if (loading) return <div className='mx-auto'>Chargement...</div>
-
+  
   return <div>
-  <SearchButton/>
+    <div className='w-[230px]'>
+      <SearchButton/>
+    </div>
 
-  <DisplayIssuesTitle/>
+    <DisplayIssuesTitle/>
 
-  <div>
-    {data.getMyIssues.map((issue, issueIndex) => (
-        <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={data.getMyIssues}/>
-    ))}
-  </div>
-</div>;
+    <div>
+      {data.userWithRelations.issues_assigned
+      ? data.userWithRelations.issues_assigned.map((issue, issueIndex) => (
+          <DisplayIssuesValues key={issueIndex} issue={issue} issueIndex={issueIndex} issues={data.userWithRelations.issues_assigned}/>
+      ))
+    : <p>Aucun ticket ne vous est assigné pour le moment</p>}
+    </div>
+  </div>;
 };
 
 export default IssuesProject;

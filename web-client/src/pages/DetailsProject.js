@@ -67,7 +67,7 @@ const DetailsProject = ({ actualUser }) => {
 
   return (
     <div className="detail-project-container">
-      <div className='flex justify-between mb-8'>
+      <div className='flex justify-between mb-4'>
         <div>
           <div className='detail-project-rollback'>
             {`Projets > ${data.getProjectById.name}`}
@@ -81,15 +81,17 @@ const DetailsProject = ({ actualUser }) => {
             <h2>{ data.getProjectById.description }</h2>
           </div>
 
-          <div className='project-collaborators flex items-start justify-start'>
+          <div className='project-collaborators flex flex-col items-start justify-start'>
 
-            <h3 className="mr-10">
+            <h3 className="mb-4 mr-4">
               Collaborateurs du projet :
             </h3>
-
-            {collaboratorsProject && collaboratorsProject.map(collaborator =>
-              <img key={collaborator.id} className="rounded-full h-8 w-8 mx-2" src={collaborator.img} alt="collabo 1"/>
-            )}
+            
+            <div className='flex'>
+              {collaboratorsProject && collaboratorsProject.map(collaborator =>
+                <img key={collaborator.id} className="rounded-full h-8 w-8 mx-2" src={collaborator.img} alt="collabo 1"/>
+              )}
+            </div>
 
           </div>
         </div>
@@ -106,34 +108,34 @@ const DetailsProject = ({ actualUser }) => {
           <Button
             onClick={setDisplayAddUserOnProject}
             onClickValue={displayAddUserOnProject}
-            buttonLabel='Ajouter un collaborateur au projet'
+            buttonLabel='Ajouter un collaborateur'
             buttonType='button'
           />
 
         </div>
 
-      {displayCreation &&
-        <CreateIssue
-          setDisplayCreation={setDisplayCreation}
-          projectName={data.getProjectById.name}
-          projectId={data.getProjectById.id}
-          userId={actualUser.id}
-          refetch={() => refetch()}
-        />
-      }
+        {displayCreation &&
+          <CreateIssue
+            setDisplayCreation={setDisplayCreation}
+            projectName={data.getProjectById.name}
+            projectId={data.getProjectById.id}
+            userId={actualUser.id}
+            refetch={() => refetch()}
+          />
+        }
 
-      {displayAddUserOnProject &&
-        <AddUserToProject
-          setDisplayAddUserOnProject={setDisplayAddUserOnProject}
-          projectId={data.getProjectById.id}
-          refetch={() => refetch()}
-        />
-      }
+        {displayAddUserOnProject &&
+          <AddUserToProject
+            setDisplayAddUserOnProject={setDisplayAddUserOnProject}
+            projectId={data.getProjectById.id}
+            refetch={() => refetch()}
+          />
+        }
 
       </div>
 
       <img
-        className="object-none object-center"
+        className="lg:w-1/2 mx-auto my-4"
         src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"
       />
 

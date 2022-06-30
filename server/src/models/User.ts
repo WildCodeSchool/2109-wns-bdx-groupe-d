@@ -47,9 +47,9 @@ class User extends BaseEntity {
 	@Field()
 	created_at!: string;
 
-	@ManyToMany(() => Project, (project) => project.user_assigned)
+	@ManyToMany(() => Project, (project) => project.id)
 	@JoinTable()
-	@Field(() => [Project])
+	@Field(() => [Project], { nullable: true })
 	project_assigned?: Project[];
 
 	@OneToMany(() => Issue, (issue) => issue.user_assigned)

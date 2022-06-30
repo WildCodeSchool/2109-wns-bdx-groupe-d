@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from "@apollo/client";
 
 import Input from '../../../components/Input';
@@ -29,6 +29,13 @@ const CreateOrganization = ({ setDisplayCreation }) => {
       }
     });
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, []);
 
   return <div className='modal-background'>
     <div className='modal-container'>
