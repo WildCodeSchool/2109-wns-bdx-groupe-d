@@ -43,7 +43,7 @@ const Projects = ({ isMobile }) => {
 
   return (
     <div>
-      <div className='flex justify-around mb-8'>
+      <div className='px-4 md:flex justify-around mb-8'>
     
       <SearchButton
         value={valuesToCompare}
@@ -51,13 +51,13 @@ const Projects = ({ isMobile }) => {
       />
 
 
-        <Button
-          onClick={setDisplayCreation}
-          onClickValue={displayCreation}
-          buttonLabel='Créer un projet'
-          buttonType='button'
-          buttonClassName='my-auto'
-        />
+      <Button
+        onClick={setDisplayCreation}
+        onClickValue={displayCreation}
+        buttonLabel='Créer un projet'
+        buttonType='button'
+        buttonClassName='my-auto mt-4 md:mt-0'
+      />
 
       </div>
 
