@@ -31,8 +31,18 @@ class SessionUtils extends Session {
       { relations: ["user"] }
     );
 
-    const currentUser = await User.findOneOrFail({
-      where: {id: userSession?.user.id},
+    return userSession?.user;
+  }
+
+  static async userWithRelations({ sessionId }: UserInfoInput) {
+    const userSession = await Session.findOne(
+      { uid: sessionId },
+      { relations: ["user"] }
+    );
+      console.log(sessionId);
+      
+    const currentUser = await User.findOne({
+      where: { id: userSession?.user.id },
       relations: ["project_assigned", "issues_assigned"]
     });
 

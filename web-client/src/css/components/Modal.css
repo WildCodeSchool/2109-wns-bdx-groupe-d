@@ -1,5 +1,5 @@
 .modal-background {
-  @apply w-screen h-screen absolute top-0 left-0 z-50 bg-wildmine_black bg-opacity-50;
+  @apply w-screen h-screen absolute top-0 left-0 z-40 bg-wildmine_black bg-opacity-50;
 }
 
 .modal-container {

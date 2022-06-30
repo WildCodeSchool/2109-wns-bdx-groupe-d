@@ -1,5 +1,5 @@
 .detail-project-container {
-  @apply px-48 mt-32 flex flex-col;
+  @apply mt-32 flex flex-col px-4;
 }
 
 .detail-project-rollback {

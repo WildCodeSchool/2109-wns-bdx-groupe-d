@@ -16,20 +16,17 @@ class UserUtils extends User {
       user.created_at = created_at;
   
       await user.save();
-  
       return user;
   }
 
   static async deleteUser({ id }: DeleteWilderInput) {
     const user = await User.findOneOrFail({ id });
-    
-    const email = user.email;
 
     return await User.remove(user);
   }
 
   static async getUserByEmail({ email }: GetUserByEmailInput ) {
-    return await User.findOneOrFail({ where: { email } });
+    return await User.findOneOrFail({ where: { email }, relations: ["issues_assigned", "project_assigned"] });
   }
 };
 

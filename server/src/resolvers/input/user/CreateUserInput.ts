@@ -17,12 +17,6 @@ class CreateUserInput {
   @Field()
   roles!: string;
 
-  // @Field()
-  // color_id!: number;
-
-  // @Field()
-  // organization_id!: number;
-
   @Field()
   created_at!: string;
 }
