@@ -10,7 +10,7 @@ const SearchButton = ({ value, onChange }) => (
       onChange={onChange}
     />
 
-    <img className='cursor-pointer absolute right-4 top-1 h-6 my-auto' src={loupe} alt='Rechercher'/>
+    <img className='cursor-pointer absolute right-4 top-1 h-6' src={loupe} alt='Rechercher'/>
   </div>
 );
 
