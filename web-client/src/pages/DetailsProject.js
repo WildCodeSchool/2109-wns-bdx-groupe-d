@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { getProjectById } from "../graphql/Project.js";
 import smiley from '../images/smiley.png';
@@ -70,7 +70,9 @@ const DetailsProject = ({ actualUser }) => {
       <div className='flex justify-between mb-4'>
         <div>
           <div className='detail-project-rollback'>
-            {`Projets > ${data.getProjectById.name}`}
+            <NavLink to="/projects">
+              Projets
+            </NavLink> {'>'} {data.getProjectById.name}
           </div>
 
           <div className='project-name'>

@@ -13,7 +13,7 @@ const capitalizeFirstLetter = value => {
 };
 
 
-const Issue = () => {
+const DetailsIssue = () => {
   const [displayAddUserOnIssue, setDisplayAddUserOnIssue] = useState(false);
 
   let { id } = useParams();
@@ -28,6 +28,9 @@ const Issue = () => {
 
   const statusLabel = statusOptions.find(value => value.value === issue.status).label;
   const priorityLabel = priorityOptions.find(value => value.value === issue.priority).label;
+
+  const newDate = new Date(issue.created_at)
+  const dateToDisplay = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`
 
   return <div className='px-20'>
 
@@ -69,8 +72,8 @@ const Issue = () => {
         </span>
       </p>
 
-      <div className='grid grid-cols-3 mt-8'>
-        <div>
+      <div className='grid grid-cols-2 md:grid-cols-3 mt-8'>
+        <div className='mr-4'>
           <p><span className='font-bold'>Statut : </span>{statusLabel}</p>
 
           <p className='my-6'><span className='font-bold'>Priorité : </span>{priorityLabel}</p>
@@ -87,13 +90,13 @@ const Issue = () => {
         </div>
 
         <div>
-          <p className='mb-6'><span className='font-bold'>Début : </span>{issue.created_at}</p>
+          <p className='mb-6'><span className='font-bold'>Début : </span>{dateToDisplay}</p>
 
-          <p><span className='font-bold'>Temps estimé : </span>{issue.estimated || 'Pas d\'estimation'}</p>
+          <p><span className='font-bold'>Temps estimé : </span>{issue.estimated || "Pas d'estimation"}</p>
         </div>
       </div>
     </div>
   </div>;
 }
 
-export default Issue;
+export default DetailsIssue;

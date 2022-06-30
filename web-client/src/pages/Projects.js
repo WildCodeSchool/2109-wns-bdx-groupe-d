@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getProjects } from '../graphql/Project.js';
 
@@ -14,15 +14,42 @@ const Projects = ({ isMobile }) => {
   const { loading, error, data } = useQuery(getProjects);
 
 
+  const [foundProject, setFoundProject] = useState([]);
+  const [valuesToCompare, setValuesToCompare] = useState('');
+
   if (loading) return 'Loading...';
 
   if (error) return `Error! ${error.message}`;
 
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = data.projects.filter((issue) => {
+        return issue.name.toLowerCase().startsWith(keyword.toLowerCase());
+      });
+      setFoundProject(results);
+
+    } else {
+      setFoundProject(data.projects);
+    }
+    setValuesToCompare(keyword);
+  };
+
+  if (foundProject.length === 0 && !valuesToCompare && data.projects.length > 0) {
+    setFoundProject(data.projects);
+  }
+
+
   return (
     <div>
       <div className='flex justify-around mb-8'>
+    
+      <SearchButton
+        value={valuesToCompare}
+        onChange={filter}
+      />
 
-        <SearchButton/>
 
         <Button
           onClick={setDisplayCreation}
@@ -40,19 +67,19 @@ const Projects = ({ isMobile }) => {
 
       <div className='projects-container'>
 
-        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
+        {foundProject.length > 0 ? foundProject.map((projectObject, index) => {
           return <DisplayProject
               key={index}
               setDisplayHover={setDisplayHover}
               index={index}
               projectObject={projectObject}
               displayHover={displayHover}
-              project={data.projects[index]}
+              project={foundProject[index]}
               to="/issue"
               isMobile={isMobile}
             />;
         })
-      :<p>Aucun projet pour le moment</p>}
+      :<p className='text-xl font-bold'>Aucun projet pour le moment</p>}
 
       </div>
     </div>

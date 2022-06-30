@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { userWithRelations } from '../graphql/UserSession';
 
 const Dashboard = ({ actualUser }) => {
-	const { loading, error, data } = useQuery(userWithRelations);
+	const { loading, error } = useQuery(userWithRelations);
 	// Les datas sont là pour toi Clara :D
 
 	if (loading) return 'Loading...';
