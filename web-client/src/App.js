@@ -50,7 +50,7 @@ const App = () => {
 							</Route>
 							<Route path="/issue/:id" children={<Issue/>}/>
 							<Route path="/settings">
-								<Settings />
+								<Settings actualUser={data.userInfo}/>
 							</Route>
 						</Switch>
 					</Layout>

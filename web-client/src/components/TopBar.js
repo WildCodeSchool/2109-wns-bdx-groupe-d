@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
-import logo from '../images/wildmine-logo.svg';
+//import logo from '../images/wildmine-logo.svg';
 
 import '../css/components/TopBar.css';
 

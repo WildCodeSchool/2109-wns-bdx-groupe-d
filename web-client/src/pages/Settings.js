@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Settings = () => {
+const Settings = (actualUser) => {
+
+  console.log(actualUser)
+
   return (
     <div className="settings-container">
       Hello Settings

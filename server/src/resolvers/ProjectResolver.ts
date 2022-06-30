@@ -7,6 +7,7 @@ import GetProjectInput from './input/project/GetProjectInput';
 import ProjectUtils from '../models/utils/ProjectUtils';
 import AssignUserInput from './input/project/AssigneUserInput';
 import UserUtils from '../models/utils/UserUtils';
+import ImageUtils from '../models/utils/ImageUtils';
 import User from '../models/User';
 import { Context } from '../apollo-server';
 
