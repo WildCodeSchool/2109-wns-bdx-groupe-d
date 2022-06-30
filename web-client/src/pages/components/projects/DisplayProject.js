@@ -2,13 +2,12 @@ import React from 'react';
 import smiley from '../../../images/smiley.png';
 import { NavLink } from 'react-router-dom';
 
-const DisplayProject = ({ setDisplayHover, index, projectObject, displayHover, project, isMobile }) => {
+const DisplayProject = ({ setDisplayHover, index, displayHover, project, isMobile }) => {
   return (
       <div
         onMouseEnter={() => setDisplayHover(index + 1)}
         onMouseLeave={() => setDisplayHover(0)}
         className='organization-project-container'
-        key={projectObject}
         style={{ height: '30rem'}}
       >
         <NavLink to={"/detailsProject/" + project.id }>

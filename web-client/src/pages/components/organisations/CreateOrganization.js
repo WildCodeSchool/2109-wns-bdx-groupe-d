@@ -40,12 +40,12 @@ const CreateOrganization = ({ setDisplayCreation }) => {
   return <div className='modal-background'>
     <div className='modal-container'>
 
-      <p className='font-bold text-secondary_color text-2xl text-center my-8'>
+      <p className='modal-title'>
         Créez votre Organisation
       </p>
 
       <img
-        className='cursor-pointer fixed right-[27%] top-[22%]'
+        className='modal-close'
         src={Close}
         alt='Fermer la fenêtre'
         onClick={() => setDisplayCreation(false)}
