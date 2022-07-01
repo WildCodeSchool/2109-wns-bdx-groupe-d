@@ -9,6 +9,8 @@ import GetIssueByIdInput from "./input/issues/GetIssueByIdInput";
 import GetIssueByProjectIdInput from './input/issues/GetIssueByProjectId';
 import AssignUserInput from './input/issues/AssignUserInput';
 import User from '../models/User';
+import UpdateStatusInput from './input/issues/UpdateStatusInput';
+import UpdatePriorityInput from './input/issues/UpdatePriorityInput';
 
 @Resolver(Issue)
 class IssueResolver {
@@ -76,6 +78,16 @@ class IssueResolver {
       relations: ["user_assigned", "user"]
     });
 	}
+
+  @Mutation(() => Issue)
+  async updateIssueStatus(@Args() {id, status}: UpdateStatusInput) {
+    return IssueUtils.updateIssueStatus({ id, status })
+  }
+
+  @Mutation(() => Issue)
+  async updateIssuePriority(@Args() {id, priority}: UpdatePriorityInput) {
+    return IssueUtils.updateIssuePriority({ id, priority })
+  }
 }
 
 export default IssueResolver;

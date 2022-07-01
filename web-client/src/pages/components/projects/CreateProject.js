@@ -62,7 +62,7 @@ const CreateProject = ({ setDisplayCreation }) => {
       </p>
 
       <img
-        className='cursor-pointer fixed right-[27%] top-[22%]'
+        className='modal-close'
         src={Close}
         alt='Fermer la fenêtre'
         onClick={() => setDisplayCreation(false)}

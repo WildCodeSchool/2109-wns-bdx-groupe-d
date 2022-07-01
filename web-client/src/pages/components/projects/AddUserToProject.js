@@ -35,7 +35,7 @@ const AddUserToProject = ({ setDisplayAddUserOnProject, refetch, projectId }) =>
       <p className='modal-title'>Ajouter un collaborateur</p>
 
       <img
-        className='cursor-pointer fixed right-[27%] top-[22%]'
+        className='modal-close'
         src={Close}
         alt='Fermer la fenêtre'
         onClick={() => setDisplayAddUserOnProject(false)}
@@ -45,7 +45,7 @@ const AddUserToProject = ({ setDisplayAddUserOnProject, refetch, projectId }) =>
 
       <Input
         label='Adresse email du collaborateur'
-        placeHolder="Entrez l'email de votre collaborateur"
+        placeHolder="Entrez l'email du collaborateur"
         labelClassName='text-sm'
         setValue={setEmail}
         value={email}
