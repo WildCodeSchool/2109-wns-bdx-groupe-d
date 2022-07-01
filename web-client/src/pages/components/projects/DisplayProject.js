@@ -21,9 +21,9 @@ const DisplayProject = ({ setDisplayHover, index, displayHover, project, isMobil
               }</p>
             </div>
           }
-          
+
           <img
-            src={project.projectPictureName ? `/images/${project.projectPictureName}` : smiley}
+            src={project.images[0] ? `/images/${project.images[project.images.length - 1].name}` : smiley}
             alt="Sélection du projet"
           />
         </NavLink>
