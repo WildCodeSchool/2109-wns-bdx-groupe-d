@@ -1,5 +1,9 @@
 .select {
-  @apply h-[40px] text-secondary_color pl-2 w-full bg-gray-200 border border-secondary_color rounded-lg px-4 focus:outline-none mt-2 placeholder-secondary_color;
+  @apply text-secondary_color pl-2 w-full bg-gray-200 border border-secondary_color rounded-lg focus:outline-none placeholder-secondary_color;
+}
+
+.select-arrow-modified {
+  @apply px-4 h-[40px];
 
   -webkit-appearance: none;
   background-image:
