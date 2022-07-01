@@ -14,14 +14,20 @@ const Diagram = () => {
 	// const unresolved = data.userWithRelations;
 	// const resolved = data.userWithRelations;
 
-	const pending = [];
-	const done = [];
-	const inProgress = [];
+	let inWait = [];
+	let done = [];
+	let inProgress = [];
+
+	let resultInWait = 0;
+
+	console.log(status);
 
 	status.forEach((element) => {
-		console.log(element.status);
+		// console.log(element.status);
 		if (element.status === 'IN_WAIT') {
-			console.log('test');
+			inWait.push(status);
+			// console.log(inWait.length);
+			resultInWait = inWait.length;
 		} else if (element.status === 'IN_PROGRESS') {
 			console.log('test2');
 		} else if (element.status === 'DONE') {
@@ -31,14 +37,14 @@ const Diagram = () => {
 		}
 	});
 
-	console.log(status);
-	console.log(statusDiagram);
+	// console.log(status);
+	// console.log(statusDiagram);
 
 	const datas = {
 		labels: ['Red', 'Green', 'Yellow'],
 		datasets: [
 			{
-				data: [statusDiagram, statusDiagram, statusDiagram],
+				data: [resultInWait, 20, 30],
 				backgroundColor: ['#00957A', '#C1C1C1', '#EACC73'],
 				hoverBackgroundColor: ['#00A550', '#F0F0F0', '#EACC41'],
 			},
