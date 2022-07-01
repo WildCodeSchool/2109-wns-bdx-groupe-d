@@ -58,7 +58,7 @@ const Diagram = () => {
 	return (
 		<>
 			{/* <canvas className="diagram-size"> */}
-			<pre>{JSON.stringify(status, null, 2)}</pre>
+			{/* <pre>{JSON.stringify(status, null, 2)}</pre> */}
 			<Doughnut data={datas} />
 			{/* </canvas> */}
 		</>
