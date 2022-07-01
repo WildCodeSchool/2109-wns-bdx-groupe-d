@@ -112,27 +112,27 @@ export const getIssueById = gql`
 `;
 
 export const assignUserToIssue = gql`
-mutation assignUserToIssue($email: String!, $issueId: Float!) {
-  assignUserToIssue(email: $email, issueId: $issueId) {
-    id
-    name
-    description
-    created_at
-    updated_at
-    status
-    priority
-    project_name
-    project_id
-    user_assigned {
+  mutation assignUserToIssue($email: String!, $issueId: Float!) {
+    assignUserToIssue(email: $email, issueId: $issueId) {
       id
-      roles
-      first_name
-      last_name
-      email
+      name
+      description
       created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user_assigned {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
     }
   }
-}
 `;
 
 export const getMyIssues = gql`
@@ -149,4 +149,68 @@ query getMyIssues {
     project_id
   }
 }
+`;
+
+export const updateIssueStatus = gql`
+  mutation updateIssueStatus($status: String!, $issueId: Float!) {
+    updateIssueStatus(status: $status, id: $issueId) {
+      id
+      name
+      description
+      created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
+      user_assigned {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
+    }
+  }
+`;
+
+export const updateIssuePriority = gql`
+  mutation updateIssuePriority($priority: String!, $issueId: Float!) {
+    updateIssuePriority(priority: $priority, id: $issueId) {
+      id
+      name
+      description
+      created_at
+      updated_at
+      status
+      priority
+      project_name
+      project_id
+      user {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
+      user_assigned {
+        id
+        roles
+        first_name
+        last_name
+        email
+        created_at
+      }
+    }
+  }
 `;

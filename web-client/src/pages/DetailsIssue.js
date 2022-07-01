@@ -1,36 +1,81 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { getIssueById } from '../graphql/Issue';
+import { getIssueById, updateIssueStatus, updateIssuePriority } from '../graphql/Issue';
 import Button from '../components/Button';
 import AddUserToIssue from './components/issues/AddUserToIssue';
 import priorityOptions from '../components/options/priorityOptions';
 import statusOptions from '../components/options/statusOptions';
+import modify from '../assets/images/modification-icon.svg';
+import Select from '../components/Select';
 
 
 const capitalizeFirstLetter = value => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
-
 const DetailsIssue = () => {
   const [displayAddUserOnIssue, setDisplayAddUserOnIssue] = useState(false);
+  const [displayStatusSelect, setDisplayStatusSelect] = useState(false);
+  const [displayPrioritySelect, setDisplayPrioritySelect] = useState(false);
+  const [priority, setPriority] = useState('');
+  const [status, setStatus] = useState('');
 
   let { id } = useParams();
 
   const { loading, data, error, refetch } = useQuery(getIssueById, { variables: { id: parseInt(id) } });
 
+  const [updateStatus] = useMutation(
+    updateIssueStatus,
+    {
+      onCompleted: () => {
+        setStatus('');
+        refetch();
+      },
+      onError: (error) => console.log(error.message)
+    }
+  );
+
+  const [updatePriority] = useMutation(
+    updateIssuePriority,
+    {
+      onCompleted: () => {
+        setPriority('');
+        refetch();
+      },
+      onError: (error) => console.log(error.message)
+    }
+  );
+
   if (loading) return <>Chargement</>
 
   if (error) return `Error! ${error.message}`;
-  
+
   const issue = data.getIssueById;
+
+  if (status) {
+    updateStatus({
+      variables: {
+        issueId: parseInt(issue.id),
+        status
+      }
+    });
+  }
+  
+  if (priority) {
+    updatePriority({
+      variables: {
+        issueId: parseInt(issue.id),
+        priority
+      }
+    });
+  }
 
   const statusLabel = statusOptions.find(value => value.value === issue.status).label;
   const priorityLabel = priorityOptions.find(value => value.value === issue.priority).label;
 
-  const newDate = new Date(issue.created_at)
-  const dateToDisplay = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`
+  const newDate = new Date(issue.created_at);
+  const dateToDisplay = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
 
   return <div className='px-8 md:px-20'>
 
@@ -72,11 +117,59 @@ const DetailsIssue = () => {
         </span>
       </p>
 
-      <div className='grid grid-cols-2 md:grid-cols-3 mt-8'>
+      <div className='grid grid-cols-2 md:grid-cols-2 mt-8'>
         <div className='mr-4'>
-          <p><span className='font-bold'>Statut : </span>{statusLabel}</p>
 
-          <p className='my-6'><span className='font-bold'>Priorité : </span>{priorityLabel}</p>
+          <div className='flex'>
+
+            <div className='flex'>
+              <p className='font-bold mr-2'>Statut :</p>
+              
+              {displayStatusSelect
+                ? <Select
+                    options={statusOptions}
+                    setValue={setStatus}
+                    value={status}
+                    selectClassName='w-full h-[24px]'
+                  />
+                : statusLabel
+              }
+            </div>
+
+            {!displayStatusSelect && <img
+              className='w-[20px] ml-4 cursor-pointer'
+              src={modify}
+              alt="Modifier le status"
+              title="Modifier le status"
+              onClick={() => setDisplayStatusSelect(!displayStatusSelect)}
+            />}
+
+          </div>
+
+          <div className='flex'>
+
+            <div className='flex my-6'>
+              <p className='font-bold mr-2'>Priorité :</p>
+              
+              {displayPrioritySelect
+                ? <Select
+                    options={priorityOptions}
+                    setValue={setPriority}
+                    value={priority}
+                    selectClassName='w-full h-[24px]'
+                  />
+                : priorityLabel}
+            </div>
+
+            {!displayStatusSelect && <img
+              className='w-[20px] ml-4 cursor-pointer'
+              src={modify}
+              alt="Modifier la priorité"
+              title="Modifier la priorité"
+              onClick={() => setDisplayPrioritySelect(!displayPrioritySelect)}
+            />}
+
+          </div>
 
           <p>
             <span className='font-bold'>
