@@ -14,7 +14,7 @@ const TopBar = () => {
 	const currentUser = data.userInfo;
 
 	window.onscroll = () => {
-		if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+		if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
 			setNavbar(true);
 		} else {
 			setNavbar(false);

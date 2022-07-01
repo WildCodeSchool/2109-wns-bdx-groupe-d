@@ -17,6 +17,8 @@
 @import './pages/DetailsProject.css';
 @import './pages/IssuesProject.css';
 
+@import './pages/Dashboard.css';
+
 @font-face {
 	font-family: 'Chaney Title';
 	src: url('../assets/fonts/chaney-regular-webfont.ttf');
