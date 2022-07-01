@@ -55,7 +55,7 @@ const App = () => {
 						</Route>
 						<Route path="/issue/:id" children={<Issue/>}/>
 						<Route path="/settings">
-							<Settings actualUser={data.userInfo}/>
+							<Settings isMobile={isMobile}/>
 						</Route>
 					</Switch>
 				</Layout>
