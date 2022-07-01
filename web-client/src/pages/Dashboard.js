@@ -1,9 +1,8 @@
 import React from 'react';
-// import diagram from '../assets/images/diagram.png';
+
 import { useQuery } from '@apollo/client';
 import { userWithRelations } from '../graphql/UserSession';
-// import { Doughnut } from 'react-chartjs-2';
-// import { labels } from 'chart.js';
+
 import DisplayAttachedProjects from './components/dashboard/DisplayAttachedProjects';
 import DisplayDashboardTitleIssues from './components/dashboard/DisplayDashboardTitleIssues';
 import DisplayIssuesValues from './components/issues/DisplayIssuesValues';

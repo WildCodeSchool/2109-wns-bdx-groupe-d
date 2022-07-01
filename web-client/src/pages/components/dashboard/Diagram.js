@@ -18,26 +18,18 @@ const Diagram = () => {
 	const done = [];
 	const inProgress = [];
 
-	status.forEach((e) => {
-		console.log(e.status);
-		if (e.status === 'IN_WAIT') {
+	status.forEach((element) => {
+		console.log(element.status);
+		if (element.status === 'IN_WAIT') {
 			console.log('test');
-		} else if (e.status === 'IN_PROGRESS') {
+		} else if (element.status === 'IN_PROGRESS') {
 			console.log('test2');
-		} else if (e.status === 'DONE') {
+		} else if (element.status === 'DONE') {
 			console.log('test3');
 		} else {
 			console.log('Pas de données');
 		}
 	});
-
-	// if (e.status === 'IN_WAIT') {
-	// 	(e.status.length);
-	// } else if {(e.status === 'IN_PROGRESS') {
-	// 	(e.status.length);
-	// } else (e.status === 'DONE') {
-	// 	(e.status.length);
-	// };
 
 	console.log(status);
 	console.log(statusDiagram);
@@ -46,7 +38,7 @@ const Diagram = () => {
 		labels: ['Red', 'Green', 'Yellow'],
 		datasets: [
 			{
-				data: [statusDiagram, 50, 100],
+				data: [statusDiagram, statusDiagram, statusDiagram],
 				backgroundColor: ['#00957A', '#C1C1C1', '#EACC73'],
 				hoverBackgroundColor: ['#00A550', '#F0F0F0', '#EACC41'],
 			},

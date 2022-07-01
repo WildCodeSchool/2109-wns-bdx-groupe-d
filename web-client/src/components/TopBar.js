@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
@@ -23,7 +23,13 @@ const TopBar = () => {
 
 	return (
 		<nav className={`navbar ${navbar ? 'navActive' : 'navInactive'}`}>
-			<div className="logo-container"><img src={logo} alt="Logo wildmine"/></div>
+			<NavLink
+				className="logo-container"
+				to="/"
+				onClick={() => setCurrentLoc('/')}
+			>
+				<img src={logo} alt="Logo wildmine"/>
+				</NavLink>
 			<div className="topbar-menu-links-container">
 				<NavLink
 					to="/"
