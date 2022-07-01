@@ -6,7 +6,7 @@ import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
 import { createProject, createFile } from '../../../graphql/Project';
 
-const CreateProject = ({ setDisplayCreationProject }) => {
+const CreateProject = ({ setDisplayCreation }) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [projectPictureName, setProjectPictureName] = useState([]);
@@ -16,7 +16,7 @@ const CreateProject = ({ setDisplayCreationProject }) => {
 	const [sendProjectInformations] = useMutation(
 		createProject,
 		{
-			onCompleted: () => setDisplayCreationProject(false),
+			onCompleted: () => setDisplayCreation(false),
 			onError: (error) => console.log(error.message),
 			refetchQueries: ['getProjects']
 		}
@@ -63,7 +63,7 @@ const CreateProject = ({ setDisplayCreationProject }) => {
 				className="modal-close"
 				src={Close}
 				alt="Fermer la fenêtre"
-				onClick={() => setDisplayCreationProject(false)}
+				onClick={() => setDisplayCreation(false)}
 			/>
 
 			<form onSubmit={onSubmit} className="w-2/3 mx-auto">
