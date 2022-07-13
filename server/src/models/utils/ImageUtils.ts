@@ -15,8 +15,8 @@ class ImageUtils extends Image {
   
       await image.save();
 
-      newProject.images = [...newProject.images, image]
-
+      newProject.images = newProject.images ? [...newProject.images, image] : [image];
+      console.log(newProject)
       await newProject.save();
 
       return image;

@@ -40,9 +40,9 @@ class Project extends BaseEntity {
 	@Field()
 	projectPictureName?: string;
 
-	@OneToMany(() => Image, image => image.project)
-	@Field(() => [Image])
-	images!: Image[]
+	@OneToMany(() => Image, image => image.project, { onDelete: 'CASCADE' })
+	@Field(() => [Image], { nullable: true })
+	images?: Image[];
 
 	// @Column()
 	// @Field()

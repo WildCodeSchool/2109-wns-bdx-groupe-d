@@ -6,8 +6,8 @@ import { userInfo } from './graphql/UserSession.js';
 import Settings from './pages/Settings.js';
 import Dashboard from './pages/Dashboard.js';
 import Organization from './pages/Organization.js';
-import IssuesProject from './pages/IssuesProject.js';
-import Issue from './pages/Issue';
+import Issues from './pages/Issues.js';
+import DetailsIssue from './pages/DetailsIssue';
 import Projects from './pages/Projects.js';
 import DetailsProject from './pages/DetailsProject.js';
 import TopBar from './components/TopBar.js';
@@ -35,8 +35,8 @@ const App = () => {
 		) : (
 			<>
 				{isMobile
-				? <MobileBar/>
-				: <TopBar/>
+					? <MobileBar/>
+					: <TopBar/>
 				}
 				<Layout>
 					<Switch>
@@ -51,9 +51,9 @@ const App = () => {
 						</Route>
 						<Route path="/detailsProject/:id" children={<DetailsProject actualUser={data.userInfo}/>}/>
 						<Route path="/issuesProject">
-							<IssuesProject isMobile={isMobile}/>
+							<Issues isMobile={isMobile}/>
 						</Route>
-						<Route path="/issue/:id" children={<Issue/>}/>
+						<Route path="/issue/:id" children={<DetailsIssue/>}/>
 						<Route path="/settings">
 							<Settings isMobile={isMobile}/>
 						</Route>

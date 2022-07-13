@@ -12,6 +12,18 @@ import {
 
 import User from './User';
 
+// export enum Status {
+//   DONE = 'DONE',
+//   IN_PROGRESS = 'IN_PROGRESS',
+//   IN_WAIT = 'IN_WAIT'
+// }
+
+// export enum Priority {
+//   HIGH = 'HIGH',
+//   NORMAL = 'NORMAL',
+//   LOW = 'LOW'
+// }
+
 @Entity()
 @ObjectType()
 class Issue extends BaseEntity {

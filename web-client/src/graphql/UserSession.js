@@ -59,6 +59,10 @@ query userWithRelations {
       description
       created_at
       projectPictureName
+	  images {
+		id
+		name
+	  }
     }
     issues_assigned {
       id

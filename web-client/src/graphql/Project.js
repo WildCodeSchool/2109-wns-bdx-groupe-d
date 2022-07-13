@@ -16,6 +16,11 @@ export const getProjects = gql`
 				email
 				created_at
 			}
+			images {
+				id
+				name
+				created_at
+			}
 		}
 	}
 `;
@@ -39,6 +44,11 @@ export const getProjectById = gql`
 				first_name
 				last_name
 				email
+				created_at
+			}
+			images {
+				id
+				name
 				created_at
 			}
 		}
@@ -82,6 +92,11 @@ mutation assignUserToProject($email: String!, $projectId: Float!) {
       first_name
       last_name
       email
+      created_at
+    }
+    images {
+      id
+      name
       created_at
     }
   }

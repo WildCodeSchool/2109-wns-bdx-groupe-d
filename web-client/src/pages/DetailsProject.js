@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Carousel, { CarouselItem } from '../components/Carousel';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { getProjectById } from "../graphql/Project.js";
 import smiley from '../images/smiley.png';
@@ -64,13 +64,17 @@ const DetailsProject = ({ actualUser }) => {
 	if (loading) return <div className='mx-auto'>Charngement ...</div>
 
 	if (issuesQuery.loading) return <div className='mx-auto'>Charngement ...</div>
-
+  
+  const images = data.getProjectById.images;
+  console.log(images);
   return (
     <div className="detail-project-container">
       <div className='flex justify-between mb-4'>
         <div>
           <div className='detail-project-rollback'>
-            {`Projets > ${data.getProjectById.name}`}
+            <NavLink to="/projects">
+              Projets
+            </NavLink> {'>'} {data.getProjectById.name}
           </div>
 
           <div className='project-name'>
@@ -134,18 +138,14 @@ const DetailsProject = ({ actualUser }) => {
 
       </div>
 
-      <img
-        className="lg:w-1/2 mx-auto my-4"
-        src={data.getProjectById.projectPictureName ? `/images/${data.getProjectById.projectPictureName}` : smiley} alt="collabo 1"
-      />
-
       <Carousel>
-        {imagesProject && imagesProject.map(image =>
+        {data.getProjectById.images && data.getProjectById.images.map(image =>
           <CarouselItem>
             <img
               key={image.id}
               className="object-none object-center"
-              src={image.url} alt="collabo 1"
+              src={`/images/${image.name}`}
+              alt="Projet"
             />
           </CarouselItem>
         )}

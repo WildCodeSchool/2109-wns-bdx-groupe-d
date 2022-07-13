@@ -24,8 +24,8 @@ class Image extends BaseEntity {
 	@Field()
 	name!: string;
 
-    @ManyToOne(() => Project, project => project.images)
-	@Field(() => Project)
+	@ManyToOne(() => Project, project => project.images, { onDelete: 'CASCADE' })
+	@Field(() => Project, { nullable: true })
 	project!: Project;
 
     @Column()

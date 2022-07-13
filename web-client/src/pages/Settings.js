@@ -12,6 +12,7 @@ const Settings = () => {
 
   const { loading, error, data } = useQuery(userWithRelations);
 
+
   const [displayUpdateUser, setDisplayUpdateUser] = useState(false);
 
 	if (loading) return 'Loading...';
@@ -20,8 +21,8 @@ const Settings = () => {
 
   const actualUser = data.userWithRelations
 
-
   console.log(data.userWithRelations)
+
 
   return (
     <div className="settings-container">

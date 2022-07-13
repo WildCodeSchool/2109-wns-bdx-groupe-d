@@ -9,32 +9,34 @@ import { createProject, createFile } from '../../../graphql/Project';
 const CreateProject = ({ setDisplayCreation }) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [projectPictureName] = useState('');
-
-	const [ImageName, setImageName] = useState('');
-	const [Images, setImages] = useState([]);
+	const [projectPictureName, setProjectPictureName] = useState([]);
+	const [pictures, setPictures] = useState([]);
 
 
 	const [sendProjectInformations] = useMutation(
-		createProject, 
+		createProject,
 		{
 			onCompleted: () => setDisplayCreation(false),
 			onError: (error) => console.log(error.message),
-			refetchQueries: ['getProjects'],	
+			refetchQueries: ['getProjects']
 		}
 	);
 
 	const [sendPicture] = useMutation(createFile);
 
 	const onChange = async ({
-        target: { validity, files: [file] }
-    }) => {
-        if (validity.valid) {
-        const uplaoaded = await sendPicture({ variables: { picture: file } });
+    target: { validity, files: [file] }
+  }) => {
+    if (validity.valid) {
+      const uplaoaded = await sendPicture({ variables: { picture: file } });
 
-        uplaoaded.data.createFile && setImageName(file.name);
-        }
-    };
+      uplaoaded.data.createFile && setPictures([...pictures, file.name]);
+
+      if (uplaoaded.data.createFile && projectPictureName.length === 0) {
+        setProjectPictureName([0]);
+      }
+    }
+  };
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -44,16 +46,21 @@ const CreateProject = ({ setDisplayCreation }) => {
 				name,
 				description,
 				createdAt: new Date().toJSON(),
-				projectPictureName,
-				images: Images			
+				projectPictureName: '',
+				images: pictures			
 			},
 		});
 	};
 
-	return (
-		<div className="bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4">
+	return  <div className='modal-background'>
+		<div className="modal-container">
+			
+      <p className='modal-title'>
+        Créez votre projet
+      </p>
+
 			<img
-				className="cursor-pointer absolute right-8 top-6"
+				className="modal-close"
 				src={Close}
 				alt="Fermer la fenêtre"
 				onClick={() => setDisplayCreation(false)}
@@ -78,20 +85,52 @@ const CreateProject = ({ setDisplayCreation }) => {
 					required
 				/>
 
-				<div className="w-5/12 mx-auto flex justify-center">
-					<label className="button-general cursor-pointer">
-						{ImageName || 'Sélectionnez une image'}
+				<div className="text-center">
 
-						<input
-							type="file"
-							onChange={onChange}
-							accept="image/png, image/jpg, image/gif, image/jpeg"
-							className="hidden"
-						/>
-					</label>
-					{ImageName &&
+          {projectPictureName.length > 0
+            ? <div className='flex flex-col w-2/3 mx-auto'>
+
+              {projectPictureName.map(value => (
+                <label key={value} className="button-general cursor-pointer mb-2">
+
+                {pictures[value] || 'Sélectionnez une image'}
+
+                <input
+                  type="file"
+                  onChange={onChange}
+                  accept="image/png, image/jpg, image/gif, image/jpeg"
+                  className="hidden"
+                />
+
+              </label>
+              ))}
+
+            </div>
+            : <label className="button-general cursor-pointer">
+              Sélectionnez une image
+
+              <input
+                type="file"
+                onChange={onChange}
+                accept="image/png, image/jpg, image/gif, image/jpeg"
+                className="hidden"
+              />
+            </label>
+          }
+
+					{pictures.length > 0 &&
 						<div className="text-center">
-							<button type="button" className="submit-button mb-8 mt-4" onClick={() => setImages([...Images, ImageName])} >Ajouter l'image</button>
+
+							<button
+                type="button"
+                className="submit-button mb-8 mt-4"
+                onClick={() => {
+                  setProjectPictureName([...projectPictureName, projectPictureName.length])
+                }}
+              >
+                Ajouter une image
+              </button>
+
 						</div>
 					}			
 				</div>
@@ -101,7 +140,7 @@ const CreateProject = ({ setDisplayCreation }) => {
 				</div>
 			</form>
 		</div>
-	);
+	</div>;
 };
 
 export default CreateProject;
