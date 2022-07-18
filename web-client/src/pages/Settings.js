@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { Redirect } from 'react-router-dom';
 import Issues from './Issues';
 import DisplayProject from './components/projects/DisplayProject';
-import { userWithRelations } from '../graphql/UserSession';
+import { userWithRelations, deleteSession } from '../graphql/UserSession';
 import Button from '../components/Button';
 import UpdateUser from './components/users/UpdateUser';
 
@@ -12,14 +13,38 @@ const Settings = () => {
 
   const { loading, error, data } = useQuery(userWithRelations);
 
-
   const [displayUpdateUser, setDisplayUpdateUser] = useState(false);
+
+  const [deconnexion] = useMutation(
+		deleteSession, 
+		{
+			onCompleted: () => <Redirect to="/"/>,
+			onError: (error) => console.log(error.message),	
+		}
+	);
+
+  const onSubmit = (event) => {
+		event.preventDefault();
+
+		deconnexion({
+			variables: {
+        user: parseInt(actualUser.id),				
+			},        
+		});
+
+    window.setTimeout(function () {
+      window.location.href = "http://localhost:3000/";
+  }, 500);
+
+	};
 
 	if (loading) return 'Loading...';
 
 	if (error) return `Error! ${error.message}`;
 
-  const actualUser = data.userWithRelations
+  const actualUser = data.userWithRelations;
+
+  
 
   console.log(data.userWithRelations)
 
@@ -35,6 +60,11 @@ const Settings = () => {
             <li className="infos-liste"><b>Email : </b>{actualUser.email}</li>
             <li className="infos-liste"><b>Statut : </b>{actualUser.roles}</li>
           </ul>
+          <form onSubmit={onSubmit} className="w-2/3 mx-auto">
+            <div className="text-center">
+              <button className="submit-button mb-8 mt-4">suppirmer</button>
+            </div>
+          </form>
           <Button
             onClick={setDisplayUpdateUser}
             onClickValue={displayUpdateUser}

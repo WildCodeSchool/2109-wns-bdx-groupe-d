@@ -77,3 +77,11 @@ query userWithRelations {
     }
   }
 }`;
+
+export const deleteSession = gql`
+	mutation DeleteSession($user: Float!) {
+		deleteSession(user: $user) {
+	  		uid
+		}
+  	}	
+`;
