@@ -3,6 +3,7 @@ import {
 	BaseEntity,
 	Column,
 	Entity,
+	OneToMany,
 	// JoinColumn,
 	JoinTable,
 	ManyToMany,
@@ -10,6 +11,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import Image from './Image';
+// import User from './User';
 import User from './User';
 // import Organization from './Organization';
 // import Issue from './Issue';
@@ -36,6 +39,10 @@ class Project extends BaseEntity {
 	@Column()
 	@Field()
 	projectPictureName?: string;
+
+	@OneToMany(() => Image, image => image.project, { onDelete: 'CASCADE' })
+	@Field(() => [Image], { nullable: true })
+	images?: Image[];
 
 	// @Column()
 	// @Field()

@@ -2,6 +2,7 @@ import md5 from "md5";
 import SignInInput from "../../resolvers/input/user/SignInInput";
 import User from "../User";
 import Session from "../Session";
+import DeleteSessionInput from "../../resolvers/input/session/DeleteSessionInput";
 import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
 
 class SessionUtils extends Session {
@@ -28,9 +29,9 @@ class SessionUtils extends Session {
   static async userInfo({ sessionId }: UserInfoInput) {
     const userSession = await Session.findOne(
       { uid: sessionId },
-      { relations: ["user"] }
+      { relations: ["user"] } 
     );
-
+    
     return userSession?.user;
   }
 
@@ -38,15 +39,21 @@ class SessionUtils extends Session {
     const userSession = await Session.findOne(
       { uid: sessionId },
       { relations: ["user"] }
-    );
+    ); 
       console.log(sessionId);
-      
+
     const currentUser = await User.findOne({
       where: { id: userSession?.user.id },
       relations: ["project_assigned", "issues_assigned"]
     });
 
     return currentUser;
+  }
+
+  static async deleteSession({ user }: DeleteSessionInput) {
+    const session = await Session.findOneOrFail({ where : { user: user } });
+
+    return await Session.remove(session);
   }
 }
 

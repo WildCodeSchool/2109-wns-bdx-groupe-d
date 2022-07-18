@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import '../css/components/Carousel.css';
+import arrow from '../assets/images/carousel-arrow.svg';
 
 
 export const CarouselItem = ({ children, width }) => {
@@ -25,26 +26,44 @@ export const CarouselItem = ({ children, width }) => {
         setActiveIndex(newIndex);
     }
 
-    return (
+    return <div className="flex justify-center">
+
+      <img
+        src={arrow}
+        alt="Précédente"
+        className="cursor-pointer rotate-180 mr-4 h-6 my-auto"
+        onClick={() => { updateIndex(activeIndex - 1); }}
+      />
       <div className='carousel'>
+
         <div className='inner' style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child, { width: "100%" });
             })}
         </div>
+
         <div className="indicators pt-5">
-            <button className="bg-blue_green_flash" onClick={() => { updateIndex(activeIndex - 1); }}>Prev</button>
+
             {React.Children.map(children, (child, index) => {
                 return (
-                    <button className={`${index === activeIndex ? "active" : ""} bg-blue_green_flash`} onClick={() => updateIndex(index)}>
-                        {index + 1}
-                    </button>
+                    <div
+                      className={`${index === activeIndex ? "bg-secondary_color" : "bg-grey_light"} h-3 w-3 mx-2 rounded-full`}
+                      onClick={() => updateIndex(index)}
+                    />
                 );
             })}
-            <button className="bg-blue_green_flash" onClick={() => { updateIndex(activeIndex + 1); }}>Next</button>
         </div>
+
       </div>
-    );
+
+      <img
+        src={arrow}
+        alt="Suivante"
+        className="cursor-pointer ml-4 h-6 my-auto"
+        onClick={() => { updateIndex(activeIndex + 1); }}
+      />
+      {/* <button className="bg-blue_green_flash" onClick={() => { updateIndex(activeIndex + 1); }}>Next</button> */}
+    </div>;
   };
 
 export default Carousel;

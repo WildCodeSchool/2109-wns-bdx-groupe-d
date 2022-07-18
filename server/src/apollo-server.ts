@@ -8,6 +8,7 @@ import ProjectResolver from "./resolvers/ProjectResolver";
 import SessionResolver from "./resolvers/SessionResolver";
 import UserResolver from "./resolvers/UserResolver";
 import OrganizationResolver from "./resolvers/OrganizationResolver";
+import ImageResolver from "./resolvers/ImageResolver";
 
 export interface Context {
   sessionId: string;
@@ -20,7 +21,7 @@ export const customAuthChecker: AuthChecker<Context> = ({ context }) => {
 
 export default async function getServer() {
   const schema = await buildSchema({
-    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver, IssueResolver, OrganizationResolver],
+    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver, OrganizationResolver, ImageResolver, IssueResolver],
     authChecker: customAuthChecker,
   });
 

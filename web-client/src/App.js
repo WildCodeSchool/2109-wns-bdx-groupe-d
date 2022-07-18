@@ -19,6 +19,8 @@ import MobileBar from './components/MobileBar.js';
 
 const App = () => {
 	const { data, refetch } = useQuery(userInfo);
+
+	console.log(data)
 	
 	const isMobile = window.innerWidth <= 1024;
 
@@ -55,7 +57,7 @@ const App = () => {
 						</Route>
 						<Route path="/issue/:id" children={<DetailsIssue/>}/>
 						<Route path="/settings">
-							<Settings />
+							<Settings isMobile={isMobile}/>
 						</Route>
 					</Switch>
 				</Layout>

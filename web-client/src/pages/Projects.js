@@ -10,12 +10,11 @@ import SearchButton from '../components/SearchButton.js';
 const Projects = ({ isMobile }) => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
+  const [foundProject, setFoundProject] = useState([]);
+  const [valuesToCompare, setValuesToCompare] = useState('');
 
   const { loading, error, data } = useQuery(getProjects);
 
-
-  const [foundProject, setFoundProject] = useState([]);
-  const [valuesToCompare, setValuesToCompare] = useState('');
 
   if (loading) return 'Loading...';
 
