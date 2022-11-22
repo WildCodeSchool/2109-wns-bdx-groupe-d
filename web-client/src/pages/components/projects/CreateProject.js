@@ -1,87 +1,146 @@
 import React, { useState } from 'react';
-import Button from '../../../components/Button';
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client';
 
 import Input from '../../../components/Input';
 import TextArea from '../../../components/TextArea';
 import Close from '../../../images/icon-close.svg';
-import { setProject } from '../../../graphql/Project';
+import { createProject, createFile } from '../../../graphql/Project';
 
 const CreateProject = ({ setDisplayCreation }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+	const [name, setName] = useState('');
+	const [description, setDescription] = useState('');
+	const [projectPictureName, setProjectPictureName] = useState([]);
+	const [pictures, setPictures] = useState([]);
 
-  const [sendProjectInformations] = useMutation(
-    setProject,
-    {
-      onCompleted: () => setDisplayCreation(false),
-      onError: (error) => console.log(error.message),
-      refetchQueries: ["getProjects"],
-    }
-  );
 
-  const onClick = () => {
-    console.log(name)
-    console.log(description)
+	const [sendProjectInformations] = useMutation(
+		createProject,
+		{
+			onCompleted: () => setDisplayCreation(false),
+			onError: (error) => console.log(error.message),
+			refetchQueries: ['getProjects']
+		}
+	);
 
-    sendProjectInformations({
-      variables: {
-        name,
-        description,
-        createdAt: new Date().toJSON()
+	const [sendPicture] = useMutation(createFile);
+
+	const onChange = async ({
+    target: { validity, files: [file] }
+  }) => {
+    if (validity.valid) {
+      const uplaoaded = await sendPicture({ variables: { picture: file } });
+
+      uplaoaded.data.createFile && setPictures([...pictures, file.name]);
+
+      if (uplaoaded.data.createFile && projectPictureName.length === 0) {
+        setProjectPictureName([0]);
       }
-    });
+    }
   };
 
-  const handleChange =  event => {
-    console.log(event.target.files[0])
-  };
+	const onSubmit = (event) => {
+		event.preventDefault();
 
-  return (
-    <div className='bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4'>
+		sendProjectInformations({
+			variables: {
+				name,
+				description,
+				createdAt: new Date().toJSON(),
+				projectPictureName: '',
+				images: pictures			
+			},
+		});
+	};
 
-      <p className='font-bold text-secondary_color text-2xl text-center my-8'>
+	return  <div className='modal-background'>
+		<div className="modal-container">
+			
+      <p className='modal-title'>
         Créez votre projet
       </p>
 
-      <img
-        className='cursor-pointer absolute right-8 top-6'
-        src={Close}
-        alt='Fermer la fenêtre'
-        onClick={() => setDisplayCreation(false)}
-      />
-      
-      <div className='w-2/3 mx-auto'>
+			<img
+				className="modal-close"
+				src={Close}
+				alt="Fermer la fenêtre"
+				onClick={() => setDisplayCreation(false)}
+			/>
 
-        <Input
-          label='Titre de votre projet'
-          placeHolder='Entrez le nom de votre projet'
-          labelClassName='text-sm'
-          setValue={setName}
-          value={name}
-        />
-        
-        <TextArea
-          label='Description'
-          placeHolder='Entrez une description de votre projet'
-          labelClassName='text-sm'
-          setValue={setDescription}
-          value={description}
-        />
+			<form onSubmit={onSubmit} className="w-2/3 mx-auto">
+				<Input
+					label="Titre de votre projet"
+					placeHolder="Entrez le nom de votre projet"
+					labelClassName="text-sm"
+					setValue={setName}
+					value={name}
+					required
+				/>
 
-        <input type='file' onChange={handleChange} />
+				<TextArea
+					label="Description"
+					placeHolder="Entrez une description de votre projet"
+					labelClassName="text-sm"
+					setValue={setDescription}
+					value={description}
+					required
+				/>
 
-        <div className='text-center'>
-          <Button
-            onClick={onClick}
-            buttonLabel='Créer votre projet'
-            buttonClassName='mb-8'
-          />
-        </div>
+				<div className="text-center">
 
-      </div>
-    </div>
-  );
+          {projectPictureName.length > 0
+            ? <div className='flex flex-col w-2/3 mx-auto'>
+
+              {projectPictureName.map(value => (
+                <label key={value} className="button-general cursor-pointer mb-2">
+
+                {pictures[value] || 'Sélectionnez une image'}
+
+                <input
+                  type="file"
+                  onChange={onChange}
+                  accept="image/png, image/jpg, image/gif, image/jpeg"
+                  className="hidden"
+                />
+
+              </label>
+              ))}
+
+            </div>
+            : <label className="button-general cursor-pointer">
+              Sélectionnez une image
+
+              <input
+                type="file"
+                onChange={onChange}
+                accept="image/png, image/jpg, image/gif, image/jpeg"
+                className="hidden"
+              />
+            </label>
+          }
+
+					{pictures.length > 0 &&
+						<div className="text-center">
+
+							<button
+                type="button"
+                className="submit-button mb-8 mt-4"
+                onClick={() => {
+                  setProjectPictureName([...projectPictureName, projectPictureName.length])
+                }}
+              >
+                Ajouter une image
+              </button>
+
+						</div>
+					}			
+				</div>
+
+				<div className="text-center">
+					<button className="submit-button mb-8 mt-4">Créer votre projet</button>
+				</div>
+			</form>
+		</div>
+	</div>;
 };
 
 export default CreateProject;

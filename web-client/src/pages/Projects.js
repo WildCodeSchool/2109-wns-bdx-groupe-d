@@ -1,46 +1,66 @@
 import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
-import { getProjects } from "../graphql/Project.js";
+import { useQuery } from '@apollo/client';
+import { getProjects } from '../graphql/Project.js';
 
-import projectImage from '../images/dev.jpeg';
-import smiley from '../images/smiley.png';
-import coffee from '../images/coffee.png';
-import donut from '../images/donut.png';
-import psyche from '../images/psyche.png';
-import water from '../images/water.png';
-import blackNWhite from '../images/blackNWhite.png';
-import loupe from '../images/loupe.svg';
 import DisplayProject from './components/projects/DisplayProject';
 import CreateProject from './components/projects/CreateProject';
 import Button from '../components/Button';
+import SearchButton from '../components/SearchButton.js';
 
-
-const Projects = () => {
+const Projects = ({ isMobile }) => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
 
+  const [foundProject, setFoundProject] = useState([]);
+  const [valuesToCompare, setValuesToCompare] = useState('');
+
+
   const { loading, error, data } = useQuery(getProjects);
+
 
   if (loading) return 'Loading...';
 
   if (error) return `Error! ${error.message}`;
 
+
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = data.projects.filter((issue) => {
+        return issue.name.toLowerCase().startsWith(keyword.toLowerCase());
+      });
+      setFoundProject(results);
+
+    } else {
+      setFoundProject(data.projects);
+    }
+    setValuesToCompare(keyword);
+  };
+
+  if (foundProject.length === 0 && !valuesToCompare && data.projects.length > 0) {
+    setFoundProject(data.projects);
+  }
+
+
   return (
-    <div className="organization-container">
-      <div className='flex justify-around mb-8'>
+    <div>
+      <div className='px-4 md:flex justify-around mb-8'>
+    
+      <SearchButton
+        value={valuesToCompare}
+        onChange={filter}
+      />
 
-        <div className='flex border border-secondary_color rounded-xl text-secondary_color'>
-          <input className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none placeholder-secondary_color' placeholder='Rechercher ...'/>
 
-          <img className='cursor-pointer mr-4' src={loupe} alt='Rechercher'/>
-        </div>
+      <Button
+        onClick={setDisplayCreation}
+        onClickValue={displayCreation}
+        buttonLabel='Créer un projet'
+        buttonType='button'
+        buttonClassName='my-auto mt-4 md:mt-0'
+      />
 
-        <Button
-          onClick={setDisplayCreation}
-          onClickValue={displayCreation}
-          buttonLabel='Créer un projet'
-          buttonType='button'
-        />
 
       </div>
 
@@ -48,37 +68,23 @@ const Projects = () => {
         <CreateProject setDisplayCreation={setDisplayCreation}/>
       }
 
-      <div className="projects-container">
+      <div className='projects-container'>
 
-        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
-          let image;
+        {foundProject.length > 0 ? foundProject.map((projectObject, index) => {
 
-          if (index === 0) image = smiley;
-
-          else if (index === 1) image = coffee;
-
-          else if (index === 2) image = donut;
-
-          else if (index === 3) image = psyche;
-
-          else if (index === 4) image = water;
-
-          else if (index === 5) image = blackNWhite;
-
-          else image = projectImage;
-
-          return (
-            <DisplayProject
+          return <DisplayProject
+              key={index}
               setDisplayHover={setDisplayHover}
               index={index}
               projectObject={projectObject}
               displayHover={displayHover}
-              image={image}
-              project={data.projects[index]}
-            />
-          );
+
+              project={foundProject[index]}
+              to="/issue"
+              isMobile={isMobile}
+            />;
         })
-      :<p>Aucun projet pour le moment</p>}
+      :<p className='text-xl font-bold'>Aucun projet pour le moment</p>}
 
       </div>
     </div>
