@@ -1,6 +1,7 @@
 import React from 'react';
 import loupe from '../images/loupe.svg';
 
+
 const SearchButton = ({ value, onChange }) => (
   <div className='flex border relative border-secondary_color rounded-xl text-secondary_color max-w-[230px] my-auto'>
     <input

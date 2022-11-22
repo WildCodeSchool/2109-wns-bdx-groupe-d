@@ -54,6 +54,7 @@ class SessionUtils extends Session {
     const session = await Session.findOneOrFail({ where : { user: user } });
 
     return await Session.remove(session);
+
   }
 }
 

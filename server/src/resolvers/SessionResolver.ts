@@ -1,3 +1,4 @@
+
 import { Args, Authorized, Resolver, Mutation, Ctx, Query } from "type-graphql";
 import Session from "../models/Session";
 
@@ -7,6 +8,7 @@ import SessionUtils from "../models/utils/SessionUtils";
 import { Context } from "../apollo-server";
 import DeleteSessionInput from "./input/session/DeleteSessionInput";
 
+
 @Resolver(Session)
 class SessionResolver {
   @Mutation(() => User)
@@ -15,6 +17,7 @@ class SessionResolver {
     @Args() { email, password }: LoginInput
   ) {
     const { sessionId } = context;
+
 
     return SessionUtils.signIn({ email, password, sessionId });
   }
@@ -41,6 +44,7 @@ class SessionResolver {
 	async deleteSession(@Args() { user }: DeleteSessionInput) {
 		return SessionUtils.deleteSession({ user });
 	}
+
 }
 
 export default SessionResolver;

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { userInfo } from '../graphql/UserSession';
+
 import logo from '../images/wildmine-logo.svg';
+
 
 import '../css/components/TopBar.css';
 
@@ -12,6 +14,7 @@ const TopBar = () => {
 	// const [element, setElement] = useState();
 	const { data } = useQuery(userInfo);
 	const currentUser = data.userInfo;
+
 
 	window.onscroll = () => {
 		if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
