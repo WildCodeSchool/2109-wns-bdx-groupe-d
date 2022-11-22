@@ -13,21 +13,22 @@ class SessionUtils extends Session {
 		if (!user) {
 			throw new Error('User not found');
 		}
+		console.log(bcrypt.compareSync(user?.password as string, password));
+		console.log(password, user.password);
+		// if (!bcrypt.compareSync(password, user?.password)) {
+		// 	throw new Error('Invalid email or password');
+		// } else if (!sessionId) {
+		// 	throw new Error('A problem occured');
+		// } else {
+		const session = new Session();
 
-		if (!bcrypt.compareSync(user?.password as string, password)) {
-			throw new Error('Invalid email or password');
-		} else if (!sessionId) {
-			throw new Error('A problem occured');
-		} else {
-			const session = new Session();
+		session.uid = sessionId;
+		session.user = user;
 
-			session.uid = sessionId;
-			session.user = user;
+		await session.save();
 
-			await session.save();
-
-			return user;
-		}
+		return user;
+		// }
 	}
 
 	static async userInfo({ sessionId }: UserInfoInput) {

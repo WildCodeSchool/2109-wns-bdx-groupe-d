@@ -9,7 +9,7 @@ import bcrypt from 'bcryptjs';
 class UserUtils extends User {
 	static async createUser({ first_name, last_name, email, password, roles, created_at }: CreateUserInput) {
 		const user = new User();
-
+		console.log('create', password);
 		user.first_name = first_name;
 		user.last_name = last_name;
 		user.email = email;

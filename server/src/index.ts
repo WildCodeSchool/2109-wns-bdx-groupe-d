@@ -8,6 +8,7 @@ import getServer from './apollo-server';
 import getDatabaseConnection from './database-connection';
 import UID from 'uid-safe';
 import indexRouter from './routes';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -22,6 +23,12 @@ const runServer = async () => {
 	const app = express();
 
 	app.use(cookieParser());
+
+	app.use(
+		cors({
+			origin: 'http://localhost:3000',
+		})
+	);
 
 	app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }));
 
