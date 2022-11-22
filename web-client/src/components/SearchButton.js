@@ -3,7 +3,7 @@ import loupe from '../images/loupe.svg';
 
 
 const SearchButton = ({ value, onChange }) => (
-  <div className='flex border relative border-secondary_color rounded-xl text-secondary_color max-w-[230px] my-auto'>
+  <div className='flex border relative border-secondary_color rounded-xl text-secondary_color max-w-[250px] my-auto'>
     <input
       className='bg-wildmine_black rounded-full h-8 pl-4 focus:outline-none placeholder-secondary_color'
       placeholder='Rechercher ...'

@@ -36,7 +36,7 @@ const UpdateUser = ({ setDisplayUpdateUser, user}) => {
 	};
 
 	return (
-		<div className="bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4">
+		<div className="bg-wildmine_black border-4 border-secondary_color text-text_color rounded-2xl fixed z-30 w-1/2 left-1/4 -mt-60">
 			<img
 				className="cursor-pointer absolute right-8 top-6"
 				src={Close}

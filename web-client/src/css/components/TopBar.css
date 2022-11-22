@@ -31,5 +31,5 @@
 }
 
 .topbar-menu-settings {
-	@apply cursor-pointer ml-8 my-auto mr-8;
+	@apply cursor-pointer ml-8 my-auto mr-8 hover:text-secondary_color;
 }

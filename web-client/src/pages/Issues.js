@@ -41,9 +41,9 @@ const Issues = () => {
         onChange={filter}
       />
 
-    <DisplayIssuesTitle/>
 
     <div>
+    <DisplayIssuesTitle/>
       {data.userWithRelations.issues_assigned
       ? foundIssues.map((issue, issueIndex) => (
         <NavLink to={`/issue/${issue.id}`}>

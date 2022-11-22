@@ -29,11 +29,11 @@ const Diagram = () => {
 			// console.log(inWait.length);
 			resultInWait = inWait.length;
 		} else if (element.status === 'IN_PROGRESS') {
-			console.log('test2');
+			// console.log('test2');
 		} else if (element.status === 'DONE') {
-			console.log('test3');
+			// console.log('test3');
 		} else {
-			console.log('Pas de données');
+			console.log('Pas encore de données');
 		}
 	});
 

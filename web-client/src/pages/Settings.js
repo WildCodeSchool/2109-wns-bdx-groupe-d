@@ -53,31 +53,31 @@ const Settings = () => {
     <div className="settings-container">
       <div className="grid grid-cols-10">
         <div className="infos-user-container col-start-1 col-end-4">
-          <h3 className="infos-title">Vos Informations</h3>
+          <h3 className="infos-title">Mes Informations</h3>
           <ul className="infos-content">
             <li className="infos-liste"><b>Nom : </b>{actualUser.last_name}</li>
             <li className="infos-liste"><b>Prénom : </b>{actualUser.first_name}</li>
             <li className="infos-liste"><b>Email : </b>{actualUser.email}</li>
             <li className="infos-liste"><b>Statut : </b>{actualUser.roles}</li>
           </ul>
-          <form onSubmit={onSubmit} className="w-2/3 mx-auto">
+          <form onSubmit={onSubmit} className="w-full mx-auto mb-4">
             <div className="text-center">
-              <button className="submit-button mb-8 mt-4">suppirmer</button>
-            </div>
-          </form>
           <Button
             onClick={setDisplayUpdateUser}
             onClickValue={displayUpdateUser}
-            buttonLabel='MAJ'
+            buttonLabel='Mettre à jour mes informations'
             buttonType='button'
             buttonClassName='my-auto'
           />
           {displayUpdateUser &&
             <UpdateUser setDisplayUpdateUser={setDisplayUpdateUser} user={actualUser}/>
           }
+              <button className="submit-button mb-8 mt-4">Me déconnecter</button>
+            </div>
+          </form>
         </div>
         <div className="projects-user-container col-start-5 col-end-11">
-            <h3 className="projects-user-title">Vos Projets</h3>     
+            <h3 className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid">Mes Projets</h3>     
           <div className="projects-user-content">
             {actualUser.project_assigned 
               ? actualUser.project_assigned.map((projectObject, index) => {
@@ -100,7 +100,7 @@ const Settings = () => {
       <div className="grid">
         <div className="issues-user-container">
           <div className="col-span-10">
-            <h3 className="issues-user-title">Vos Tickets</h3>
+            <h3 className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid mt-8">Mes Tickets</h3>
           </div>
         </div>
         {actualUser.issues_assigned 

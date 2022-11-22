@@ -41,10 +41,13 @@ const Dashboard = ({ actualUser }) => {
 		<div className="dashboard-container">
 			{actualUser ? (
 				<>
-					<Diagram />
-					<div className="grid grid-cols-3 gap-6">
-						<div className="col-span-1">
+				<div className="">
+					<div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
+						<div className="grid grid-cols-1">
 							<div className="max-w-sm rounded overflow-hidden shadow-lg bg-secondary_color">
+								<div className='p-4'>
+								<Diagram />
+								</div>
 								<div className="p-4">
 									{/* <img className="w-full" src={diagram} alt="diagram" /> */}
 									<div className="font-bold text-xl mb-2 font-chaney_title text-md text-center">
@@ -59,14 +62,14 @@ const Dashboard = ({ actualUser }) => {
 											</div>
 											<div>
 												<p className="text_color_light">Nombre de tickets résolus depuis (date)</p>
-												<div className="font-chaney_title text-center"> 25</div>
+												<div className="font-chaney_title text-center"> ...</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="col-span-2">
+						<div className="grid grid-cols-1 col-span-4">
 							<p className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid">
 								Projets auxquels je suis rattaché
 							</p>
@@ -84,7 +87,7 @@ const Dashboard = ({ actualUser }) => {
 							})}
 						</div>
 
-						<div className="col-span-3">
+						<div className="col-span-3 sm:col-span-6">
 							<p className="font-bold text-xl text_color_light mt-8 mb-12 font-chaney_title">
 								Derniers tickets traités
 							</p>
@@ -108,9 +111,10 @@ const Dashboard = ({ actualUser }) => {
 							</div>
 						</div>
 					</div>
+					</div>
 				</>
 			) : (
-				<>Pas de données :'(</>
+				<>Pas de données pour le moment! :'(</>
 			)}
 		</div>
 	);
