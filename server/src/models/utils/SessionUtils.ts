@@ -1,61 +1,58 @@
-import md5 from "md5";
-import SignInInput from "../../resolvers/input/user/SignInInput";
-import User from "../User";
-import Session from "../Session";
-import DeleteSessionInput from "../../resolvers/input/session/DeleteSessionInput";
-import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
+import md5 from 'md5';
+import SignInInput from '../../resolvers/input/user/SignInInput';
+import User from '../User';
+import Session from '../Session';
+import DeleteSessionInput from '../../resolvers/input/session/DeleteSessionInput';
+import UserInfoInput from '../../resolvers/input/user/UserInfoInput';
+import bcrypt from 'bcryptjs';
 
 class SessionUtils extends Session {
-  static async signIn({ email, password, sessionId }: SignInInput) {
-    const user = await User.findOne({ email });
-    const hash = md5(password);
+	static async signIn({ email, password, sessionId }: SignInInput) {
+		const user = await User.findOne({ email });
 
-    if (hash !== user?.password) {
-      throw new Error("Invalid email or password");
-    } else if (!sessionId) {
-      throw new Error("A problem occured");
-    } else {
-      const session = new Session();
+		if (!user) {
+			throw new Error('User not found');
+		}
 
-      session.uid = sessionId;
-      session.user = user;
+		if (!bcrypt.compareSync(user?.password as string, password)) {
+			throw new Error('Invalid email or password');
+		} else if (!sessionId) {
+			throw new Error('A problem occured');
+		} else {
+			const session = new Session();
 
-      await session.save();
+			session.uid = sessionId;
+			session.user = user;
 
-      return user;
-    }
-  }
+			await session.save();
 
-  static async userInfo({ sessionId }: UserInfoInput) {
-    const userSession = await Session.findOne(
-      { uid: sessionId },
-      { relations: ["user"] } 
-    );
-    
-    return userSession?.user;
-  }
+			return user;
+		}
+	}
 
-  static async userWithRelations({ sessionId }: UserInfoInput) {
-    const userSession = await Session.findOne(
-      { uid: sessionId },
-      { relations: ["user"] }
-    ); 
-      console.log(sessionId);
+	static async userInfo({ sessionId }: UserInfoInput) {
+		const userSession = await Session.findOne({ uid: sessionId }, { relations: ['user'] });
 
-    const currentUser = await User.findOne({
-      where: { id: userSession?.user.id },
-      relations: ["project_assigned", "issues_assigned"]
-    });
+		return userSession?.user;
+	}
 
-    return currentUser;
-  }
+	static async userWithRelations({ sessionId }: UserInfoInput) {
+		const userSession = await Session.findOne({ uid: sessionId }, { relations: ['user'] });
+		console.log(sessionId);
 
-  static async deleteSession({ user }: DeleteSessionInput) {
-    const session = await Session.findOneOrFail({ where : { user: user } });
+		const currentUser = await User.findOne({
+			where: { id: userSession?.user.id },
+			relations: ['project_assigned', 'issues_assigned'],
+		});
 
-    return await Session.remove(session);
+		return currentUser;
+	}
 
-  }
+	static async deleteSession({ user }: DeleteSessionInput) {
+		const session = await Session.findOneOrFail({ where: { user: user } });
+
+		return await Session.remove(session);
+	}
 }
 
 export default SessionUtils;
