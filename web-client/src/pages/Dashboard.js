@@ -1,168 +1,113 @@
 import React from 'react';
-import diagram from '../assets/images/diagram.png';
-import { useQuery } from "@apollo/client";
+
+import { useQuery } from '@apollo/client';
 import { userWithRelations } from '../graphql/UserSession';
 
-const Dashboard = ({ actualUser }) => {
-	const { loading, error } = useQuery(userWithRelations);
-	// Les datas sont là pour toi Clara :D
+import DisplayAttachedProjects from './components/dashboard/DisplayAttachedProjects';
+import DisplayDashboardTitleIssues from './components/dashboard/DisplayDashboardTitleIssues';
+import DisplayIssuesValues from './components/issues/DisplayIssuesValues';
+import Diagram from './components/dashboard/Diagram';
 
-	if (loading) return 'Loading...';
+const Dashboard = ({ actualUser }) => {
+	const { loading, error, data } = useQuery(userWithRelations);
+
+	console.log(data);
+
+	if (loading)
+		return (
+			<div className="flex justify-center">
+				<svg
+					role="status"
+					className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500"
+					viewBox="0 0 100 101"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+						fill="currentColor"
+					/>
+					<path
+						d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+						fill="currentFill"
+					/>
+				</svg>
+			</div>
+		);
 
 	if (error) return `Error! ${error.message}`;
+
 	return (
 		<div className="dashboard-container">
 			{actualUser ? (
 				<>
+					<Diagram />
 					<div className="grid grid-cols-3 gap-6">
 						<div className="col-span-1">
-							<div className="max-w-sm rounded overflow-hidden shadow-lg bg-secondary_color columns-2">
-								<img className="w-full" src={diagram} alt="diagram" />
-								<div className="px-6 py-4">
-									<div className="font-bold text-xl mb-2 font-chaney">Résumé de mes tickets</div>
-									<div className="grid grid-cols-2 mt-6 mb-6">
-										<p className="text_color_light">Non traités En cours Résolus</p>
-										<p className="text_color_light">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
-											perferendis eaque, exercitationem praesentium nihil.
-										</p>
+							<div className="max-w-sm rounded overflow-hidden shadow-lg bg-secondary_color">
+								<div className="p-4">
+									{/* <img className="w-full" src={diagram} alt="diagram" /> */}
+									<div className="font-bold text-xl mb-2 font-chaney_title text-md text-center">
+										Résumé de mes tickets
+									</div>
+									<div className="px-6 py-4">
+										<div className="grid grid-cols-2 p-4">
+											<div>
+												<p className="text_color_light">Non traités ()</p>
+												<p className="text_color_light">En cours ()</p>
+												<p className="text_color_light">Résolus ()</p>
+											</div>
+											<div>
+												<p className="text_color_light">Nombre de tickets résolus depuis (date)</p>
+												<div className="font-chaney_title text-center"> 25</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div className="col-span-2">
-							<p className="font-bold text-xl mb-2 text_color_light font-chaney divide-y divide-solid">
+							<p className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid">
 								Projets auxquels je suis rattaché
 							</p>
-							<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-								<table className="w-full text-sm border text-left text-gray-500 dark:text-gray-400">
-									<thead className="text-xs text-wildmine_black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-										<tr>
-											<th scope="col" className="px-6 py-3">
-												Projet
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Entreprise
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Catégorie
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Date
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr className="text-text_color_light border-b dark:bg-gray-800 dark:border-gray-700">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												plat learning
-											</th>
-											<td className="px-6 py-4">SGB</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">15/09/2020</td>
-										</tr>
-										<tr className="text-text_color_light border-b dark:bg-gray-800 dark:border-gray-700">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												Notre projet
-											</th>
-											<td className="px-6 py-4">OPC</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">12/06/2022</td>
-										</tr>
-										<tr className="text-text_color_light dark:bg-gray-800">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												Plat e-commerce
-											</th>
-											<td className="px-6 py-4">Smiling Green bean</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">04/05/2020</td>
-										</tr>
-									</tbody>
-								</table>
+							<div className="relative overflow-x-auto shadow-md sm:rounded-lg text-center">
+								<DisplayAttachedProjects />
 							</div>
+							{data.userWithRelations.project_assigned.map((project) => {
+								return (
+									<div className="grid grid-cols-3 p-4 text-center">
+										<p>{project.name}</p>
+										<p>{project.description}</p>
+										<p>{project.created_at}</p>
+									</div>
+								);
+							})}
 						</div>
+
 						<div className="col-span-3">
-							<p className="font-bold text-xl text_color_light mt-8 mb-12 font-chaney">Derniers tickets traités</p>
-							<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-								<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mb-32">
-									<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-										<tr>
-											<th scope="col" className="px-6 py-3">
-												No du ticket
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Nom du ticket
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Commentaire
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Statut
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Catégorie
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Client
-											</th>
-											<th scope="col" className="px-6 py-3">
-												Date
-											</th>
-										</tr>
-									</thead>
-									<tbody className="bg-gradient-to-b from-wildmine_black to-gray-700 text-text_color_light">
-										<tr className="dark:bg-gray-800 dark:border-gray-700">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
-													#16257
-												</span>
-											</th>
-											<td className="px-6 py-4">Pb affichage</td>
-											<td className="px-6 py-4">Le problème résulte...</td>
-											<td className="px-6 py-4">
-												<strong className="border border-warning text-white bg-warning uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
-											</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">OPC</td>
-											<td className="px-6 py-4">08/01/2021</td>
-										</tr>
-										<tr className="dark:bg-gray-800 dark:border-gray-700">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
-													#28760
-												</span>
-											</th>
-											<td className="px-6 py-4">Bug avec Docker</td>
-											<td className="px-6 py-4">Launch des cont...</td>
-											<td className="px-6 py-4">
-												<strong className="border border-success text-white bg-success uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
-											</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">SGB</td>
-											<td className="px-6 py-4">13/02/2021</td>
-										</tr>
-										<tr className="dark:bg-gray-800">
-											<th scope="row" className="px-6 py-4 font-medium dark:text-white whitespace-nowrap">
-												<span className="bg-black_badge text-secondary_color text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300 font-chaney">
-													#82635
-												</span>
-											</th>
-											<td className="px-6 py-4">Link erroné</td>
-											<td className="px-6 py-4">La base de données...</td>
-											<td className="px-6 py-4">
-												{' '}
-												<strong className="border border-danger text-white bg-danger uppercase px-5 py-1.5 rounded-full text-[10px] tracking-wide"></strong>
-											</td>
-											<td className="px-6 py-4">dev</td>
-											<td className="px-6 py-4">Surf Coffee Shop</td>
-											<td className="px-6 py-4">20/06/2021</td>
-										</tr>
-									</tbody>
-								</table>
+							<p className="font-bold text-xl text_color_light mt-8 mb-12 font-chaney_title">
+								Derniers tickets traités
+							</p>
+							<div className="my-4">
+								<DisplayDashboardTitleIssues />
+
+								<div>
+									{data.userWithRelations.issues_assigned ? (
+										data.userWithRelations.issues_assigned.map((issue, issueIndex) => (
+											<DisplayIssuesValues
+												key={issueIndex}
+												issue={issue}
+												issueIndex={issueIndex}
+												issues={data.userWithRelations.issues_assigned}
+											/>
+										))
+									) : (
+										<p>Aucun ticket ne vous est assigné pour le moment</p>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
-					{/* </div> */}
 				</>
 			) : (
 				<>Pas de données :'(</>
