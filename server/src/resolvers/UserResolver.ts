@@ -1,8 +1,9 @@
-import { Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Context } from "../apollo-server";
 
 import User from "../models/User";
 import CreateUserInput from "./input/user/CreateUserInput";
+import UpdateUserInput from "./input/user/UpdateUserInput";
 import UserUtils from "../models/utils/UserUtils";
 import DeleteUserInput from "./input/user/DeleteUserInput";
 import GetUserByEmailInput from "./input/user/getUserByEmailInput";
@@ -33,6 +34,26 @@ class UserResolver {
       password,
       roles,
       created_at,
+    });
+  }
+
+  @Mutation(() => User)
+  async updateUser( 
+    @Arg("id") id: number,
+    @Args()
+    {
+      first_name,
+      last_name,
+      email,
+      roles
+    }: UpdateUserInput
+  ) {
+    return UserUtils.updateUser({
+      id,
+      first_name,
+      last_name,
+      email,
+      roles
     });
   }
 
