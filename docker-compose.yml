@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.4'
 services:
   web-client:
     build:
@@ -9,7 +9,7 @@ services:
     volumes:
       - ./web-client:/app
     environment:
-      CHOKIDAR_USEPOLLING: 'true'
+      CHOKIDAR_USEPOLLING: "true"
 
   api:
     build:

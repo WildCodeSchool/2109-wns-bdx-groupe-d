@@ -1,14 +1,15 @@
 import React from 'react';
 import diagram from '../assets/images/diagram.png';
-// import { useQuery } from "@apollo/client";
-// import { getUser } from "../graphql/User.js";
+import { useQuery } from "@apollo/client";
+import { userWithRelations } from '../graphql/UserSession';
 
 const Dashboard = ({ actualUser }) => {
-	// const { loading, error, data } = useQuery(getUser);
+	const { loading, error } = useQuery(userWithRelations);
+	// Les datas sont là pour toi Clara :D
 
-	// if (loading) return 'Loading...';
+	if (loading) return 'Loading...';
 
-	// if (error) return `Error! ${error.message}`;
+	if (error) return `Error! ${error.message}`;
 	return (
 		<div className="dashboard-container">
 			{actualUser ? (

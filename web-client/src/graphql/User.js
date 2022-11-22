@@ -9,6 +9,13 @@ export const getUser = gql`
 			roles
 			email
 			created_at
+			project_assigned {
+				id
+				name
+				description
+				created_at
+				projectPictureName
+			}
 		}
 	}
 `;
@@ -22,6 +29,18 @@ export const setUser = gql`
 			roles
 			email
 			created_at
+		}
+	}
+`;
+
+export const updateUser = gql`
+	mutation updateUser($id: Float!, $firstName: String!, $lastName: String!, $roles: String!, $email: String!) {
+		updateUser(id: $id, first_name: $firstName, last_name: $lastName, roles: $roles, email: $email) {
+			id
+			first_name
+			last_name
+			roles
+			email
 		}
 	}
 `;

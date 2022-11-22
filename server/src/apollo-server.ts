@@ -3,9 +3,13 @@ import { AuthChecker, buildSchema } from "type-graphql";
 import User from "./models/User";
 import SessionUtils from "./models/utils/SessionUtils";
 import FileResolver from "./resolvers/FileResolver";
+
+import IssueResolver from "./resolvers/IssueResolver";
 import ProjectResolver from "./resolvers/ProjectResolver";
 import SessionResolver from "./resolvers/SessionResolver";
 import UserResolver from "./resolvers/UserResolver";
+import OrganizationResolver from "./resolvers/OrganizationResolver";
+import ImageResolver from "./resolvers/ImageResolver";
 
 export interface Context {
   sessionId: string;
@@ -18,7 +22,9 @@ export const customAuthChecker: AuthChecker<Context> = ({ context }) => {
 
 export default async function getServer() {
   const schema = await buildSchema({
-    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver],
+
+    resolvers: [UserResolver, SessionResolver, ProjectResolver, FileResolver, OrganizationResolver, ImageResolver, IssueResolver],
+
     authChecker: customAuthChecker,
   });
 
@@ -26,9 +32,9 @@ export default async function getServer() {
     schema,
     context: async ({ req }): Promise<Context> => {
       const sessionId = req.cookies.sessionId || "";
-      const user = sessionId
-        ? await SessionUtils.userInfo({ sessionId })
-        : null;
+
+      const user = await SessionUtils.userInfo({ sessionId }) || null;
+
 
       return { sessionId, user };
     },

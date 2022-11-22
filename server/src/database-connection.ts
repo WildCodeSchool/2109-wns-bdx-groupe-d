@@ -8,12 +8,13 @@ import Color from './models/Color';
 import Comment from './models/Comment';
 import File from './models/File';
 import Session from './models/Session';
+import Image from './models/Image';
 
 export default async (url: string, logging = false) => {
 	await createConnection({
 		type: "postgres",
     	url,
-		entities: [User, Organization, Project, Issue, Color, Comment, File, Session],
+		entities: [User, Organization, Project, Issue, Color, Comment, File, Session, Image],
 		synchronize: true,
     logging,
 	});

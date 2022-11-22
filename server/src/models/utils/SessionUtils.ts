@@ -1,8 +1,9 @@
 import md5 from "md5";
-import SignInInput from "../../resolvers/input/SignInInput";
+import SignInInput from "../../resolvers/input/user/SignInInput";
 import User from "../User";
 import Session from "../Session";
-import UserInfoInput from "../../resolvers/input/UserInfoInput";
+import DeleteSessionInput from "../../resolvers/input/session/DeleteSessionInput";
+import UserInfoInput from "../../resolvers/input/user/UserInfoInput";
 
 class SessionUtils extends Session {
   static async signIn({ email, password, sessionId }: SignInInput) {
@@ -28,10 +29,32 @@ class SessionUtils extends Session {
   static async userInfo({ sessionId }: UserInfoInput) {
     const userSession = await Session.findOne(
       { uid: sessionId },
-      { relations: ["user"] }
+      { relations: ["user"] } 
     );
+    
+    return userSession?.user;
+  }
 
-    return userSession?.user || null;
+  static async userWithRelations({ sessionId }: UserInfoInput) {
+    const userSession = await Session.findOne(
+      { uid: sessionId },
+      { relations: ["user"] }
+    ); 
+      console.log(sessionId);
+
+    const currentUser = await User.findOne({
+      where: { id: userSession?.user.id },
+      relations: ["project_assigned", "issues_assigned"]
+    });
+
+    return currentUser;
+  }
+
+  static async deleteSession({ user }: DeleteSessionInput) {
+    const session = await Session.findOneOrFail({ where : { user: user } });
+
+    return await Session.remove(session);
+
   }
 }
 

@@ -7,9 +7,13 @@ import CreateProject from './components/projects/CreateProject';
 import Button from '../components/Button';
 import SearchButton from '../components/SearchButton.js';
 
-const Projects = () => {
+const Projects = ({ isMobile }) => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
+
+  const [foundProject, setFoundProject] = useState([]);
+  const [valuesToCompare, setValuesToCompare] = useState('');
+
 
   const { loading, error, data } = useQuery(getProjects);
 
@@ -18,18 +22,45 @@ const Projects = () => {
 
   if (error) return `Error! ${error.message}`;
 
+
+  const filter = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = data.projects.filter((issue) => {
+        return issue.name.toLowerCase().startsWith(keyword.toLowerCase());
+      });
+      setFoundProject(results);
+
+    } else {
+      setFoundProject(data.projects);
+    }
+    setValuesToCompare(keyword);
+  };
+
+  if (foundProject.length === 0 && !valuesToCompare && data.projects.length > 0) {
+    setFoundProject(data.projects);
+  }
+
+
   return (
-    <div className="organization-container">
-      <div className='flex justify-around mb-8'>
+    <div>
+      <div className='px-4 md:flex justify-around mb-8'>
+    
+      <SearchButton
+        value={valuesToCompare}
+        onChange={filter}
+      />
 
-        <SearchButton/>
 
-        <Button
-          onClick={setDisplayCreation}
-          onClickValue={displayCreation}
-          buttonLabel='Créer un projet'
-          buttonType='button'
-        />
+      <Button
+        onClick={setDisplayCreation}
+        onClickValue={displayCreation}
+        buttonLabel='Créer un projet'
+        buttonType='button'
+        buttonClassName='my-auto mt-4 md:mt-0'
+      />
+
 
       </div>
 
@@ -37,19 +68,23 @@ const Projects = () => {
         <CreateProject setDisplayCreation={setDisplayCreation}/>
       }
 
-      <div className="projects-container">
+      <div className='projects-container'>
 
-        {data.projects.length > 0 ? data.projects.map((projectObject, index) => {
+        {foundProject.length > 0 ? foundProject.map((projectObject, index) => {
+
           return <DisplayProject
               key={index}
               setDisplayHover={setDisplayHover}
               index={index}
               projectObject={projectObject}
               displayHover={displayHover}
-              project={data.projects[index]}
+
+              project={foundProject[index]}
+              to="/issue"
+              isMobile={isMobile}
             />;
         })
-      :<p>Aucun projet pour le moment</p>}
+      :<p className='text-xl font-bold'>Aucun projet pour le moment</p>}
 
       </div>
     </div>

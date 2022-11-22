@@ -1,18 +1,16 @@
 import { ArgsType, Field } from 'type-graphql';
+import Project from '../../models/Project';
 
 @ArgsType()
-class CreateProjectInput {
+class CreateUserInput {
   @Field()
   name!: string;
 
   @Field()
-  description?: string;
+  project!: number;
 
   @Field()
   created_at!: string;
-
-  @Field()
-  projectPictureName?: string;
 }
 
-export default CreateProjectInput;
+export default CreateUserInput;
