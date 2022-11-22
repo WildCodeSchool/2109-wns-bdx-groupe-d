@@ -11,15 +11,17 @@ const Projects = ({ isMobile }) => {
 	const [displayHover, setDisplayHover] = useState(false);
   const [displayCreation, setDisplayCreation] = useState(false);
 
-  const { loading, error, data } = useQuery(getProjects);
-
-
   const [foundProject, setFoundProject] = useState([]);
   const [valuesToCompare, setValuesToCompare] = useState('');
+
+
+  const { loading, error, data } = useQuery(getProjects);
+
 
   if (loading) return 'Loading...';
 
   if (error) return `Error! ${error.message}`;
+
 
   const filter = (e) => {
     const keyword = e.target.value;
@@ -59,6 +61,7 @@ const Projects = ({ isMobile }) => {
         buttonClassName='my-auto mt-4 md:mt-0'
       />
 
+
       </div>
 
       {displayCreation &&
@@ -68,12 +71,14 @@ const Projects = ({ isMobile }) => {
       <div className='projects-container'>
 
         {foundProject.length > 0 ? foundProject.map((projectObject, index) => {
+
           return <DisplayProject
               key={index}
               setDisplayHover={setDisplayHover}
               index={index}
               projectObject={projectObject}
               displayHover={displayHover}
+
               project={foundProject[index]}
               to="/issue"
               isMobile={isMobile}

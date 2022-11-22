@@ -28,7 +28,7 @@ class ProjectUtils extends Project {
   }
 
   static async getProjectById({ id }: GetProjectInput) {
-    return await Project.findOneOrFail({ where: { id }, relations: ["user_assigned"] });
+    return await Project.findOneOrFail({ where: { id }, relations: ["images", "user_assigned"] });
   }
 
   static async assignUserToProject({ email, projectId }: AssignUserInput) {
