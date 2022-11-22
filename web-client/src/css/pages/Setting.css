@@ -3,7 +3,7 @@
 }
 
 .infos-user-container {
-	@apply w-full mb-4 bg-altered_white-color rounded-lg;
+	@apply bg-altered_white-color rounded-lg;
 }
 
 .infos-title {

@@ -34,7 +34,9 @@ const Issues = () => {
     setFoundIssues(data.userWithRelations.issues_assigned);
   }
   
-  return <div>
+  return (
+    <>
+  <div className='px-4 md:flex justify-around mb-8'>
 
       <SearchButton
         value={valuesToCompare}
@@ -52,7 +54,7 @@ const Issues = () => {
       ))
     : <p className='text-xl font-bold'>Aucun ticket ne vous est assigné pour le moment</p>}
     </div>
-  </div>;
+  </div></>);
 };
 
 export default Issues;

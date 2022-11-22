@@ -153,7 +153,7 @@ const DetailsProject = ({ actualUser }) => {
       
       {!issuesQuery.loading && issuesQuery.data.getIssuesByProjectId[0] && !issuesQuery.error
       ? <div>
-        <p className='font-black text-2xl pt-20'>Tickets en cours</p>
+        <p className='font-black text-2xl pt-20 mb-8'>Tickets en cours</p>
         
         <Issues issues={issuesQuery.data.getIssuesByProjectId}/>
       </div>
@@ -165,7 +165,7 @@ const DetailsProject = ({ actualUser }) => {
               className="bg-blue_green_flash text-black rounded-full flex items-center justify-center"
               onClick={() => { setShowFiveTickets(true) }}
             >
-              <svg
+              {/* <svg
                 className="w-14 h-14 dark:text-white"
                 fill="none"
                 stroke="currentColor"
@@ -177,7 +177,7 @@ const DetailsProject = ({ actualUser }) => {
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z"/>
-              </svg>
+              </svg> */}
             </button>
             : <button
               className="bg-blue_green_flash text-black rounded-full"
@@ -201,7 +201,7 @@ const DetailsProject = ({ actualUser }) => {
         }
       </div>
       
-      <div className="rounded-full place-items-center">
+      {/* <div className="rounded-full place-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-36 w-36" viewBox="0 0 20 20" fill="currentColor">
           <path
             fillRule="evenodd"
@@ -209,7 +209,7 @@ const DetailsProject = ({ actualUser }) => {
             clipRule="evenodd"
           />
         </svg>
-      </div>
+      </div> */}
     </div>
   );
 }

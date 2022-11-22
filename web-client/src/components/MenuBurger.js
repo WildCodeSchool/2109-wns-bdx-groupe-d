@@ -64,6 +64,16 @@ const MenuBurger = ({ setOpenMenu }) => {
     >
       Tickets
     </NavLink>
+    <NavLink
+      to="/settings"
+      className={`text-black text-2xl font-bold mb-4 ${currentLoc === '/settings' ? 'border-b-2 border-b-secondary_color' : ''}`}
+      onClick={() => {
+        setCurrentLoc('/settings');
+        setOpenMenu(false);
+      }}
+    >
+      Paramètres
+    </NavLink>
   </div>
 </div>
 };

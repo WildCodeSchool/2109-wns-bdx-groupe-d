@@ -51,8 +51,8 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
-      <div className="grid grid-cols-10">
-        <div className="infos-user-container col-start-1 col-end-4">
+      <div className="">
+        <div className="infos-user-container grid grid-cols-1 col-span-3 m-4">
           <h3 className="infos-title">Mes Informations</h3>
           <ul className="infos-content">
             <li className="infos-liste"><b>Nom : </b>{actualUser.last_name}</li>
@@ -76,7 +76,7 @@ const Settings = () => {
             </div>
           </form>
         </div>
-        <div className="projects-user-container col-start-5 col-end-11">
+        <div className="projects-user-container grid grid-cols-1 col-span-3 m-4">
             <h3 className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid">Mes Projets</h3>     
           <div className="projects-user-content">
             {actualUser.project_assigned 
@@ -99,7 +99,7 @@ const Settings = () => {
       </div>
       <div className="grid">
         <div className="issues-user-container">
-          <div className="col-span-10">
+          <div className="grid grid-cols-1 col-span-3 m-4">
             <h3 className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid mt-8">Mes Tickets</h3>
           </div>
         </div>

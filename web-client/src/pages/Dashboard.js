@@ -43,7 +43,7 @@ const Dashboard = ({ actualUser }) => {
 				<>
 				<div className="">
 					<div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
-						<div className="grid grid-cols-1">
+						<div className="grid grid-cols-1 col-span-3 m-4">
 							<div className="max-w-sm rounded overflow-hidden shadow-lg bg-secondary_color">
 								<div className='p-4'>
 								<Diagram />
@@ -69,7 +69,7 @@ const Dashboard = ({ actualUser }) => {
 								</div>
 							</div>
 						</div>
-						<div className="grid grid-cols-1 col-span-4">
+						<div className="grid grid-cols-1 col-span-3 m-4">
 							<p className="font-bold text-xl mb-2 text_color_light font-chaney_title divide-y divide-solid">
 								Projets auxquels je suis rattaché
 							</p>

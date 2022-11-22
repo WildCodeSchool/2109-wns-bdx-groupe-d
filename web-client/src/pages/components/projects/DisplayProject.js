@@ -25,6 +25,7 @@ const DisplayProject = ({ setDisplayHover, index, displayHover, project, isMobil
           <img
             src={project.images ? `/images/${project.images[project.images.length - 1].name}` : smiley}
             alt="Sélection du projet"
+            className='rounded'
           />
         </NavLink>
 
